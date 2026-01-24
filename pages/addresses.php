@@ -1,67 +1,68 @@
-<div class="view-enter" style="padding-bottom: 120px;">
-    <header class="cart-header">
-        <a href="?page=profile" style="text-decoration: none; color: var(--white);">
-            <span class="material-symbols-outlined">arrow_back_ios</span>
-        </a>
-        <h1 class="cart-title">Saved Addresses</h1>
-        <div style="width: 24px;"></div>
+<div class="view-enter addresses-v3" style="background: var(--bg-main); min-height: 100vh;">
+    <header class="home-header-v3">
+         <div class="stagger-1" style="display: flex; align-items: center; justify-content: space-between; animation: viewEnter 0.5s ease forwards; opacity: 0;">
+             <button class="icon-btn-v3 glass" onclick="history.back()">
+                 <span class="material-symbols-outlined">arrow_back_ios</span>
+             </button>
+             <h1 style="font-size: 20px; font-weight: 800; letter-spacing: -0.01em;">Saved Addresses</h1>
+             <button class="icon-btn-v3 glass">
+                 <span class="material-symbols-outlined">add_location_alt</span>
+             </button>
+         </div>
     </header>
 
-    <main style="padding: 24px;">
+    <main style="padding: 0 24px;">
         <!-- Primary Address -->
-        <div style="margin-bottom: 24px;">
-            <p style="font-size: 10px; font-weight: 800; color: var(--zinc-500); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px;">Primary Address</p>
+        <div class="stagger-2" style="margin-bottom: 32px; animation: viewEnter 0.5s ease forwards; opacity: 0;">
+            <p style="font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;">Primary Destination</p>
             
-            <div style="background: var(--tile-grey); border: 2px solid var(--primary); border-radius: 24px; padding: 20px;">
-                <div style="display: flex; align-items: flex-start; gap: 16px;">
-                    <div style="width: 48px; height: 48px; background: rgba(57, 255, 20, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <span class="material-symbols-outlined" style="color: var(--primary);">home</span>
+            <div style="background: var(--bg-secondary); border: 2.3px solid var(--primary); border-radius: 32px; padding: 24px; box-shadow: var(--neon-shadow);">
+                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <div style="width: 56px; height: 56px; background: var(--primary-light); border-radius: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span class="material-symbols-outlined filled" style="color: var(--primary); font-size: 28px;">home</span>
                     </div>
                     <div style="flex: 1;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 16px; font-weight: 700; color: var(--white);">Home</p>
-                            <span style="font-size: 9px; font-weight: 800; background: var(--primary); color: #000; padding: 2px 8px; border-radius: 50px; text-transform: uppercase;">Default</span>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <h3 style="font-size: 16px; font-weight: 900;">Home</h3>
+                            <span class="glass-pill-badge" style="background: var(--primary); color: #000; padding: 2px 10px; font-weight: 900;">ACTIVE</span>
                         </div>
-                        <p style="font-size: 14px; color: var(--zinc-400); line-height: 1.5;">HSR Layout, Sector 2, Bangalore, Karnataka 560102</p>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Sector 2, HSR Layout, Bangalore - 560102, Karnataka</p>
                     </div>
-                    <button style="background: none; border: none; color: var(--primary); cursor: pointer;">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Other Addresses -->
-        <div>
-            <p style="font-size: 10px; font-weight: 800; color: var(--zinc-500); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px;">Other Addresses</p>
+        <div class="stagger-3" style="animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.3s;">
+            <p style="font-size: 10px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;">Alternative Outposts</p>
             
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="background: var(--tile-grey); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 20px;">
-                    <div style="display: flex; align-items: flex-start; gap: 16px;">
-                        <div style="width: 48px; height: 48px; background: rgba(57, 255, 20, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                            <span class="material-symbols-outlined" style="color: var(--primary);">work</span>
+            <div style="display: flex; flex-direction: column; gap: 16px; padding-bottom: 140px;">
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 28px; padding: 24px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                    <div style="display: flex; align-items: flex-start; gap: 18px;">
+                        <div style="width: 48px; height: 48px; background: var(--bg-main); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 22px;">work</span>
                         </div>
                         <div style="flex: 1;">
-                            <p style="font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px;">Office</p>
-                            <p style="font-size: 14px; color: var(--zinc-400); line-height: 1.5;">Koramangala, 5th Block, Bangalore, Karnataka 560095</p>
+                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Office (Wework)</h4>
+                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">RMZ Ecoworld, Outer Ring Rd, Bellandur, Bangalore</p>
                         </div>
-                        <button style="background: none; border: none; color: var(--zinc-500); cursor: pointer;">
-                            <span class="material-symbols-outlined">more_horiz</span>
+                        <button class="icon-btn-v3 glass" style="width: 36px; height: 36px; border-radius: 12px;">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
                         </button>
                     </div>
                 </div>
 
-                <div style="background: var(--tile-grey); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 20px;">
-                    <div style="display: flex; align-items: flex-start; gap: 16px;">
-                        <div style="width: 48px; height: 48px; background: rgba(57, 255, 20, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                            <span class="material-symbols-outlined" style="color: var(--primary);">apartment</span>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 28px; padding: 24px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                    <div style="display: flex; align-items: flex-start; gap: 18px;">
+                        <div style="width: 48px; height: 48px; background: var(--bg-main); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 22px;">apartment</span>
                         </div>
                         <div style="flex: 1;">
-                            <p style="font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px;">Friend's Place</p>
-                            <p style="font-size: 14px; color: var(--zinc-400); line-height: 1.5;">Indiranagar, 100 Feet Road, Bangalore, Karnataka 560038</p>
+                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Gym Outpost</h4>
+                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Cult.fit, 27th Main Rd, Sector 2, HSR Layout</p>
                         </div>
-                        <button style="background: none; border: none; color: var(--zinc-500); cursor: pointer;">
-                            <span class="material-symbols-outlined">more_horiz</span>
+                        <button class="icon-btn-v3 glass" style="width: 36px; height: 36px; border-radius: 12px;">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
                         </button>
                     </div>
                 </div>
@@ -69,11 +70,11 @@
         </div>
     </main>
 
-    <!-- Add New Address Button -->
-    <div class="fixed-footer">
-        <button class="checkout-btn" style="gap: 8px;">
-            <span class="material-symbols-outlined">add_location</span>
-            Add New Address
+    <!-- Floating Action Button -->
+    <footer style="position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; padding: 0 24px; z-index: 100;">
+        <button class="neon-btn" style="width: 100%; height: 64px; background: var(--primary); color: #000; border: none; border-radius: 20px; font-size: 16px; font-weight: 950; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: var(--neon-shadow);">
+            <span class="material-symbols-outlined" style="font-weight: 900;">add_location_alt</span>
+            PIN NEW LOCATION
         </button>
-    </div>
+    </footer>
 </div>

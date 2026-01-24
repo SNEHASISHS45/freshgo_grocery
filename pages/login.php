@@ -1,75 +1,64 @@
-<div class="view-enter" style="min-height: 100vh; display: flex; flex-direction: column;">
-    <!-- Background Decoration -->
-    <div style="position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: rgba(57, 255, 20, 0.1); border-radius: 50%; filter: blur(80px); pointer-events: none;"></div>
-    
-    <header style="padding: 48px 24px 24px; text-align: center;">
-        <div style="width: 64px; height: 64px; background: rgba(57, 255, 20, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
-            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 32px;">eco</span>
+<div class="view-enter login-v3" style="background: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+    <!-- Abstract Decoration -->
+    <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: var(--primary-light); border-radius: 50%; filter: blur(80px); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: var(--primary-light); border-radius: 50%; filter: blur(60px); pointer-events: none; opacity: 0.5;"></div>
+
+    <header class="stagger-1" style="padding: 48px 24px 20px; animation: viewEnter 0.5s ease forwards; opacity: 0;">
+        <div style="width: 64px; height: 64px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+             <span class="material-symbols-outlined filled" style="color: var(--primary); font-size: 32px;">local_mall</span>
         </div>
-        <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">Welcome Back</h1>
-        <p style="font-size: 14px; color: var(--zinc-500);">Freshness awaits you</p>
     </header>
 
-    <main style="flex: 1; padding: 24px;">
-        <form onsubmit="event.preventDefault(); window.location.href='?page=home';" style="display: flex; flex-direction: column; gap: 20px;">
-            <!-- Email -->
-            <div>
-                <label style="display: block; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; margin-left: 4px;">Email Address</label>
-                <input type="email" placeholder="Enter your email" style="width: 100%; height: 56px; padding: 0 16px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-size: 14px; outline: none;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
+    <main style="flex: 1; padding: 0 24px 24px;">
+        <div class="stagger-1" style="margin-bottom: 40px; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.1s;">
+            <h1 style="font-size: 36px; font-weight: 950; letter-spacing: -0.03em; line-height: 1.1;">Welcome <br><span style="color: var(--primary);">Back Agent.</span></h1>
+            <p style="font-size: 15px; color: var(--text-muted); font-weight: 700; margin-top: 12px;">Secure access to your fresh inventory.</p>
+        </div>
 
-            <!-- Password -->
-            <div>
-                <label style="display: block; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; margin-left: 4px;">Password</label>
+        <form onsubmit="event.preventDefault(); location.href='?page=home';" style="display: flex; flex-direction: column; gap: 24px;" class="stagger-2">
+            <div class="input-group-v3" style="animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.2s;">
+                <label style="display: block; font-size: 11px; font-weight: 950; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; margin-left: 4px;">Identity Key</label>
                 <div style="position: relative;">
-                    <input type="password" id="loginPassword" placeholder="Enter your password" style="width: 100%; height: 56px; padding: 0 48px 0 16px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-size: 14px; outline: none;">
-                    <button type="button" onclick="togglePassword('loginPassword')" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--zinc-500); cursor: pointer;">
-                        <span class="material-symbols-outlined">visibility</span>
-                    </button>
+                    <span class="material-symbols-outlined" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 20px;">alternate_email</span>
+                    <input type="email" placeholder="alex@vault.com" style="width: 100%; height: 64px; padding: 0 24px 0 56px; border-radius: 22px; background: var(--bg-secondary); border: 1.5px solid var(--border-color); color: var(--text-primary); font-size: 15px; font-weight: 700; outline: none; transition: all 0.3s;" onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='var(--neon-shadow)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
                 </div>
             </div>
 
-            <!-- Forgot Password -->
-            <div style="text-align: right;">
-                <a href="?page=forgot" style="font-size: 14px; color: var(--primary); font-weight: 700; text-decoration: none;">Forgot Password?</a>
+            <div class="input-group-v3" style="animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.3s;">
+                <label style="display: block; font-size: 11px; font-weight: 950; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; margin-left: 4px;">Passphrase</label>
+                <div style="position: relative;">
+                    <span class="material-symbols-outlined" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 20px;">lock</span>
+                    <input type="password" placeholder="••••••••" style="width: 100%; height: 64px; padding: 0 24px 0 56px; border-radius: 22px; background: var(--bg-secondary); border: 1.5px solid var(--border-color); color: var(--text-primary); font-size: 15px; font-weight: 700; outline: none; transition: all 0.3s;" onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='var(--neon-shadow)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+                    <button type="button" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted);"><span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span></button>
+                </div>
             </div>
 
-            <!-- Login Button -->
-            <button type="submit" style="width: 100%; height: 56px; background: var(--primary); color: #000; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 8px;">
-                Login
+            <div style="display: flex; justify-content: flex-end; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.35s;">
+                <a href="?page=forgot" style="font-size: 13px; color: var(--primary); font-weight: 900; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em;">Lost Key?</a>
+            </div>
+
+            <button type="submit" class="neon-btn" style="width: 100%; height: 64px; background: var(--primary); color: #000; border: none; border-radius: 22px; font-size: 18px; font-weight: 950; cursor: pointer; margin-top: 8px; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.4s; box-shadow: var(--neon-shadow);">
+                AUTHENTICATE
             </button>
-
-            <!-- Divider -->
-            <div style="display: flex; align-items: center; gap: 16px; margin: 16px 0;">
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-                <span style="font-size: 12px; color: var(--zinc-500);">Or continue with</span>
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-            </div>
-
-            <!-- Social Login -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                <button type="button" style="height: 56px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; color: var(--white); font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span style="font-size: 20px;">G</span> Google
-                </button>
-                <button type="button" style="height: 56px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; color: var(--white); font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span class="material-symbols-outlined">phone_iphone</span> Apple
-                </button>
-            </div>
         </form>
+
+        <div class="stagger-3" style="margin-top: 40px; text-align: center; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.5s;">
+             <p style="font-size: 14px; color: var(--text-muted); font-weight: 700; margin-bottom: 24px;">Or initiate via social protocols</p>
+             <div style="display: flex; gap: 16px; justify-content: center;">
+                  <button style="width: 64px; height: 64px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="width: 24px;">
+                  </button>
+                  <button style="width: 64px; height: 64px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" style="width: 24px;" class="dark-icon-invert">
+                  </button>
+             </div>
+        </div>
     </main>
 
-    <!-- Sign Up Footer -->
-    <footer style="padding: 24px; text-align: center;">
-        <p style="font-size: 14px; color: var(--zinc-500);">
-            Don't have an account? 
-            <a href="?page=signup" style="color: var(--primary); font-weight: 700; text-decoration: none;">Sign Up</a>
+    <footer class="stagger-3" style="padding: 32px; text-align: center; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.6s;">
+        <p style="font-size: 15px; color: var(--text-muted); font-weight: 700;">
+            New to the network? 
+            <a href="?page=signup" style="color: var(--primary); font-weight: 950; text-decoration: none;">Join FreshGo</a>
         </p>
     </footer>
 </div>
-
-<script>
-function togglePassword(id) {
-    const input = document.getElementById(id);
-    input.type = input.type === 'password' ? 'text' : 'password';
-}
-</script>

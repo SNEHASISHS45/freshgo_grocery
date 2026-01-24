@@ -1,71 +1,63 @@
-<div class="view-enter support-page">
-    <header class="support-header">
-        <a href="?page=profile" class="back-btn">
-            <span class="material-symbols-outlined">arrow_back</span>
-        </a>
-        <h1 class="support-title">Help & Support</h1>
+<div class="view-enter support-v3" style="background: var(--bg-main); min-height: 100vh;">
+    <header class="home-header-v3">
+         <div class="stagger-1" style="display: flex; align-items: center; justify-content: space-between; animation: none;">
+             <button class="icon-btn-v3 glass" onclick="history.back()">
+                 <span class="material-symbols-outlined" style="font-weight: 900;">arrow_back_ios</span>
+             </button>
+             <h1 style="font-size: 20px; font-weight: 850; letter-spacing: -0.01em;">Concierge Hub</h1>
+             <div style="width: 44px;"></div>
+         </div>
     </header>
 
-    <main class="support-content">
-        <div class="support-search">
-            <span class="material-symbols-outlined">search</span>
-            <input type="text" placeholder="Search topics...">
+    <main style="padding: 0 24px;">
+        <p class="stagger-1" style="font-size: 11px; font-weight: 950; color: var(--primary); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 28px; text-align: center;">Operational Assistance Required?</p>
+        
+        <!-- Search Help -->
+        <div class="search-bar-v3 stagger-1" style="margin-bottom: 36px; box-shadow: var(--shadow-sm); height: 64px; border-radius: 20px;">
+            <span class="material-symbols-outlined" style="font-size: 24px; color: var(--primary);">search_intelligence</span>
+            <input type="text" placeholder="Scan knowledge archive..." style="font-size: 15px; font-weight: 700;">
         </div>
 
-        <div style="margin-bottom: 24px;">
-            <h3 class="faq-section-title">FAQ</h3>
-            
-            <div class="faq-item">
-                <div class="faq-item-left">
-                    <span class="material-symbols-outlined">info</span>
-                    <span>Orders & Delivery</span>
+        <!-- FAQ Sections -->
+        <div class="stagger-2" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px;">
+            <?php 
+            $faqs = [
+                ['t' => 'Transmission Logistics', 'i' => 'local_shipping'],
+                ['t' => 'Fiscal Clearances', 'i' => 'receipt_long'],
+                ['t' => 'Protocol Assurance', 'i' => 'verified'],
+                ['t' => 'Elite Membership', 'i' => 'workspace_premium'],
+            ];
+            foreach($faqs as $f): ?>
+            <div class="profile-menu-v2" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 24px; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 44px; height: 44px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); border: 1px solid var(--border-color);">
+                        <span class="material-symbols-outlined" style="font-size: 22px; font-weight: 900;"><?= $f['i'] ?></span>
+                    </div>
+                    <span style="font-weight: 900; font-size: 16px; letter-spacing: -0.01em;"><?= $f['t'] ?></span>
                 </div>
-                <div class="faq-item-right">
-                    <span class="material-symbols-outlined">expand_more</span>
-                </div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">arrow_forward_ios</span>
             </div>
+            <?php endforeach; ?>
+        </div>
 
-            <div class="faq-item">
-                <div class="faq-item-left">
-                    <span class="material-symbols-outlined">info</span>
-                    <span>Payments</span>
-                </div>
-                <div class="faq-item-right">
-                    <span class="material-symbols-outlined">expand_more</span>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-item-left">
-                    <span class="material-symbols-outlined">info</span>
-                    <span>Refunds</span>
-                </div>
-                <div class="faq-item-right">
-                    <span class="material-symbols-outlined">expand_more</span>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-item-left">
-                    <span class="material-symbols-outlined">info</span>
-                    <span>Premium Membership</span>
-                </div>
-                <div class="faq-item-right">
-                    <span class="material-symbols-outlined">expand_more</span>
-                </div>
-            </div>
+        <!-- Contact Bento -->
+        <div class="stagger-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 140px;">
+             <div class="bento-card" style="background: var(--bg-secondary); border: 2.3px solid var(--primary); border-radius: 36px; padding: 32px; text-align: center; box-shadow: var(--neon-shadow);">
+                 <div style="width: 56px; height: 56px; background: var(--bg-main); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1.5px solid var(--primary);">
+                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 32px; font-weight: 900;">forum</span>
+                 </div>
+                 <h4 style="font-size: 15px; font-weight: 900; letter-spacing: -0.02em;">Live Intel</h4>
+                 <p style="font-size: 11px; color: var(--primary); font-weight: 950; margin-top: 6px; text-transform: uppercase;">2 Min Latency</p>
+                 <button class="neon-btn" style="width: 100%; height: 48px; background: var(--primary); color: #000; border: none; border-radius: 16px; margin-top: 24px; font-size: 12px; font-weight: 950; text-transform: uppercase;">Ignite Chat</button>
+             </div>
+             <div class="bento-card" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 36px; padding: 32px; text-align: center;">
+                 <div style="width: 56px; height: 56px; background: var(--bg-main); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1.5px solid var(--border-color);">
+                    <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 32px;">alternate_email</span>
+                 </div>
+                 <h4 style="font-size: 15px; font-weight: 900; letter-spacing: -0.02em;">Data Ticket</h4>
+                 <p style="font-size: 11px; color: var(--text-muted); font-weight: 950; margin-top: 6px; text-transform: uppercase;">2H Response</p>
+                 <button style="width: 100%; height: 48px; background: var(--bg-main); color: var(--text-primary); border: 1.5px solid var(--border-color); border-radius: 16px; margin-top: 24px; font-size: 12px; font-weight: 950; text-transform: uppercase;">Transmit Mail</button>
+             </div>
         </div>
     </main>
-
-    <footer class="support-footer">
-        <h4>Still need help?</h4>
-        <button class="support-btn primary">
-            <span class="material-symbols-outlined">chat_bubble</span>
-            Start Live Chat
-        </button>
-        <button class="support-btn secondary">
-            <span class="material-symbols-outlined">mail</span>
-            Email Support
-        </button>
-    </footer>
 </div>

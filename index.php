@@ -7,22 +7,22 @@ if (!isset($_SESSION['favorites'])) $_SESSION['favorites'] = [];
 
 // Products data
 $products = [
-    ['id' => '1', 'name' => 'Amul Gold Full Cream Milk', 'price' => 33, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1550583724-1255818c09d3?q=80&w=400', 'weight' => '500ml', 'brand' => 'Amul'],
-    ['id' => '2', 'name' => 'Aashirvaad Shudh Atta', 'price' => 215, 'oldPrice' => 240, 'category' => 'Atta & Flours', 'image' => 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400', 'weight' => '5kg', 'brand' => 'ITC', 'isOnSale' => true],
+    ['id' => '1', 'name' => 'Amul Gold Full Cream Milk', 'price' => 33, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1563636619-e9107da5a1bb?q=80&w=400', 'weight' => '500ml', 'brand' => 'Amul'],
+    ['id' => '2', 'name' => 'Aashirvaad Shudh Atta', 'price' => 215, 'oldPrice' => 240, 'category' => 'Atta & Flours', 'image' => 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?q=80&w=400', 'weight' => '5kg', 'brand' => 'ITC', 'isOnSale' => true],
     ['id' => '3', 'name' => 'Alphonso Mangoes', 'price' => 699, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=400', 'weight' => '6pcs', 'brand' => 'Farm Fresh', 'isOrganic' => true],
-    ['id' => '4', 'name' => 'Maggi 2-Min Noodles', 'price' => 14, 'category' => 'Instant Food', 'image' => 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
-    ['id' => '5', 'name' => 'Tata Tea Gold', 'price' => 165, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1544787210-2211d7c329d7?q=80&w=400', 'weight' => '250g', 'brand' => 'Tata'],
-    ['id' => '6', 'name' => 'Organic Broccoli', 'price' => 89, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
+    ['id' => '4', 'name' => 'Maggi Masala Noodles', 'price' => 14, 'category' => 'Instant Food', 'image' => 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
+    ['id' => '5', 'name' => 'Tata Tea Gold Premium', 'price' => 165, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1594631252845-29fc4586d56c?q=80&w=400', 'weight' => '250g', 'brand' => 'Tata'],
+    ['id' => '6', 'name' => 'Fresh Organic Broccoli', 'price' => 89, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
     ['id' => '7', 'name' => 'Mother Dairy Paneer', 'price' => 85, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=400', 'weight' => '200g', 'brand' => 'Mother Dairy'],
     ['id' => '8', 'name' => 'Catch Turmeric Powder', 'price' => 45, 'category' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400', 'weight' => '100g', 'brand' => 'Catch'],
-    ['id' => '9', 'name' => 'Fresh Red Apples', 'price' => 149, 'oldPrice' => 179, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?q=80&w=400', 'weight' => '1kg', 'brand' => 'Kashmir', 'isOnSale' => true],
-    ['id' => '10', 'name' => 'Amul Butter', 'price' => 56, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?q=80&w=400', 'weight' => '100g', 'brand' => 'Amul'],
-    ['id' => '11', 'name' => 'Fresh Spinach', 'price' => 25, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
-    ['id' => '12', 'name' => 'Nescafe Classic', 'price' => 245, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=400', 'weight' => '200g', 'brand' => 'Nestle'],
-    ['id' => '13', 'name' => 'MDH Garam Masala', 'price' => 75, 'category' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400', 'weight' => '100g', 'brand' => 'MDH'],
-    ['id' => '14', 'name' => 'Fresh Bananas', 'price' => 45, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=400', 'weight' => '1 dozen', 'brand' => 'Farm Fresh'],
+    ['id' => '9', 'name' => 'Kashmiri Red Apples', 'price' => 149, 'oldPrice' => 179, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?q=80&w=400', 'weight' => '1kg', 'brand' => 'Farm Direct', 'isOnSale' => true],
+    ['id' => '10', 'name' => 'Amul Salted Butter', 'price' => 56, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?q=80&w=400', 'weight' => '100g', 'brand' => 'Amul'],
+    ['id' => '11', 'name' => 'Fresh Palak (Spinach)', 'price' => 25, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
+    ['id' => '12', 'name' => 'Nescafe Classic Coffee', 'price' => 245, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=400', 'weight' => '200g', 'brand' => 'Nestle'],
+    ['id' => '13', 'name' => 'MDH Garam Masala', 'price' => 75, 'category' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1596040033222-198305001ff9?q=80&w=400', 'weight' => '100g', 'brand' => 'MDH'],
+    ['id' => '14', 'name' => 'Robusta Bananas', 'price' => 45, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=400', 'weight' => '1 dozen', 'brand' => 'Farm Fresh'],
     ['id' => '15', 'name' => 'Amul Cheese Slices', 'price' => 120, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=400', 'weight' => '200g', 'brand' => 'Amul'],
-    ['id' => '16', 'name' => 'Fresh Tomatoes', 'price' => 35, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1546470427-f4f1d6c7e27e?q=80&w=400', 'weight' => '500g', 'brand' => 'Local'],
+    ['id' => '16', 'name' => 'Hybrid Tomatoes', 'price' => 35, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1591130901023-ec13982467d3?q=80&w=400', 'weight' => '500g', 'brand' => 'Local'],
 ];
 
 $categories = ['All', 'Dairy', 'Atta & Flours', 'Fruits', 'Vegetables', 'Tea & Coffee', 'Instant Food', 'Masala & Spices'];
@@ -60,7 +60,12 @@ if ($action === 'add_cart' && $actionId) {
         }
         $msg = 'Added to basket!';
     }
-    header('Location: ?page=home&msg=' . urlencode($msg));
+    $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?page=home';
+    // Remove existing msg from referer if any
+    $referer = preg_replace('/([?&])msg=[^&]*(&|$)/', '$1', $referer);
+    $referer = rtrim($referer, '?&');
+    $sep = strpos($referer, '?') !== false ? '&' : '?';
+    header('Location: ' . $referer . $sep . 'msg=' . urlencode($msg));
     exit;
 }
 
@@ -195,36 +200,43 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
+    
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
 </head>
+<script>
+    // Immediate theme set to prevent flash
+    (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
 <body>
     <div id="app-container">
         <div id="view-port">
             <?php include "pages/{$page}.php"; ?>
         </div>
-        <?php if (in_array($page, ['home', 'explore', 'cart', 'rewards', 'profile'])): ?>
-        <nav class="bottom-nav">
-            <a href="?page=home" class="nav-item <?= $page === 'home' ? 'active' : '' ?>">
+        <?php if (in_array($page, ['home', 'explore', 'cart', 'profile', 'orders', 'rewards'])): ?>
+        <nav class="bottom-nav-floating">
+            <a href="?page=home" class="nav-item-v3 <?= $page === 'home' ? 'active' : '' ?>">
                 <span class="material-symbols-outlined <?= $page === 'home' ? 'filled' : '' ?>">home</span>
-                <span class="nav-label">Home</span>
             </a>
-            <a href="?page=explore" class="nav-item <?= $page === 'explore' ? 'active' : '' ?>">
+            <a href="?page=explore" class="nav-item-v3 <?= $page === 'explore' ? 'active' : '' ?>">
                 <span class="material-symbols-outlined <?= $page === 'explore' ? 'filled' : '' ?>">grid_view</span>
-                <span class="nav-label">Explore</span>
             </a>
-            <a href="?page=cart" class="nav-item <?= $page === 'cart' ? 'active' : '' ?>">
-                <div class="cart-icon-wrapper">
-                    <span class="material-symbols-outlined <?= $page === 'cart' ? 'filled' : '' ?>">shopping_basket</span>
-                    <?php if ($cartCount > 0): ?><span class="cart-badge"><?= $cartCount ?></span><?php endif; ?>
-                </div>
-                <span class="nav-label">Cart</span>
+            <div class="nav-center-btn">
+                <a href="?page=cart" class="center-circle">
+                    <span class="material-symbols-outlined filled" style="font-size: 28px;">shopping_basket</span>
+                    <?php if ($cartCount > 0): ?><span class="nav-badge-v3"><?= $cartCount ?></span><?php endif; ?>
+                </a>
+            </div>
+            <a href="?page=orders" class="nav-item-v3 <?= $page === 'orders' ? 'active' : '' ?>">
+                <span class="material-symbols-outlined <?= $page === 'orders' ? 'filled' : '' ?>">receipt_long</span>
             </a>
-            <a href="?page=rewards" class="nav-item <?= $page === 'rewards' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined <?= $page === 'rewards' ? 'filled' : '' ?>">stars</span>
-                <span class="nav-label">Coins</span>
-            </a>
-            <a href="?page=profile" class="nav-item <?= $page === 'profile' ? 'active' : '' ?>">
+            <a href="?page=profile" class="nav-item-v3 <?= $page === 'profile' ? 'active' : '' ?>">
                 <span class="material-symbols-outlined <?= $page === 'profile' ? 'filled' : '' ?>">person</span>
-                <span class="nav-label">Profile</span>
             </a>
         </nav>
         <?php endif; ?>
