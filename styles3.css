@@ -1,0 +1,541 @@
+/* Additional Styles - Part 3 */
+
+/* Explore Page */
+.explore-page {
+    padding: 32px 24px 40px;
+}
+
+.explore-title {
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.explore-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--zinc-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    min-height: auto;
+}
+
+.explore-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 48px;
+    background: var(--tile-grey);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.explore-card:hover {
+    border-color: rgba(57, 255, 20, 0.2);
+}
+
+.explore-card.large {
+    grid-column: span 2;
+    min-height: 200px;
+}
+
+.explore-card.wide {
+    grid-column: span 2;
+}
+
+.explore-card.full {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+}
+
+.explore-card-title {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.explore-card-small-title {
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.explore-card-sub {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    background: rgba(57, 255, 20, 0.1);
+    padding: 4px 12px;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.explore-card-icon {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.explore-card:hover .explore-card-icon {
+    transform: scale(1.1);
+}
+
+.explore-card-bg {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    font-size: 200px;
+    opacity: 0.05;
+    transition: opacity 0.3s ease;
+}
+
+.explore-card:hover .explore-card-bg {
+    opacity: 0.1;
+}
+
+.explore-full-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.explore-full-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(57, 255, 20, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.explore-card.full:hover .explore-full-icon {
+    background: var(--primary);
+}
+
+.explore-card.full:hover .explore-full-icon .material-symbols-outlined {
+    color: #000;
+}
+
+.explore-full-info h4 {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.explore-full-info p {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--zinc-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+.explore-quality {
+    margin-top: 32px;
+    background: rgba(57, 255, 20, 0.05);
+    border-radius: 40px;
+    padding: 32px;
+    border: 1px solid rgba(57, 255, 20, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.explore-quality h4 {
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.explore-quality p {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--zinc-500);
+    line-height: 1.5;
+}
+
+.explore-quality-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 4px solid rgba(57, 255, 20, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Profile Page */
+.profile-page {
+    padding-bottom: 40px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+}
+
+.profile-avatar {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.profile-avatar-ring {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--primary), transparent);
+}
+
+.profile-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid var(--bg-deep);
+    overflow: hidden;
+}
+
+.profile-avatar-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-edit-btn {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: #000;
+    border: 4px solid var(--bg-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.profile-badge {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.profile-menu {
+    padding: 0 24px;
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--tile-grey);
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-menu-item:active {
+    transform: scale(0.98);
+}
+
+.profile-menu-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: rgba(57, 255, 20, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.profile-menu-info {
+    flex: 1;
+}
+
+.profile-menu-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.profile-menu-sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--zinc-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+.logout-btn {
+    width: 100%;
+    height: 56px;
+    margin-top: 32px;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--red-500);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:active {
+    transform: scale(0.98);
+}
+
+/* Rewards Page */
+.rewards-page {
+    padding-bottom: 40px;
+}
+
+.rewards-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.rewards-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 256px;
+    height: 256px;
+    background: rgba(57, 255, 20, 0.1);
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.rewards-label {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+}
+
+.rewards-coins {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.rewards-number {
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+}
+
+.rewards-unit {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.rewards-tier {
+    margin-top: 16px;
+    padding: 4px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--zinc-400);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.rewards-goal {
+    margin: 0 24px 40px;
+    background: var(--tile-grey);
+    border-radius: 40px;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rewards-goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.rewards-goal-title {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.rewards-goal-sub {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--zinc-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.rewards-unlock {
+    background: rgba(57, 255, 20, 0.2);
+    color: var(--primary);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.rewards-progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.rewards-progress-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 50px;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+.rewards-progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.rewards-progress-labels span {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--zinc-600);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.rewards-progress-labels span:last-child {
+    color: var(--zinc-400);
+}
+
+.rewards-offers {
+    padding: 0 24px;
+}
+
+.rewards-offers-title {
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.rewards-offers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.reward-card {
+    background: var(--tile-grey);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reward-card .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+.reward-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.reward-card .coins {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.claim-btn {
+    width: 100%;
+    padding: 8px;
+    background: var(--white);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.claim-btn:active {
+    transform: scale(0.95);
+}
