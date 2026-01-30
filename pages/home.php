@@ -70,14 +70,20 @@ $reorderItems = array_slice($products, 12, 4); // Different items for variety
 
         <!-- Promo Carousel -->
         <section class="home-carousel no-scrollbar stagger-2" style="padding: 0 24px 24px;">
-            <div class="promo-slide" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000'); min-width: 320px; height: 180px;">
+            <div class="promo-slide" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%); height: 180px; border: 1.5px solid var(--primary);">
+                <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.2; transform: rotate(-15deg);">
+                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=farm&icon=leaf" style="width: 150px; height: 150px;">
+                </div>
                 <div class="promo-content">
                     <span class="promo-badge" style="background: #fff; color: #000;">Organic Special</span>
                     <h3 style="font-size: 28px; letter-spacing: -0.02em;">Fresh From <br><span style="color: var(--primary);">Village Farms</span></h3>
                     <p style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 6px; font-weight: 600;">Harvested this morning</p>
                 </div>
             </div>
-            <div class="promo-slide" style="background-image: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=1000'); min-width: 320px; height: 180px;">
+            <div class="promo-slide" style="background: linear-gradient(135deg, #121212 0%, #262626 100%); height: 180px; border: 1.5px solid var(--primary);">
+                <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.2; transform: rotate(15deg);">
+                     <img src="https://api.dicebear.com/7.x/icons/svg?seed=spices&icon=box" style="width: 150px; height: 150px;">
+                </div>
                 <div class="promo-content">
                     <span class="promo-badge">Spice Protocol</span>
                     <h3 style="font-size: 28px; letter-spacing: -0.02em;">Handpicked <br><span style="color: var(--primary);">Masala Blends</span></h3>
@@ -115,19 +121,19 @@ $reorderItems = array_slice($products, 12, 4); // Different items for variety
                 <button onclick="location.href='?page=explore'" style="color: var(--primary); font-size: 12px; font-weight: 800; border: none; background: none; cursor: pointer; text-transform: uppercase;">View All</button>
             </div>
             <div class="bento-grid" style="height: auto; grid-template-rows: auto; gap: 16px;">
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Vegetables'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px;">
-                    <div style="z-index: 2;">
-                        <h4 class="bento-title" style="font-size: 20px; font-weight: 900;">Fresh<br>Vegetables</h4>
-                        <span class="bento-sub" style="font-weight: 850;">Direct from Farms</span>
+                <div class="bento-card glass" onclick="location.href='?page=explore&category=Vegetables'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px; overflow: hidden; background: linear-gradient(135deg, var(--bg-secondary) 0%, #EBF9F1 100%);">
+                    <div style="z-index: 5; position: relative;">
+                        <h4 class="bento-title" style="font-size: 20px; font-weight: 900; color: #0E1B13;">Fresh<br>Vegetables</h4>
+                        <span class="bento-sub" style="font-weight: 850; background: #30E87A; color: #fff; padding: 4px 10px; border-radius: 8px; display: inline-block; margin-top: 6px; font-size: 10px;">DIRECT FROM FARMS</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1566385101042-1a000c1268c4?q=80&w=400" alt="Veg" style="position: absolute; bottom: -10px; right: -10px; width: 120px; height: 120px; object-fit: contain; transform: rotate(10deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
+                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=broccoli&backgroundColor=b6e3f4&icon=leaf" alt="Veg" style="position: absolute; bottom: 10px; right: 10px; width: 90px; height: 90px; object-fit: contain; transform: rotate(10deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); z-index: 1;">
                 </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Fruits'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px;">
-                    <div style="z-index: 2;">
-                        <h4 style="font-size: 20px; font-weight: 900;">Seasonal<br>Fruits</h4>
-                        <span class="bento-sub" style="font-weight: 850;">Freshly Picked</span>
+                <div class="bento-card glass" onclick="location.href='?page=explore&category=Fruits'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px; overflow: hidden; background: linear-gradient(135deg, var(--bg-secondary) 0%, #FFF4EE 100%);">
+                    <div style="z-index: 5; position: relative;">
+                        <h4 style="font-size: 20px; font-weight: 900; color: #0E1B13;">Seasonal<br>Fruits</h4>
+                        <span class="bento-sub" style="font-weight: 850; background: #FF844B; color: #fff; padding: 4px 10px; border-radius: 8px; display: inline-block; margin-top: 6px; font-size: 10px;">FRESHLY PICKED</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=400" alt="Fruits" style="position: absolute; bottom: -10px; right: -10px; width: 120px; height: 120px; object-fit: contain; transform: rotate(-5deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
+                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=apple&backgroundColor=ffdfbf&icon=sun" alt="Fruits" style="position: absolute; bottom: 10px; right: 10px; width: 90px; height: 90px; object-fit: contain; transform: rotate(-5deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); z-index: 1;">
                 </div>
                 <div class="bento-card glass" onclick="location.href='?page=explore&category=Dairy'" style="grid-column: span 1; padding: 20px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 28px;">
                      <div style="width: 50px; height: 50px; background: #EDF7FC; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">

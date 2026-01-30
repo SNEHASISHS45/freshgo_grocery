@@ -5,12 +5,12 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 $browseMode = ($category === 'All' && empty($search));
 
 $departments = [
-    ['name' => 'Dairy, Bread & Eggs', 'id_name' => 'Dairy', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuB4Y-vofCH2X572FGp6jP9KQiAs1atxVzNOlbrOsT4PFYJqQv-Gm5ST8jHlsbVHNJWOY9_uuISNU8KildHjYKb58_nQ0cmxsvHcmutH1ABmgI_0wi1_dThRXBQnkFQ1ybpS5iJ_E5NCATn1RV_4-huhUa9D2eJVPFSp-SxGCW7-GFJovOsVRszhFNJcaOEhHL4XIxuYcOAoB7pGwO-HxZGN7lCdPo7EFUFIFQhLyEamEXseGcw359AO8ayHIvN8ty7ihE0qLbVnCG_s', 'color' => '#EDF7FC'],
-    ['name' => 'Vegetables & Fruits', 'id_name' => 'Vegetables', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDaZGPeNO240DmeZgwPTbu2Dzk24eU-2JsKrLrmjfwvZCmcr3jtlAaNzNGwA93kKmu1et2I0MJMyGICn__ZwTZL9xvZ8l2XQReSiG6ERAnfy4jdCn6-7pRjkvt7eBdBJvMLYi2BFy6Or4gvILHfwk4yetzoYB-WDBVafzvnqgnYiHbsVQD4tS1e8BBm98TSwIAMb-yHKtS2QaZnosDlh-Bb024hw2FBNdgq8Y_38IKzf1_W4TXiCd0J0zg393fHetZh6QkxrP7FI1Ln', 'color' => '#EBF9F1'],
-    ['name' => 'Atta, Rice & Dal', 'id_name' => 'Atta & Flours', 'image' => 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=200', 'color' => '#FDE8E4'],
-    ['name' => 'Masala & Spices', 'id_name' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400', 'color' => '#F4EBF7'],
-    ['name' => 'Tea, Coffee & More', 'id_name' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1544787210-2211d7c329d7?q=80&w=400', 'color' => '#FFF6EE'],
-    ['name' => 'Snacks & Munchies', 'id_name' => 'Instant Food', 'image' => 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400', 'color' => '#FFF9E5'],
+    ['name' => 'Dairy, Bread & Eggs', 'id_name' => 'Dairy', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=milk&icon=droplet', 'color' => '#EDF7FC'],
+    ['name' => 'Vegetables & Fruits', 'id_name' => 'Vegetables', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=veg&icon=leaf', 'color' => '#EBF9F1'],
+    ['name' => 'Atta, Rice & Dal', 'id_name' => 'Atta & Flours', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=grain&icon=box', 'color' => '#FDE8E4'],
+    ['name' => 'Masala & Spices', 'id_name' => 'Masala & Spices', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=spice&icon=box', 'color' => '#F4EBF7'],
+    ['name' => 'Tea, Coffee & More', 'id_name' => 'Tea & Coffee', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=coffee&icon=coffee', 'color' => '#FFF6EE'],
+    ['name' => 'Snacks & Munchies', 'id_name' => 'Instant Food', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=snack&icon=fast-food', 'color' => '#FFF9E5'],
 ];
 
 // Handle search filtering

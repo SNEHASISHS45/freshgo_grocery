@@ -111,50 +111,50 @@ function askAI() {
 
 // 4. Page & Component Animations
 function initGSAP() {
-    // Initial staggered entry - Using .from to be safer
-    const staggeredElements = document.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
-
-    gsap.from(staggeredElements, {
-        y: 30,
+    // 4.1 Initial staggered entry for layout sections
+    const staggeredSections = document.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+    gsap.from(staggeredSections, {
+        y: 20,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.1,
+        stagger: 0.12,
         ease: "cubic",
-        clearProps: "all"
+        clearProps: "opacity,transform,y"
     });
 
-    // Banners scale intro
+    // 4.2 Banners scale intro
     gsap.from(".promo-slide", {
-        scale: 0.9,
+        scale: 0.95,
         opacity: 0,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: "cubic",
-        delay: 0.3,
-        clearProps: "all"
+        delay: 0.4,
+        clearProps: "opacity,transform,scale"
     });
 
-    // Handle Cards - Ensure they are visible
+    // 4.3 Handle Cards with ScrollTrigger
     const cards = document.querySelectorAll('.product-card-v3, .bento-card');
     gsap.from(cards, {
         opacity: 0,
-        y: 20,
+        y: 15,
         duration: 0.6,
         stagger: {
-            amount: 0.4,
+            amount: 0.3,
             grid: "auto",
             from: "start"
         },
         ease: "cubic",
         scrollTrigger: {
-            trigger: ".view-port",
+            trigger: "#view-port",
+            scroller: "#view-port",
             start: "top bottom",
             toggleActions: "play none none none"
         },
-        clearProps: "all"
+        clearProps: "opacity,transform,y"
     });
 
-    // Interactive Hover Effects
+    // 4.4 Interactive Hover Effects
     document.querySelectorAll('.product-card-v3, .bento-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card, { y: -8, scale: 1.02, duration: 0.4, ease: "cubic" });
@@ -164,7 +164,7 @@ function initGSAP() {
         });
     });
 
-    // Bottom Nav Pulse
+    // 4.5 Bottom Nav Pulse
     gsap.to(".nav-center-btn .center-circle", {
         boxShadow: "0 0 25px rgba(48, 232, 122, 0.4)",
         repeat: -1,
@@ -173,8 +173,14 @@ function initGSAP() {
         ease: "sine.inOut"
     });
 
-    // Refresh ScrollTrigger
-    setTimeout(() => { ScrollTrigger.refresh(); }, 500);
+    // 4.6 Refresh Logic
+    const refreshST = () => {
+        setTimeout(() => { ScrollTrigger.refresh(); }, 500);
+    };
+
+    refreshST();
+    window.addEventListener('resize', refreshST);
+    window.addEventListener('load', refreshST);
 }
 
 // 5. Setup & Events
