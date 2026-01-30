@@ -1,19 +1,8 @@
 <?php
-// Explore Page - Premium Search & Category Filtering (Indian Localization)
-
+// Explore Page - Premium Search & Category Filtering
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $browseMode = ($category === 'All' && empty($search));
 
-$departments = [
-    ['name' => 'Dairy, Bread & Eggs', 'id_name' => 'Dairy', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=milk&icon=droplet', 'color' => '#EDF7FC'],
-    ['name' => 'Vegetables & Fruits', 'id_name' => 'Vegetables', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=veg&icon=leaf', 'color' => '#EBF9F1'],
-    ['name' => 'Atta, Rice & Dal', 'id_name' => 'Atta & Flours', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=grain&icon=box', 'color' => '#FDE8E4'],
-    ['name' => 'Masala & Spices', 'id_name' => 'Masala & Spices', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=spice&icon=box', 'color' => '#F4EBF7'],
-    ['name' => 'Tea, Coffee & More', 'id_name' => 'Tea & Coffee', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=coffee&icon=coffee', 'color' => '#FFF6EE'],
-    ['name' => 'Snacks & Munchies', 'id_name' => 'Instant Food', 'image' => 'https://api.dicebear.com/7.x/icons/svg?seed=snack&icon=fast-food', 'color' => '#FFF9E5'],
-];
-
-// Handle search filtering
 if (!empty($search)) {
     $filteredProducts = array_filter($products, function($p) use ($search) {
         return stripos($p['name'], $search) !== false || stripos($p['category'], $search) !== false || stripos($p['brand'], $search) !== false;
@@ -24,82 +13,108 @@ if (!empty($search)) {
     });
 }
 ?>
-<div class="view-enter explore-page-v3">
-    <header class="home-header-v3">
-         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-             <?php if (!$browseMode): ?>
-             <button class="icon-btn-v3 glass" onclick="location.href='?page=explore'">
-                 <span class="material-symbols-outlined">arrow_back_ios</span>
-             </button>
-             <?php else: ?>
-             <div style="width: 44px;"></div>
-             <?php endif; ?>
-             <h1 style="font-size: 20px; font-weight: 800;"><?= $browseMode ? 'Find Products' : ($search ? 'Search Results' : $category) ?></h1>
-             <button class="icon-btn-v3 glass theme-toggle-btn" onclick="toggleTheme()" style="position: relative;">
-                <span class="material-symbols-outlined dark-icon" style="display: none;">dark_mode</span>
-                <span class="material-symbols-outlined light-icon">light_mode</span>
-             </button>
+<div class="view-enter explore-page-v3" style="background: var(--bg-main); min-height: 100vh;">
+    <!-- Neo-Premium Explore Header -->
+    <header style="background: var(--bg-main); padding: 16px 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-subtle);">
+         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+             <div style="display: flex; align-items: center; gap: 14px;">
+                 <?php if (!$browseMode): ?>
+                 <button class="icon-btn-v3" onclick="location.href='?page=explore'" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="font-size: 24px; color: var(--text-primary);">chevron_left</span>
+                 </button>
+                 <?php endif; ?>
+                 <div>
+                    <h1 style="font-size: 20px; font-weight: 850; color: var(--text-primary); letter-spacing: -0.01em;"><?= $browseMode ? 'Shop by Category' : ($search ? 'Results' : $category) ?></h1>
+                    <?php if (!$browseMode && $search): ?><p style="font-size: 11px; color: var(--text-muted); font-weight: 700; margin-top: 2px;">Searching for "<?= htmlspecialchars($search) ?>"</p><?php endif; ?>
+                 </div>
+             </div>
+             <div style="display: flex; gap: 10px;">
+                <button class="icon-btn-v3" onclick="toggleTheme()" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined light-icon" style="color: var(--text-primary);">dark_mode</span>
+                    <span class="material-symbols-outlined dark-icon" style="color: var(--text-primary);">light_mode</span>
+                </button>
+                <button class="icon-btn-v3" onclick="toggleNotifications()" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: var(--text-primary);">notifications</span>
+                </button>
+             </div>
          </div>
-         <form action="index.php" method="GET" class="search-bar-v3">
+         <form action="index.php" method="GET" class="search-bar-v3" style="background: var(--bg-secondary); border-radius: 16px; height: 52px; display: flex; align-items: center; padding: 0 16px; gap: 12px; border: 1px solid var(--border-subtle);">
             <input type="hidden" name="page" value="explore">
-            <span class="material-symbols-outlined">search</span>
-            <input type="text" name="search" placeholder="Search for 'bread', 'chips'..." value="<?= htmlspecialchars($search) ?>" autocomplete="off">
-        </form>
+            <span class="material-symbols-outlined" style="color: var(--brand-primary); font-size: 22px;">search</span>
+            <input type="text" name="search" placeholder="Search for bread, jam, fruits..." value="<?= htmlspecialchars($search) ?>" autocomplete="off" style="flex: 1; background: none; border: none; outline: none; font-size: 15px; font-weight: 700; color: var(--text-primary);">
+         </form>
     </header>
 
-    <main style="padding: 24px;">
-        <?php if ($browseMode): ?>
-        <!-- Departments Grid -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-bottom: 120px;">
-            <?php foreach ($departments as $dept): ?>
-            <a href="?page=explore&category=<?= urlencode($dept['id_name']) ?>" style="text-decoration: none;">
-                <div style="background: <?= $dept['color'] ?>; border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-xl); padding: 24px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: transform 0.2s;" onmouseover="this.style.transform='scale(0.98)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="width: 100px; height: 80px;">
-                        <img src="<?= $dept['image'] ?>" alt="<?= $dept['name'] ?>" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
-                    <h4 style="color: #0E1B13; font-size: 15px; font-weight: 800; text-align: center; line-height: 1.2;"><?= $dept['name'] ?></h4>
+     <main style="padding: 24px 16px;">
+         <?php if ($browseMode): ?>
+         <!-- Browse Mode Category Grid -->
+         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 12px; padding-bottom: 120px;">
+            <?php
+            $depts = [
+                ['n' => 'Dairy', 'i' => '🥛', 'bg' => 'var(--cat-dairy)', 'id' => 'Dairy'],
+                ['n' => 'Fruits', 'i' => '🍎', 'bg' => 'var(--cat-fruits)', 'id' => 'Fruits'],
+                ['n' => 'Veggies', 'i' => '🥦', 'bg' => 'var(--cat-veggies)', 'id' => 'Vegetables'],
+                ['n' => 'Snacks', 'i' => '🍪', 'bg' => 'var(--cat-snacks)', 'id' => 'Instant Food'],
+                ['n' => 'Atta', 'i' => '🌾', 'bg' => 'var(--cat-atta)', 'id' => 'Atta & Flours'],
+                ['n' => 'Spices', 'i' => '🌶️', 'bg' => 'var(--cat-spices)', 'id' => 'Masala & Spices'],
+                ['n' => 'Brew', 'i' => '☕', 'bg' => 'var(--cat-tea)', 'id' => 'Tea & Coffee'],
+                ['n' => 'Frozen', 'i' => '🧊', 'bg' => 'var(--cat-frozen)', 'id' => 'Dairy'],
+            ];
+            foreach ($depts as $d): ?>
+            <a href="?page=explore&category=<?= urlencode($d['id']) ?>" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="width: 100%; aspect-ratio: 1; background: <?= $d['bg'] ?>; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1.5px solid var(--bg-main); box-shadow: var(--shadow-sm); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    <?= $d['i'] ?>
                 </div>
+                <span style="font-size: 11px; font-weight: 850; color: var(--text-primary); text-align: center; line-height: 1.2;"><?= $d['n'] ?></span>
             </a>
             <?php endforeach; ?>
-        </div>
-        <?php else: ?>
-        <!-- Filtered Product Results -->
-        <?php if (empty($filteredProducts)): ?>
-        <div style="text-align: center; padding: 60px 20px;">
-            <div style="width: 80px; height: 80px; background: var(--bg-secondary); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--text-muted); opacity: 0.5;">search_off</span>
+         </div>
+         <?php else: ?>
+         <!-- Product Grid Results -->
+         <?php if (empty($filteredProducts)): ?>
+         <div style="text-align: center; padding: 100px 20px;">
+            <div style="width: 120px; height: 120px; background: var(--bg-secondary); border-radius: 44px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; border: 2px solid var(--border-subtle);">
+                <span class="material-symbols-outlined" style="font-size: 54px; color: var(--text-muted); opacity: 0.5;">search_off</span>
             </div>
-            <h3 style="font-size: 18px; font-weight: 800;">No products found</h3>
-            <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Try searching for something else like "milk" or "maggi".</p>
-        </div>
-        <?php else: ?>
-        <div class="best-seller-grid-v3" style="padding: 0 0 120px;">
-            <?php foreach ($filteredProducts as $product): ?>
-            <?php $isFav = in_array($product['id'], $_SESSION['favorites']); ?>
+            <h3 style="font-size: 22px; font-weight: 900; color: var(--text-primary); letter-spacing: -0.01em;">No results found</h3>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-top: 12px; font-weight: 600; line-height: 1.5; padding: 0 20px;">We couldn't find exactly what you're looking for. Try a different term or browse categories.</p>
+            <button onclick="location.href='?page=explore'" style="margin-top: 32px; height: 50px; padding: 0 32px; background: var(--brand-primary); color: #fff; border: none; border-radius: 16px; font-weight: 850; font-size: 14px; box-shadow: var(--shadow-md);">Explore All Categories</button>
+         </div>
+         <?php else: ?>
+         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 120px;">
+            <?php foreach ($filteredProducts as $item): ?>
+            <?php 
+                $isFav = in_array($item['id'], $_SESSION['favorites']); 
+                $deliveryTime = rand(8, 15) . " MINS";
+            ?>
             <div class="product-card-v3">
-                <div class="product-img-v3 glass" onclick="location.href='?page=product&id=<?= $product['id'] ?>'" style="cursor: pointer;">
-                    <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400';">
-                    <button class="fav-btn-v3 <?= $isFav ? 'active' : '' ?>" onclick="event.stopPropagation(); location.href='?action=toggle_favorite&id=<?= $product['id'] ?>'">
-                        <span class="material-symbols-outlined <?= $isFav ? 'filled' : '' ?>" style="font-size: 20px;"><?= $isFav ? 'favorite' : 'favorite' ?></span>
-                    </button>
+                <div class="delivery-time-badge">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+                    <?= $deliveryTime ?>
                 </div>
-                <div class="product-meta-v3" style="padding: 8px 4px 0;">
-                    <span style="font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em;"><?= $product['category'] ?></span>
-                    <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 8px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= $product['name'] ?></h4>
-                    <div class="product-footer-v3">
-                        <div style="display: flex; flex-direction: column;">
-                            <span class="price" style="font-size: 18px; font-weight: 950; color: var(--text-primary); letter-spacing: -0.01em;">₹<?= $product['price'] ?></span>
-                            <span style="font-size: 11px; color: var(--text-muted); font-weight: 850; text-transform: uppercase;"><?= $product['weight'] ?></span>
-                        </div>
-                        <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">
-                            <span class="material-symbols-outlined" style="font-weight: 950; font-size: 24px;">shopping_basket</span>
-                        </button>
+                <button class="fav-btn-v3 <?= $isFav ? 'active' : '' ?>" onclick="location.href='?action=toggle_favorite&id=<?= $item['id'] ?>'">
+                    <span class="material-symbols-outlined <?= $isFav ? 'filled' : '' ?>" style="font-size: 18px;">favorite</span>
+                </button>
+                <div class="product-img-v3" onclick="location.href='?page=product&id=<?= $item['id'] ?>'">
+                    <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>">
+                </div>
+                <div class="product-title-v3"><?= $item['name'] ?></div>
+                <div class="product-weight-v3"><?= $item['weight'] ?></div>
+                <div class="product-footer-v3">
+                    <div class="price-container-v3">
+                        <span class="price-current">₹<?= $item['price'] ?></span>
+                        <?php if (isset($item['oldPrice'])): ?>
+                            <span class="price-old">₹<?= $item['oldPrice'] ?></span>
+                        <?php endif; ?>
                     </div>
+                    <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $item['id'] ?>'">ADD</button>
                 </div>
             </div>
             <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
-        <?php endif; ?>
-    </main>
+         </div>
+         <?php endif; ?>
+         <?php endif; ?>
+     </main>
 </div>
+
+

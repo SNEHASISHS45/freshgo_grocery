@@ -1,86 +1,98 @@
-<div class="view-enter profile-page-v3" style="background: var(--bg-main);">
-    <header class="home-header-v3" style="padding-top: 64px;">
-        <div class="stagger-1" style="display: flex; align-items: center; gap: 24px;">
-            <div style="width: 88px; height: 88px; border-radius: 32px; background: var(--primary-light); overflow: hidden; border: 2.3px solid var(--primary); transform: rotate(-3deg); box-shadow: var(--shadow-md);">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Snehasish" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="flex: 1;">
-                <h2 style="font-size: 26px; font-weight: 950; letter-spacing: -0.03em;">Snehasish S.</h2>
-                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 13px; font-weight: 950; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.1em;">
-                    <span class="material-symbols-outlined filled" style="font-size: 16px; color: var(--primary);">verified</span>
-                    <span>ELITE PROTOCOL MEMBER</span>
-                </div>
-            </div>
-            <div style="display: flex; gap: 12px;">
-                <button class="icon-btn-v3 glass theme-toggle-btn" onclick="toggleTheme()" style="border-radius: 16px; width: 48px; height: 48px;">
-                    <span class="material-symbols-outlined dark-icon" style="display: none;">dark_mode</span>
-                    <span class="material-symbols-outlined light-icon">light_mode</span>
-                </button>
-            </div>
-        </div>
+<div class="view-enter profile-page-v3" style="background: var(--bg-secondary); min-height: 100vh; padding-bottom: 120px;">
+    <!-- Neo-Premium profile Header -->
+    <header style="background: var(--bg-main); padding: 24px 20px; border-bottom: 2px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);">
+         <div style="display: flex; align-items: center; gap: 16px;">
+             <div style="width: 56px; height: 56px; background: var(--brand-primary-light); border-radius: 18px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--brand-primary);">
+                 <span class="material-symbols-outlined" style="color: var(--brand-primary); font-size: 32px; font-variation-settings: 'FILL' 1;">person_filled</span>
+             </div>
+             <div>
+                <h1 style="font-size: 22px; font-weight: 950; color: var(--text-primary); letter-spacing: -0.02em;">Snehasish S.</h1>
+                <p style="font-size: 13px; color: var(--text-secondary); font-weight: 750; margin-top: 2px; opacity: 0.8;">Protocol: +91 98XXX XXX00</p>
+             </div>
+         </div>
+         <div style="display: flex; gap: 8px;">
+            <button class="icon-btn-v3" onclick="toggleTheme()" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined light-icon" style="color: var(--text-primary);">dark_mode</span>
+                <span class="material-symbols-outlined dark-icon" style="color: var(--text-primary);">light_mode</span>
+            </button>
+            <button class="icon-btn-v3" onclick="location.href='?page=settings'" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 22px;">settings</span>
+            </button>
+         </div>
     </header>
 
-    <main style="padding: 32px 24px;">
-        <!-- Account Bento -->
-        <div class="stagger-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px;">
-            <a href="?page=orders" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 32px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);" class="bento-card">
-                <div style="width: 48px; height: 48px; background: var(--bg-main); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 26px;">shopping_bag</span>
+    <main style="padding: 24px 16px;">
+        <!-- Orders & Payments Island -->
+        <h3 style="font-size: 13px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 14px 12px;">Commerce Hub</h3>
+        <div style="background: var(--bg-tile); border-radius: 28px; border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 28px; box-shadow: var(--shadow-sm);">
+            <a href="?page=orders" style="display: flex; align-items: center; gap: 16px; padding: 18px 20px; text-decoration: none; border-bottom: 1px solid var(--border-subtle);">
+                <div style="width: 44px; height: 44px; background: var(--cat-dairy); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: #3B71FE; font-size: 22px;">receipt_long</span>
                 </div>
-                <p style="font-size: 16px; font-weight: 900; letter-spacing: -0.01em;">My Orders</p>
-                <p style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin-top: 6px; text-transform: uppercase;">1 Transmission</p>
+                <div style="flex: 1;">
+                    <span style="font-size: 15px; font-weight: 850; color: var(--text-primary); display: block;">Your Orders</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">History & Tracking Protocol</span>
+                </div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">chevron_right</span>
             </a>
-            <a href="?page=favorites" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 32px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);" class="bento-card">
-                <div style="width: 48px; height: 48px; background: var(--bg-main); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="color: var(--red); font-size: 26px;">favorite</span>
+            <a href="?page=payment" style="display: flex; align-items: center; gap: 16px; padding: 18px 20px; text-decoration: none; border-bottom: 1px solid var(--border-subtle);">
+                <div style="width: 44px; height: 44px; background: var(--cat-snacks); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: #F8912D; font-size: 22px;">account_balance_wallet</span>
                 </div>
-                <p style="font-size: 16px; font-weight: 900; letter-spacing: -0.01em;">Favorites</p>
-                <p style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin-top: 6px; text-transform: uppercase;">12 Archived</p>
+                <div style="flex: 1;">
+                    <span style="font-size: 15px; font-weight: 850; color: var(--text-primary); display: block;">Payment Vault</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">UPI, Cards & Credits Hub</span>
+                </div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">chevron_right</span>
+            </a>
+            <a href="?page=addresses" style="display: flex; align-items: center; gap: 16px; padding: 18px 20px; text-decoration: none;">
+                <div style="width: 44px; height: 44px; background: var(--cat-veggies); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: var(--brand-primary); font-size: 22px;">location_on</span>
+                </div>
+                <div style="flex: 1;">
+                    <span style="font-size: 15px; font-weight: 850; color: var(--text-primary); display: block;">Delivery Nodes</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Manage Geolocation Points</span>
+                </div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">chevron_right</span>
             </a>
         </div>
 
-        <!-- List Menu -->
-        <div class="stagger-3" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 40px; overflow: hidden; box-shadow: var(--shadow-sm);">
-            <a href="?page=payment" class="profile-menu-v2" style="padding: 24px 28px;">
-                <div style="width: 44px; height: 44px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="font-size: 22px;">credit_card</span>
+        <!-- Support & Legal Island -->
+        <h3 style="font-size: 13px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 14px 12px;">System Assistance</h3>
+        <div style="background: var(--bg-tile); border-radius: 28px; border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 28px; box-shadow: var(--shadow-sm);">
+            <a href="?page=support" style="display: flex; align-items: center; gap: 16px; padding: 18px 20px; text-decoration: none; border-bottom: 1px solid var(--border-subtle);">
+                <div style="width: 44px; height: 44px; background: var(--bg-secondary); border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-subtle);">
+                    <span class="material-symbols-outlined" style="color: var(--text-secondary); font-size: 22px;">headset_mic</span>
                 </div>
-                <span style="font-weight: 900; font-size: 16px; letter-spacing: -0.01em;">Wallet & Fiscal Hub</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+                <div style="flex: 1;">
+                    <span style="font-size: 15px; font-weight: 850; color: var(--text-primary); display: block;">Support Terminal</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">24/7 Live Assistance Hub</span>
+                </div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">chevron_right</span>
             </a>
-            <a href="?page=addresses" class="profile-menu-v2" style="border-top: 1.5px solid var(--border-color); padding: 24px 28px;">
-                <div style="width: 44px; height: 44px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="font-size: 22px;">location_on</span>
+            <a href="?page=about" style="display: flex; align-items: center; gap: 16px; padding: 18px 20px; text-decoration: none;">
+                <div style="width: 44px; height: 44px; background: var(--bg-secondary); border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-subtle);">
+                    <span class="material-symbols-outlined" style="color: var(--text-secondary); font-size: 22px;">info</span>
                 </div>
-                <span style="font-weight: 900; font-size: 16px; letter-spacing: -0.01em;">Saved Locations</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
-            </a>
-            <a href="?page=rewards" class="profile-menu-v2" style="border-top: 1.5px solid var(--border-color); padding: 24px 28px;">
-                <div style="width: 44px; height: 44px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="font-size: 22px; color: gold;">stars</span>
+                <div style="flex: 1;">
+                    <span style="font-size: 15px; font-weight: 850; color: var(--text-primary); display: block;">About Protocol</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">System Version 4.0.0 Stable</span>
                 </div>
-                <span style="font-weight: 900; font-size: 16px; letter-spacing: -0.01em;">Loyalty & Coins</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
-            </a>
-            <a href="?page=support" class="profile-menu-v2" style="border-top: 1.5px solid var(--border-color); padding: 24px 28px;">
-                <div style="width: 44px; height: 44px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
-                    <span class="material-symbols-outlined" style="font-size: 22px;">flag</span>
-                </div>
-                <span style="font-weight: 900; font-size: 16px; letter-spacing: -0.01em;">Concierge Support</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 20px;">chevron_right</span>
             </a>
         </div>
 
-        <!-- Logout Section -->
-        <div class="stagger-4" style="margin-top: 60px; text-align: center; padding-bottom: 120px;">
-            <a href="?page=welcome" class="logout-link" style="justify-content: center; background: rgba(255, 77, 79, 0.08); padding: 22px; border-radius: 28px; border: 1.5px solid rgba(255, 77, 79, 0.15); margin: 0 10px; text-decoration: none;">
-                <span class="material-symbols-outlined" style="font-weight: 950; color: var(--red);">logout</span>
-                <span style="letter-spacing: 0.05em; font-weight: 950; color: var(--red); text-transform: uppercase; font-size: 13px;">TERMINATE PROTOCOL</span>
-            </a>
-            <div style="margin-top: 40px;">
-                 <p style="font-size: 12px; color: var(--text-muted); font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">FreshGo Cloud v3.4.2</p>
-                 <p style="font-size: 10px; color: var(--primary); font-weight: 950; margin-top: 6px; text-transform: uppercase;">Quantum Encrypted Session</p>
+        <button onclick="location.href='?page=welcome'" style="width: 100%; height: 58px; background: rgba(255, 59, 137, 0.06); border: 1.5px solid rgba(255, 59, 137, 0.2); border-radius: 18px; color: var(--brand-accent); font-size: 15px; font-weight: 950; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; box-shadow: var(--shadow-sm);">
+            <span class="material-symbols-outlined" style="font-size: 22px; font-weight: 900;">power_settings_new</span>
+            TERMINATE SESSION
+        </button>
+
+        <div style="text-align: center; margin-top: 48px; padding-bottom: 40px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--bg-tile); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 100px; box-shadow: var(--shadow-sm);">
+                <div style="width: 6px; height: 6px; background: var(--brand-primary); border-radius: 50%;"></div>
+                <span style="font-size: 10px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Proudly Made for Speed Hub</span>
             </div>
         </div>
     </main>
 </div>
+

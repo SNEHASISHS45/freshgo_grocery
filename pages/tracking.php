@@ -1,96 +1,96 @@
 <div class="view-enter tracking-v3" style="background: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column;">
-    <!-- Map Background Area -->
-    <div class="stagger-1" style="flex: 1; position: relative; background: #ccdce1;">
-        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200" alt="Map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; filter: contrast(1.1) grayscale(0.2);">
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1), transparent 40%, rgba(0,0,0,0.05));"></div>
+    <!-- Map Area (Full Screen) -->
+    <div style="position: fixed; inset: 0; background: var(--bg-secondary); z-index: 1;">
+         <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1200" alt="Map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(0.2) contrast(1.1);">
+         
+         <header style="position: absolute; top: 0; left: 0; width: 100%; padding: 16px; display: flex; align-items: center; justify-content: space-between; z-index: 10;">
+             <button onclick="location.href='?page=home'" style="width: 44px; height: 44px; border-radius: 14px; background: var(--bg-tile); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
+                 <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 24px;">close</span>
+             </button>
+             <button onclick="toggleTheme()" style="width: 44px; height: 44px; border-radius: 14px; background: var(--bg-tile); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
+                <span class="material-symbols-outlined light-icon" style="color: var(--text-primary);">dark_mode</span>
+                <span class="material-symbols-outlined dark-icon" style="color: var(--text-primary);">light_mode</span>
+             </button>
+         </header>
 
-        <!-- Premium Navigation Header -->
-        <header class="home-header-v3" style="background: transparent; position: absolute; width: 100%; border: none; z-index: 20;">
-            <div class="header-top-row" style="padding: 0 24px;">
-                <button class="icon-btn-v3 glass" onclick="location.href='?page=home'" style="background: rgba(255,255,255,0.8);">
-                    <span class="material-symbols-outlined" style="color: #000; font-weight: 850;">close</span>
-                </button>
-                <div style="background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); padding: 10px 24px; border-radius: 50px; border: 1.5px solid white; box-shadow: var(--shadow-md);">
-                    <p style="font-size: 13px; font-weight: 950; color: #000; text-transform: uppercase; letter-spacing: 0.05em;">TRACKING FG-8291</p>
-                </div>
-                <div style="width: 44px;"></div>
-            </div>
-        </header>
-
-        <!-- Dynamic Rider Pulse Marker -->
-        <div style="position: absolute; top: 45%; left: 52%; transform: translate(-50%, -50%); transition: all 1s ease-in-out;">
-            <div style="width: 56px; height: 56px; background: var(--primary); border-radius: 20px; border: 4px solid white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <span class="material-symbols-outlined" style="color: #000; font-size: 32px; font-weight: 950;">pedal_bike</span>
-            </div>
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: var(--primary); border-radius: 50%; opacity: 0.3; animation: riderPing 2s infinite;"></div>
-        </div>
-        
-        <!-- Delivery Goal Marker -->
-        <div style="position: absolute; bottom: 20%; left: 20%;">
-            <div style="width: 40px; height: 40px; background: #000; border-radius: 50%; border: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
-                <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">home</span>
-            </div>
-        </div>
+         <!-- Rider Indicator -->
+         <div style="position: absolute; top: 40%; left: 50%; width: 56px; height: 56px; background: var(--brand-primary); border-radius: 20px; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(21, 209, 112, 0.4); transform: translate(-50%, -50%);">
+            <span class="material-symbols-outlined" style="color: #000; font-size: 28px; font-weight: 950;">pedal_bike</span>
+            <div style="position: absolute; inset: -15px; border: 2px solid var(--brand-primary); border-radius: 50%; opacity: 0.5; animation: pulse-ring 2s infinite;"></div>
+         </div>
     </div>
 
-    <!-- Live Status Sheet -->
-    <div class="stagger-1" style="background: var(--bg-main); border-radius: 48px 48px 0 0; padding: 48px 24px 60px; position: relative; z-index: 10; margin-top: -48px; box-shadow: 0 -20px 60px rgba(0,0,0,0.15);">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+    <!-- Neo-Bottom Sheet -->
+    <div style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: var(--bg-main); border-radius: 36px 36px 0 0; padding: 24px 20px 48px; z-index: 100; box-shadow: 0 -12px 48px rgba(0,0,0,0.12); border-top: 1px solid var(--border-subtle);">
+        <div style="width: 48px; height: 6px; background: var(--border-subtle); border-radius: 3px; margin: 0 auto 28px;"></div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px;">
             <div>
-                 <p style="font-size: 11px; font-weight: 950; color: var(--primary); text-transform: uppercase; letter-spacing: 0.25em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                     <span style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%; display: inline-block; animation: pulse 2s infinite;"></span>
-                     LIVE TRANSMISSION
-                 </p>
-                 <h2 style="font-size: 32px; font-weight: 950; line-height: 1; letter-spacing: -0.04em;">Arriving in <br><span style="color: var(--primary);">8-10 Mins</span></h2>
+                <h2 style="font-size: 24px; font-weight: 950; color: var(--text-primary); line-height: 1.1; letter-spacing: -0.02em;">Arriving Hub: <span style="color: var(--brand-primary);">8-10 Mins</span></h2>
+                <p style="font-size: 13px; color: var(--text-secondary); font-weight: 700; margin-top: 6px;">Protocol active. Ramesh is navigating your route.</p>
             </div>
-            <button class="neon-btn" style="width: 64px; height: 64px; background: var(--primary); border: none; border-radius: 20px; color: #000; display: flex; align-items: center; justify-content: center; box-shadow: var(--neon-shadow);">
-                <span class="material-symbols-outlined" style="font-weight: 950; font-size: 28px;">call</span>
-            </button>
-        </div>
-
-        <!-- Progress Timeline -->
-        <div class="stepper-v3" style="margin-bottom: 48px;">
-            <div class="step-v3 completed">
-                <div class="step-icon-v3" style="background: var(--primary); color: #000;"><span class="material-symbols-outlined" style="font-size: 14px; font-weight: 950;">check</span></div>
-                <div class="step-info-v3">
-                    <h4 style="font-size: 16px; font-weight: 950; letter-spacing: -0.01em;">Order Received</h4>
-                    <p style="font-size: 13px; color: var(--text-muted); font-weight: 800;">Confirmed at 04:15 PM</p>
-                </div>
-            </div>
-            <div class="step-v3 completed">
-                <div class="step-icon-v3" style="background: var(--primary); color: #000;"><span class="material-symbols-outlined" style="font-size: 14px; font-weight: 950;">check</span></div>
-                <div class="step-info-v3">
-                    <h4 style="font-size: 16px; font-weight: 950; letter-spacing: -0.01em;">Quality Secured</h4>
-                    <p style="font-size: 13px; color: var(--text-muted); font-weight: 800;">Verified by Hub Intel #2</p>
-                </div>
-            </div>
-            <div class="step-v3">
-                <div class="step-icon-v3 animate-pulse" style="background: var(--primary); border: 4px solid var(--primary-light);"></div>
-                <div class="step-info-v3">
-                    <h4 style="font-size: 16px; font-weight: 950; color: var(--text-primary); letter-spacing: -0.01em;">Transmission In Progress</h4>
-                    <p style="font-size: 13px; color: var(--text-muted); font-weight: 800;">Ramesh is navigating on an EV bike</p>
-                </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="icon-btn-v3" style="width: 48px; height: 48px; border-radius: 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 22px;">call</span>
+                </button>
+                 <button class="icon-btn-v3" style="width: 48px; height: 48px; border-radius: 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 22px;">chat_bubble_outline</span>
+                </button>
             </div>
         </div>
 
-        <!-- Delivery Partner Profile -->
-        <div style="display: flex; align-items: center; gap: 20px; background: var(--bg-secondary); border: 2.3px solid var(--primary); border-radius: 36px; padding: 24px; box-shadow: var(--neon-shadow);">
-            <div style="width: 60px; height: 60px; border-radius: 18px; overflow: hidden; background: var(--primary-light); border: 1.5px solid var(--primary);">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ramesh" alt="Rider" style="width: 100%; height: 100%; object-fit: cover;">
+        <!-- Progress Milestones Island -->
+        <div style="background: var(--bg-secondary); border-radius: 28px; padding: 20px; border: 1px solid var(--border-subtle); margin-bottom: 28px;">
+            <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; position: relative;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--brand-primary); display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 12px rgba(21, 209, 112, 0.2);">
+                    <span class="material-symbols-outlined" style="color: #000; font-size: 16px; font-weight: 950;">check</span>
+                </div>
+                <div style="flex: 1;">
+                    <p style="font-size: 15px; font-weight: 900; color: var(--text-primary);">Logistics Triggered</p>
+                    <p style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Inventory dispatched from Hub Alpha</p>
+                </div>
+                <!-- Vertical Line Connector -->
+                <div style="position: absolute; top: 28px; left: 14px; width: 2px; height: calc(100% + 4px); background: var(--brand-primary); opacity: 1;"></div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--brand-primary-light); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2;">
+                   <div style="width: 10px; height: 10px; background: var(--brand-primary); border-radius: 50%;"></div>
+                </div>
+                <div style="flex: 1;">
+                    <p style="font-size: 15px; font-weight: 900; color: var(--text-primary);">Rider Transmitting</p>
+                    <p style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Real-time sync active for final approach</p>
+                </div>
+                <span style="font-size: 10px; font-weight: 950; color: var(--brand-primary); background: var(--brand-primary-light); padding: 4px 10px; border-radius: 6px; text-transform: uppercase;">Live</span>
+            </div>
+        </div>
+
+        <!-- Rider Profile Card Island -->
+        <div style="background: var(--bg-tile); border-radius: 24px; padding: 18px; display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <div style="width: 54px; height: 54px; background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-subtle); padding: 4px;">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ramesh" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div style="flex: 1;">
-                <p style="font-size: 17px; font-weight: 950; color: var(--text-primary);">Ramesh Kumar</p>
-                <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 900; margin-top: 2px;">
-                     <span class="material-symbols-outlined filled" style="font-size: 16px; color: #FFD700;">grade</span>
-                     <span style="color: var(--text-muted);">4.9 • Certified Fresh Agent</span>
+                <h4 style="font-size: 16px; font-weight: 900; color: var(--text-primary);">Ramesh Kumar</h4>
+                <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                    <span class="material-symbols-outlined filled" style="color: #FFCC00; font-size: 15px;">star</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--text-secondary);">4.9 Hub Rating</span>
                 </div>
             </div>
-            <button class="icon-btn-v3 glass" style="width: 48px; height: 48px; border-radius: 16px;">
-                <span class="material-symbols-outlined" style="font-size: 24px; color: var(--primary);">chat_bubble</span>
-            </button>
+            <div style="text-align: right;">
+                 <p style="font-size: 10px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Rider Tip</p>
+                 <button style="border: none; background: none; font-size: 14px; font-weight: 950; color: var(--brand-primary); margin-top: 2px;">ADD ₹20</button>
+            </div>
         </div>
     </div>
 </div>
+
+
+<style>
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+</style>
 
 <style>
 @keyframes riderPing {

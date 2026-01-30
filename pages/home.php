@@ -1,204 +1,157 @@
 <?php
-// Home Page - Bento Premium Redesign & Functional Integration (Indian Localization)
-
-$hour = date('H');
-$greeting = "Good Day";
-if ($hour < 12) $greeting = "Namaste";
-else if ($hour < 17) $greeting = "Good Afternoon";
-else $greeting = "Good Evening";
-
-// Filter some "Popular" products for the best sellers section
-$bestSellers = array_slice($products, 0, 4); 
-$reorderItems = array_slice($products, 12, 4); // Different items for variety
+// Home Page - Blinkit/Zepto Inspired Premium Design
+$bestSellers = array_slice($products, 0, 6); 
+$reorderItems = array_slice($products, 12, 4);
 ?>
-<div class="view-enter home-page-v3">
-    <header class="home-header-v3">
-        <div class="header-top-row stagger-1">
-            <div class="header-user-box" onclick="location.href='?page=profile'" style="cursor: pointer;">
-                <div class="profile-img-v3" style="transform: rotate(-3deg); border: 2px solid var(--primary);">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Snehasish" alt="Profile">
+<div class="view-enter home-page-v3" style="background: var(--bg-main);">
+    <!-- Sticky Neo-Premium Header -->
+    <header style="background: var(--bg-header); padding: 16px 16px 24px; position: sticky; top: 0; z-index: 1000; border-radius: 0 0 32px 32px; box-shadow: var(--shadow-lg);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+            <div class="location-chip-v3" onclick="detectLocation()" style="display: flex; align-items: center; gap: 14px; cursor: pointer;">
+                <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="material-symbols-outlined" style="color: #fff; font-size: 26px;">location_on</span>
                 </div>
-                <div class="delivery-text-v3">
-                    <span style="display: flex; align-items: center; gap: 4px;"><?= $greeting ?>, Snehasish! <span style="font-size: 14px;">👋</span></span>
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        <span class="material-symbols-outlined filled" style="font-size: 16px; color: var(--primary);">location_on</span>
-                        <h2 style="font-size: 14px; font-weight: 800;">HSR Layout, Sector 2</h2>
-                        <span class="material-symbols-outlined" style="font-size: 18px; color: var(--text-muted);">expand_more</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <h3 id="location-title" style="font-size: 17px; font-weight: 850; color: #fff; line-height: 1.1; letter-spacing: -0.01em;">HSR Layout</h3>
+                        <span class="material-symbols-outlined" style="color: #fff; font-size: 20px; opacity: 0.8;">keyboard_arrow_down</span>
                     </div>
+                    <p id="location-subtitle" style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); margin-top: 3px; letter-spacing: 0.01em;">Bengaluru, KA 560102</p>
                 </div>
             </div>
-            <div style="display: flex; gap: 12px;">
-                <button class="icon-btn-v3 glass theme-toggle-btn" onclick="toggleTheme()" style="position: relative; width: 48px; height: 48px; border-radius: 16px;">
-                    <span class="material-symbols-outlined dark-icon" style="display: none;">dark_mode</span>
-                    <span class="material-symbols-outlined light-icon">light_mode</span>
+            <div style="display: flex; gap: 10px;">
+                <button class="icon-btn-v3" onclick="toggleTheme()" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="material-symbols-outlined light-icon" style="font-size: 22px;">dark_mode</span>
+                    <span class="material-symbols-outlined dark-icon" style="font-size: 22px;">light_mode</span>
                 </button>
-                <button class="icon-btn-v3 glass" onclick="location.href='?page=notifications'" style="width: 48px; height: 48px; border-radius: 16px;">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <?php if ($cartCount > 0): ?><div style="position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; border: 2px solid var(--bg-main);"></div><?php endif; ?>
+                <div style="position: relative;">
+                    <button class="icon-btn-v3" onclick="toggleNotifications()" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                        <span class="material-symbols-outlined" style="font-size: 22px;">notifications</span>
+                    </button>
+                    <div style="position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--brand-primary); border-radius: 50%; border: 2px solid #8E0E44;"></div>
+                </div>
+                <button class="icon-btn-v3" onclick="location.href='?page=profile'" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="material-symbols-outlined" style="font-size: 22px;">person</span>
                 </button>
             </div>
         </div>
 
-        <form action="index.php" method="GET" class="search-bar-v3 stagger-1" style="height: 60px; border-radius: 20px;">
+        <form action="index.php" method="GET" style="position: relative;">
             <input type="hidden" name="page" value="explore">
-            <span class="material-symbols-outlined" style="font-size: 24px;">search</span>
-            <input type="text" name="search" id="searchInput" placeholder="Search dairy, fruits, organic..." autocomplete="off" style="font-size: 15px; font-weight: 600;">
-            <button type="button" onclick="askAI()" style="background: var(--primary-light); border: none; padding: 10px; border-radius: 12px; display: flex; align-items: center; cursor: pointer; color: var(--primary);">
-                <span class="material-symbols-outlined" style="font-size: 22px;">auto_awesome</span>
-            </button>
+            <div class="search-bar-v3" style="background: var(--bg-tile); border: none; border-radius: 18px; height: 54px; padding: 0 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-premium);">
+                <span class="material-symbols-outlined" style="color: var(--brand-primary); font-size: 24px;">search</span>
+                <input type="text" name="search" placeholder="Search 'Alphonso Mango'" style="flex: 1; border: none; background: none; outline: none; font-size: 15px; font-weight: 700; color: var(--text-primary);">
+                <div style="width: 1.5px; height: 20px; background: var(--border-subtle);"></div>
+                <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 24px;">mic</span>
+            </div>
         </form>
     </header>
 
     <main>
-        <!-- Delivery Promise -->
-        <div class="stagger-1" style="padding: 0 24px; margin-bottom: 20px;">
-            <div style="background: var(--bg-secondary); border-radius: 18px; padding: 12px 20px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border-color);">
-                <div style="width: 40px; height: 40px; background: var(--primary-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
-                    <span class="material-symbols-outlined filled">bolt</span>
+        <!-- Modern Banners -->
+        <section class="no-scrollbar" style="display: flex; gap: 16px; overflow-x: auto; padding: 24px 16px;">
+            <div style="min-width: 88%; height: 180px; background: var(--cat-veggies); border-radius: 28px; padding: 24px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+                <div style="z-index: 2;">
+                    <div style="background: var(--brand-primary); color: #fff; padding: 4px 12px; border-radius: 8px; font-size: 10px; font-weight: 950; display: inline-block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Direct from Farm</div>
+                    <h2 style="font-size: 24px; font-weight: 950; color: var(--text-primary); margin: 0 0 16px; line-height: 1.1; letter-spacing: -0.02em;">Fresh Veggies<br>Starting @ ₹19</h2>
+                    <button style="background: var(--text-primary); color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-size: 12px; font-weight: 900; box-shadow: var(--shadow-md);">SHOP NOW</button>
                 </div>
-                <div>
-                    <p style="font-size: 12px; font-weight: 800; color: var(--text-primary);">Delivery in 12 Minutes</p>
-                    <p style="font-size: 10px; color: var(--primary); font-weight: 700; text-transform: uppercase;">Guaranteed Freshness</p>
-                </div>
-                <div style="margin-left: auto; height: 30px; width: 1px; background: var(--border-color);"></div>
-                <div style="margin-left: auto; text-align: right;">
-                    <p style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Rainy Weather</p>
-                    <p style="font-size: 11px; font-weight: 700; color: var(--red);">Priority Dispatch</p>
-                </div>
+                <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300" style="width: 140px; height: 140px; object-fit: cover; border-radius: 20px; transform: rotate(-8deg); margin-right: -10px; box-shadow: var(--shadow-lg);">
             </div>
-        </div>
-
-        <!-- Promo Carousel -->
-        <section class="home-carousel no-scrollbar stagger-2" style="padding: 0 24px 24px;">
-            <div class="promo-slide" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%); height: 180px; border: 1.5px solid var(--primary);">
-                <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.2; transform: rotate(-15deg);">
-                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=farm&icon=leaf" style="width: 150px; height: 150px;">
+            <div style="min-width: 88%; height: 180px; background: var(--cat-fruits); border-radius: 28px; padding: 24px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+                <div style="z-index: 2;">
+                    <div style="background: var(--brand-accent); color: #fff; padding: 4px 12px; border-radius: 8px; font-size: 10px; font-weight: 950; display: inline-block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Weekend Sale</div>
+                    <h2 style="font-size: 24px; font-weight: 950; color: var(--text-primary); margin: 0 0 16px; line-height: 1.1; letter-spacing: -0.02em;">Super Fruits<br>Up to 40% Off</h2>
+                    <button style="background: var(--brand-accent); color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-size: 12px; font-weight: 900; box-shadow: var(--shadow-md);">CLAIM OFFER</button>
                 </div>
-                <div class="promo-content">
-                    <span class="promo-badge" style="background: #fff; color: #000;">Organic Special</span>
-                    <h3 style="font-size: 28px; letter-spacing: -0.02em;">Fresh From <br><span style="color: var(--primary);">Village Farms</span></h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 6px; font-weight: 600;">Harvested this morning</p>
-                </div>
-            </div>
-            <div class="promo-slide" style="background: linear-gradient(135deg, #121212 0%, #262626 100%); height: 180px; border: 1.5px solid var(--primary);">
-                <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.2; transform: rotate(15deg);">
-                     <img src="https://api.dicebear.com/7.x/icons/svg?seed=spices&icon=box" style="width: 150px; height: 150px;">
-                </div>
-                <div class="promo-content">
-                    <span class="promo-badge">Spice Protocol</span>
-                    <h3 style="font-size: 28px; letter-spacing: -0.02em;">Handpicked <br><span style="color: var(--primary);">Masala Blends</span></h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 6px; font-weight: 600;">Authentic Indian flavors</p>
-                </div>
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=300" style="width: 140px; height: 140px; object-fit: cover; border-radius: 20px; transform: rotate(12deg); margin-right: -10px; box-shadow: var(--shadow-lg);">
             </div>
         </section>
 
-        <!-- Quick Reorder -->
-        <section class="quick-reorder-section stagger-2" style="padding-top: 0;">
-            <div class="section-header-v3">
-                <h2 class="section-title-v3">Frequently Bought <span class="ai-hint" style="background: var(--primary-light); color: var(--primary); padding: 4px 10px;">SMART PICK</span></h2>
-                <button onclick="location.href='?page=orders'" style="color: var(--primary); font-size: 12px; font-weight: 800; border: none; background: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">History</button>
+        <!-- Dynamic Category Grid -->
+        <section style="padding: 0 16px 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 4px;">
+                <h2 style="font-size: 20px; font-weight: 850; color: var(--text-primary); letter-spacing: -0.01em;">Shop by Category</h2>
+                <div style="width: 40px; height: 4px; background: var(--brand-primary); border-radius: 10px; opacity: 0.3;"></div>
             </div>
-            <div class="reorder-list-v3 no-scrollbar" style="gap: 16px;">
-                <?php foreach ($reorderItems as $item): ?>
-                <div class="reorder-card-v3" style="width: 85px;">
-                    <div class="reorder-img-v3" onclick="location.href='?page=product&id=<?= $item['id'] ?>'" style="width: 85px; height: 85px; border-radius: 24px; background: var(--bg-secondary); border: 1.5px solid var(--border-color); padding: 14px;">
-                        <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.05));" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200';">
-                        <button class="reorder-add-small" onclick="event.stopPropagation(); location.href='?action=add_cart&id=<?= $item['id'] ?>&msg=Quickly added to basket!'" style="width: 30px; height: 30px; border-radius: 10px; bottom: -5px; right: -5px;">
-                            <span class="material-symbols-outlined" style="font-size: 18px; font-weight: 800;">add</span>
-                        </button>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 14px;">
+                <?php
+                $categories_all = [
+                    ['n' => 'Dairy', 'i' => '🥛', 'bg' => 'var(--cat-dairy)'],
+                    ['n' => 'Fruits', 'i' => '🍎', 'bg' => 'var(--cat-fruits)'],
+                    ['n' => 'Veggies', 'i' => '🥦', 'bg' => 'var(--cat-veggies)'],
+                    ['n' => 'Snacks', 'i' => '🍪', 'bg' => 'var(--cat-snacks)'],
+                    ['n' => 'Atta', 'i' => '🌾', 'bg' => 'var(--cat-atta)'],
+                    ['n' => 'Tea', 'i' => '☕', 'bg' => 'var(--cat-tea)'],
+                    ['n' => 'Frozen', 'i' => '🧊', 'bg' => 'var(--cat-frozen)'],
+                    ['n' => 'More', 'i' => '✨', 'bg' => 'var(--cat-more)']
+                ];
+                foreach ($categories_all as $c): ?>
+                <div onclick="location.href='?page=explore&category=<?= urlencode($c['n']) ?>'" style="display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;">
+                    <div style="width: 100%; aspect-ratio: 1; background: <?= $c['bg'] ?>; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 34px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--bg-main); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                        <?= $c['i'] ?>
                     </div>
-                    <span style="font-size: 10px; font-weight: 800; text-align: center; color: var(--text-primary); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;"><?= $item['brand'] ?></span>
+                    <span style="font-size: 11px; font-weight: 800; color: var(--text-primary); text-align: center; line-height: 1.2;"><?= $c['n'] ?></span>
                 </div>
                 <?php endforeach; ?>
-                <div style="min-width: 8px;"></div>
             </div>
         </section>
 
-        <!-- Bento Explore -->
-        <section style="padding: 24px 0;" class="stagger-3">
-            <div class="section-header-v3">
-                <h2 class="section-title-v3">Shop by Categories</h2>
-                <button onclick="location.href='?page=explore'" style="color: var(--primary); font-size: 12px; font-weight: 800; border: none; background: none; cursor: pointer; text-transform: uppercase;">View All</button>
+        <!-- Neo-Highlights Section -->
+        <section style="background: var(--bg-secondary); padding: 32px 16px; border-radius: 40px 40px 0 0; border-top: 1px solid var(--border-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 4px;">
+                <div>
+                    <h2 style="font-size: 20px; font-weight: 850; color: var(--text-primary); letter-spacing: -0.01em;">Trending Now</h2>
+                    <p style="font-size: 11px; color: var(--brand-primary); font-weight: 800; text-transform: uppercase; margin-top: 2px;">Fresh from the hub</p>
+                </div>
+                <button onclick="location.href='?page=explore'" style="background: var(--bg-tile); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px 16px; font-size: 12px; font-weight: 850; box-shadow: var(--shadow-sm);">See All</button>
             </div>
-            <div class="bento-grid" style="height: auto; grid-template-rows: auto; gap: 16px;">
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Vegetables'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px; overflow: hidden; background: linear-gradient(135deg, var(--bg-secondary) 0%, #EBF9F1 100%);">
-                    <div style="z-index: 5; position: relative;">
-                        <h4 class="bento-title" style="font-size: 20px; font-weight: 900; color: #0E1B13;">Fresh<br>Vegetables</h4>
-                        <span class="bento-sub" style="font-weight: 850; background: #30E87A; color: #fff; padding: 4px 10px; border-radius: 8px; display: inline-block; margin-top: 6px; font-size: 10px;">DIRECT FROM FARMS</span>
-                    </div>
-                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=broccoli&backgroundColor=b6e3f4&icon=leaf" alt="Veg" style="position: absolute; bottom: 10px; right: 10px; width: 90px; height: 90px; object-fit: contain; transform: rotate(10deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); z-index: 1;">
-                </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Fruits'" style="grid-column: span 2; padding: 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 32px; overflow: hidden; background: linear-gradient(135deg, var(--bg-secondary) 0%, #FFF4EE 100%);">
-                    <div style="z-index: 5; position: relative;">
-                        <h4 style="font-size: 20px; font-weight: 900; color: #0E1B13;">Seasonal<br>Fruits</h4>
-                        <span class="bento-sub" style="font-weight: 850; background: #FF844B; color: #fff; padding: 4px 10px; border-radius: 8px; display: inline-block; margin-top: 6px; font-size: 10px;">FRESHLY PICKED</span>
-                    </div>
-                    <img src="https://api.dicebear.com/7.x/icons/svg?seed=apple&backgroundColor=ffdfbf&icon=sun" alt="Fruits" style="position: absolute; bottom: 10px; right: 10px; width: 90px; height: 90px; object-fit: contain; transform: rotate(-5deg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); z-index: 1;">
-                </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Dairy'" style="grid-column: span 1; padding: 20px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 28px;">
-                     <div style="width: 50px; height: 50px; background: #EDF7FC; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-                        <img src="https://api.dicebear.com/7.x/icons/svg?seed=milk&icon=droplet" style="width: 30px; height: 30px;" alt="Dairy">
-                     </div>
-                     <span style="font-size: 13px; font-weight: 900;">Dairy</span>
-                </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Atta & Flours'" style="grid-column: span 1; padding: 20px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 28px;">
-                     <div style="width: 50px; height: 50px; background: #FDE8E4; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-                        <img src="https://api.dicebear.com/7.x/icons/svg?seed=grain&icon=box" style="width: 30px; height: 30px;" alt="Flour">
-                     </div>
-                     <span style="font-size: 13px; font-weight: 900;">Atta</span>
-                </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Tea & Coffee'" style="grid-column: span 1; padding: 20px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 28px;">
-                     <div style="width: 50px; height: 50px; background: #FFF6EE; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-                        <img src="https://api.dicebear.com/7.x/icons/svg?seed=coffee&icon=coffee" style="width: 30px; height: 30px;" alt="Tea">
-                     </div>
-                     <span style="font-size: 13px; font-weight: 900;">Brews</span>
-                </div>
-                <div class="bento-card glass" onclick="location.href='?page=explore&category=Instant Food'" style="grid-column: span 1; padding: 20px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 28px;">
-                     <div style="width: 50px; height: 50px; background: #FFF9E5; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-                        <img src="https://api.dicebear.com/7.x/icons/svg?seed=fastfood&icon=fast-food" style="width: 30px; height: 30px;" alt="FastFood">
-                     </div>
-                     <span style="font-size: 13px; font-weight: 900;">Snacks</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Best Sellers -->
-        <section style="padding: 16px 0 140px;" class="stagger-4">
-            <div class="section-header-v3">
-                <h2 class="section-title-v3">Popular Highlights</h2>
-                <button onclick="location.href='?page=explore'" style="color: var(--primary); font-size: 12px; font-weight: 800; border: none; background: none; cursor: pointer; text-transform: uppercase;">Discover All</button>
-            </div>
-            <div class="best-seller-grid-v3" style="gap: 20px;">
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
                 <?php foreach ($bestSellers as $product): ?>
-                <?php $isFav = in_array($product['id'], $_SESSION['favorites']); ?>
+                <?php 
+                    $isFav = in_array($product['id'], $_SESSION['favorites']); 
+                    $deliveryTime = rand(8, 15) . " MINS";
+                ?>
                 <div class="product-card-v3">
-                    <div class="product-img-v3 glass" onclick="location.href='?page=product&id=<?= $product['id'] ?>'">
-                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400';">
-                        <button class="fav-btn-v3 <?= $isFav ? 'active' : '' ?>" onclick="event.stopPropagation(); location.href='?action=toggle_favorite&id=<?= $product['id'] ?>'">
-                            <span class="material-symbols-outlined <?= $isFav ? 'filled' : '' ?>" style="font-size: 20px;"><?= $isFav ? 'favorite' : 'favorite' ?></span>
-                        </button>
+                    <div class="delivery-time-badge">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+                        <?= $deliveryTime ?>
                     </div>
-                    <div class="product-meta-v3" style="padding: 8px 4px 0;">
-                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                            <span style="font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em;"><?= $product['category'] ?></span>
-                            <?php if ($product['isOrganic'] ?? false): ?>
-                                <span style="font-size: 8px; font-weight: 950; background: var(--primary-light); color: var(--primary); padding: 2px 6px; border-radius: 4px;">ORGANIC</span>
+                    <button class="fav-btn-v3 <?= $isFav ? 'active' : '' ?>" onclick="location.href='?action=toggle_favorite&id=<?= $product['id'] ?>'">
+                        <span class="material-symbols-outlined <?= $isFav ? 'filled' : '' ?>" style="font-size: 18px;">favorite</span>
+                    </button>
+                    <div class="product-img-v3" onclick="location.href='?page=product&id=<?= $product['id'] ?>'">
+                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                    </div>
+                    <div class="product-title-v3"><?= $product['name'] ?></div>
+                    <div class="product-weight-v3"><?= $product['weight'] ?></div>
+                    <div class="product-footer-v3">
+                        <div class="price-container-v3">
+                            <span class="price-current">₹<?= $product['price'] ?></span>
+                            <?php if (isset($product['oldPrice'])): ?>
+                                <span class="price-old">₹<?= $product['oldPrice'] ?></span>
                             <?php endif; ?>
                         </div>
-                        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 8px; line-height: 1.3; height: 40px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?= $product['name'] ?></h4>
-                        <div class="product-footer-v3">
-                            <div style="display: flex; flex-direction: column;">
-                                <span class="price" style="font-size: 18px; font-weight: 950; color: var(--text-primary); letter-spacing: -0.01em;">₹<?= $product['price'] ?></span>
-                                <span style="font-size: 11px; color: var(--text-muted); font-weight: 850; text-transform: uppercase;"><?= $product['weight'] ?></span>
-                            </div>
-                            <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">
-                                <span class="material-symbols-outlined" style="font-weight: 950; font-size: 24px;">shopping_basket</span>
-                            </button>
-                        </div>
+                        <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">ADD</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </section>
+
+        <!-- Banner - Coupon Style -->
+        <section style="padding: 24px 16px;">
+            <div style="background: linear-gradient(90deg, #6200EA 0%, #B388FF 100%); border-radius: 20px; padding: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(98, 0, 234, 0.2);">
+                <div>
+                    <h3 style="color: #fff; font-size: 18px; font-weight: 850;">FreshGo Pass</h3>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; margin-top: 4px;">Save ₹50 on every order</p>
+                </div>
+                <button style="background: #fff; color: #6200EA; border: none; border-radius: 10px; padding: 10px 20px; font-size: 12px; font-weight: 800;">ACTIVATE</button>
+            </div>
+        </section>
+
+        <div style="height: 120px;"></div>
     </main>
 </div>
+
