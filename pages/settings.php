@@ -2,7 +2,7 @@
     <header class="home-header-v3">
          <div class="stagger-1" style="display: flex; align-items: center; justify-content: space-between; animation: viewEnter 0.5s ease forwards; opacity: 0;">
              <button class="icon-btn-v3 glass" onclick="history.back()">
-                 <span class="material-symbols-outlined">arrow_back_ios</span>
+                 <i data-lucide="arrow-left" style="width: 24px; height: 24px;"></i>
              </button>
              <h1 style="font-size: 20px; font-weight: 800; letter-spacing: -0.01em;">Settings</h1>
              <div style="width: 44px;"></div>
@@ -12,21 +12,21 @@
     <main style="padding: 0 24px;">
         <!-- Account Bento Item -->
         <div class="stagger-2" style="margin-bottom: 32px; animation: viewEnter 0.5s ease forwards; opacity: 0; animation-delay: 0.1s;">
-            <p style="font-size: 10px; font-weight: 950; color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px;">Identity & Access</p>
+            <p style="font-size: 10px; font-weight: 950; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px;">Identity & Access</p>
             <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-sm);">
                 <div class="profile-menu-v2">
                     <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">person</span>
+                        <i data-lucide="user" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                     </div>
                     <span style="font-weight: 800; font-size: 15px;">Profile Protocol</span>
-                    <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
+                    <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
                 </div>
                 <div class="profile-menu-v2" style="border-top: 1px solid var(--border-color);">
                     <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">security</span>
+                        <i data-lucide="shield-check" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                     </div>
                     <span style="font-weight: 800; font-size: 15px;">Encryption & Privacy</span>
-                    <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
+                    <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <div style="padding: 24px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
                     <div style="display: flex; align-items: center; gap: 16px;">
                         <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">notifications_active</span>
+                            <i data-lucide="bell-ring" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                         </div>
                         <span style="font-weight: 800; font-size: 15px;">Intel Updates</span>
                     </div>
@@ -50,7 +50,7 @@
                 <div style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
                     <div style="display: flex; align-items: center; gap: 16px;">
                         <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">dark_mode</span>
+                            <i data-lucide="moon" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                         </div>
                         <span style="font-weight: 800; font-size: 15px;">Neural Dark Mode</span>
                     </div>
@@ -68,14 +68,14 @@
             <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-sm);">
                 <div class="profile-menu-v2">
                     <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">translate</span>
+                        <i data-lucide="languages" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                     </div>
                     <span style="font-weight: 800; font-size: 15px;">Language Matrix</span>
-                    <span style="font-size: 11px; font-weight: 950; color: var(--primary); text-transform: uppercase; background: var(--primary-light); padding: 4px 10px; border-radius: 50px;">English</span>
+                    <span style="font-size: 11px; font-weight: 950; color: var(--brand-primary); text-transform: uppercase; background: var(--brand-primary-light); padding: 4px 10px; border-radius: 50px;">English</span>
                 </div>
                 <div class="profile-menu-v2" style="border-top: 1px solid var(--border-color);">
                     <div style="width: 40px; height: 40px; background: var(--bg-main); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">hub</span>
+                        <i data-lucide="network" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                     </div>
                     <span style="font-weight: 800; font-size: 15px;">Regional Hub</span>
                     <span style="font-size: 11px; font-weight: 950; color: var(--text-muted); text-transform: uppercase;">Bangalore #2</span>

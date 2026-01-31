@@ -26,5 +26,31 @@
         "shopping"
     ],
     "lang": "en-IN",
-    "scope": "/"
+    "scope": "/",
+    "shortcuts": [
+        {
+            "name": "Search Items",
+            "short_name": "Search",
+            "description": "Quickly find groceries",
+            "url": "index.php?page=explore",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.3-4.3'/></svg>",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "My Basket",
+            "short_name": "Basket",
+            "description": "View items in cart",
+            "url": "index.php?page=cart",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'><path d='M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z'/><path d='M3 6h18'/><path d='M16 10a4 4 0 0 1-8 0'/></svg>",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
 }

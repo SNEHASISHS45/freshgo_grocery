@@ -7,7 +7,7 @@
         
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; position: relative; z-index: 10;">
             <button class="icon-btn-v3 glass" style="background: rgba(0,0,0,0.08); border: 1.5px solid rgba(0,0,0,0.05); color: #000;" onclick="history.back()">
-                <span class="material-symbols-outlined" style="font-weight: 900;">arrow_back_ios</span>
+                <i data-lucide="chevron-left" style="width: 24px; height: 24px;"></i>
             </button>
             <h1 style="font-size: 14px; font-weight: 950; color: #000; text-transform: uppercase; letter-spacing: 0.2em;">Currency Protocol</h1>
             <div style="width: 44px;"></div>
@@ -20,7 +20,7 @@
                  <span style="font-size: 12px; font-weight: 950; color: #000; background: rgba(0,0,0,0.1); padding: 6px 18px; border-radius: 50px; margin-top: 14px; border: 1.5px solid rgba(0,0,0,0.05);">COINS</span>
              </div>
              <div style="inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.08); padding: 10px 24px; border-radius: 50px; margin-top: 28px; border: 1px solid rgba(0,0,0,0.05); display: inline-flex;">
-                  <span class="material-symbols-outlined filled" style="font-size: 18px; color: #000;">stars</span>
+                  <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #000;"></i>
                   <p style="font-size: 13px; font-weight: 950; color: #000; letter-spacing: 0.02em;">ELITE TIER ARCHIVE</p>
              </div>
         </div>
@@ -35,7 +35,7 @@
                      <p style="font-size: 17px; color: var(--text-primary); font-weight: 900; margin-top: 8px; letter-spacing: -0.01em;">Earn 180 coins for level up</p>
                  </div>
                  <div style="width: 52px; height: 52px; background: var(--bg-main); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm);">
-                     <span class="material-symbols-outlined" style="color: var(--primary); font-size: 28px; font-weight: 900;">workspace_premium</span>
+                     <i data-lucide="gem" style="color: var(--primary); width: 28px; height: 28px;"></i>
                  </div>
              </div>
              <div style="height: 14px; background: var(--bg-main); border-radius: 50px; overflow: hidden; margin-bottom: 16px; position: relative; border: 1px solid var(--border-color);">
@@ -57,15 +57,15 @@
         <div class="stagger-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 140px;">
             <?php 
             $offers = [
-                ['name' => 'Free Transmission', 'coins' => '200', 'icon' => 'local_shipping'],
-                ['name' => '₹50 Liquid Credit', 'coins' => '500', 'icon' => 'account_balance_wallet'],
-                ['name' => 'Mystery Archive', 'coins' => '300', 'icon' => 'inventory_2'],
-                ['name' => 'Priority Clearance', 'coins' => '400', 'icon' => 'verified_user'],
+                ['name' => 'Free Transmission', 'coins' => '200', 'icon' => 'truck'],
+                ['name' => '₹50 Liquid Credit', 'coins' => '500', 'icon' => 'wallet'],
+                ['name' => 'Mystery Archive', 'coins' => '300', 'icon' => 'package-search'],
+                ['name' => 'Priority Clearance', 'coins' => '400', 'icon' => 'shield-check'],
             ];
             foreach($offers as $o): ?>
             <div class="bento-card" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 36px; padding: 32px; text-align: center; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); position: relative;">
                 <div style="width: 60px; height: 60px; background: var(--bg-main); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm);">
-                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 28px; font-weight: 900;"><?= $o['icon'] ?></span>
+                    <i data-lucide="<?= $o['icon'] ?>" style="color: var(--primary); width: 28px; height: 28px;"></i>
                 </div>
                 <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 8px; line-height: 1.3; color: var(--text-primary);"><?= $o['name'] ?></h4>
                 <p style="font-size: 11px; font-weight: 950; color: var(--primary); text-transform: uppercase; margin-bottom: 24px; letter-spacing: 0.1em;"><?= $o['coins'] ?> Coins</p>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'freshgo-v5';
+const CACHE_NAME = 'freshgo-v6';
 const ASSETS = [
     '/',
     '/index.php',

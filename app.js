@@ -1,34 +1,96 @@
 // FreshGo Grocery App - GSAP Powered Animations & Core Logic
+const EASE_EMPHASIZED = "power3.out";
+const EASE_STANDARD = "power2.out";
 
-// Initialize GSAP Plug-ins
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+// 1. App-like Haptic Feedback
+function hapticFeedback(type = 'light') {
+    if (!navigator.vibrate) return;
 
-// Material Design 3 "Emphasized" Easing
-CustomEase.create("m3-emphasized", "0.2, 0, 0, 1");
-CustomEase.create("m3-decelerate", "0, 0, 0, 1");
+    switch (type) {
+        case 'light': navigator.vibrate(10); break;
+        case 'medium': navigator.vibrate(20); break;
+        case 'heavy': navigator.vibrate(50); break;
+        case 'success': navigator.vibrate([10, 30, 10]); break;
+        case 'error': navigator.vibrate([50, 50, 50]); break;
+    }
+}
 
-// 1. Theme Management
+// 2. Global Progress Bar Logic
+const ProgressBar = {
+    el: document.getElementById('app-progress'),
+    start() {
+        if (!this.el) return;
+        this.el.style.width = '0%';
+        this.el.style.opacity = '1';
+        gsap.to(this.el, { width: '70%', duration: 1.5, ease: "power1.out" });
+    },
+    finish() {
+        if (!this.el) return;
+        gsap.to(this.el, {
+            width: '100%',
+            duration: 0.5,
+            ease: "power2.inout",
+            onComplete: () => {
+                gsap.to(this.el, { opacity: 0, duration: 0.3 });
+            }
+        });
+    }
+};
+
+// 3. Skeleton Transition Logic
+function handleSplashScreen() {
+    const skeleton = document.getElementById('skeleton-overlay');
+    if (!skeleton) return;
+
+    const hide = () => {
+        skeleton.style.opacity = '0';
+        setTimeout(() => {
+            skeleton.style.display = 'none';
+            skeleton.style.visibility = 'hidden';
+            if (typeof initGSAP === 'function') initGSAP();
+        }, 500);
+    };
+
+    if (typeof gsap !== 'undefined') {
+        gsap.to(skeleton, {
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.2,
+            ease: "power2.out",
+            onComplete: hide
+        });
+        // Safety timeout: hide after 1.5s regardless of GSAP
+        setTimeout(hide, 1500);
+    } else {
+        hide();
+    }
+}
+
+// --- CORE SYSTEM ---
+
+// 1. Theme Management (Modified for Haptics)
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 }
 
 function toggleTheme() {
+    hapticFeedback('medium');
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
-    // Update Meta Theme Color for Status Bar Sync
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) metaTheme.setAttribute('content', newTheme === 'dark' ? '#060807' : '#FFFFFF');
 
     showToast(`${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} Mode Activated`);
 }
 
-// 2. Premium Toast System
+// 2. Premium Toast System (Modified for Haptics)
 function showToast(message) {
+    hapticFeedback('light');
     const existingToast = document.querySelector('.toast');
     if (existingToast) existingToast.remove();
 
@@ -54,13 +116,13 @@ function showToast(message) {
         white-space: nowrap;
         border: 2px solid rgba(255,255,255,0.2);
     `;
-    toast.innerHTML = `<span class="material-symbols-outlined filled" style="font-size: 20px;">check_circle</span> ${message}`;
+    toast.innerHTML = `<i data-lucide="check-circle" style="width: 20px; height: 20px;"></i> ${message}`;
     document.body.appendChild(toast);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
-    // GSAP Toast Animation
     gsap.fromTo(toast,
         { y: 60, opacity: 0, scale: 0.8 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "m3-emphasized" }
+        { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: EASE_EMPHASIZED }
     );
 
     setTimeout(() => {
@@ -69,14 +131,15 @@ function showToast(message) {
             opacity: 0,
             scale: 0.9,
             duration: 0.5,
-            ease: "m3-emphasized",
+            ease: EASE_EMPHASIZED,
             onComplete: () => toast.remove()
         });
     }, 2800);
 }
 
-// 3. AI Search Concierge
+// 3. AI Search Concierge (Modified with Progress)
 function askAI() {
+    hapticFeedback('medium');
     const input = document.getElementById('searchInput');
     const panel = document.getElementById('aiResponse');
     const msgBox = document.getElementById('aiMessage');
@@ -86,10 +149,12 @@ function askAI() {
         return;
     }
 
+    ProgressBar.start();
     const btn = document.querySelector('button[onclick="askAI()"]');
-    gsap.to(btn, { rotation: "+=360", duration: 1, ease: "m3-emphasized" });
+    if (btn) gsap.to(btn, { rotation: "+=360", duration: 1, ease: EASE_EMPHASIZED });
 
     setTimeout(() => {
+        ProgressBar.finish();
         const hints = [
             `Analysis: The best ${input.value} is currently at Hub #2. High demand today.`,
             `Protocol: Pairs well with organic sourdough. Adding to suggestions.`,
@@ -101,7 +166,7 @@ function askAI() {
             panel.style.display = 'block';
             gsap.fromTo(panel,
                 { opacity: 0, y: 15, scale: 0.95 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "m3-emphasized" }
+                { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: EASE_EMPHASIZED }
             );
         }
     }, 800);
@@ -109,130 +174,293 @@ function askAI() {
 
 // 4. Page & Component Animations
 function initGSAP() {
-    // 4.1 Page Entrance Reveal
-    const views = document.querySelectorAll('.view-enter');
-    if (views.length > 0) {
-        gsap.fromTo(views,
-            { opacity: 1 },
-            { opacity: 1, duration: 0.1 } // Just a placeholder to ensure the class is active
-        );
+    gsap.registerPlugin(ScrollTrigger);
 
-        // Stagger inner elements of the view
-        const headers = document.querySelectorAll('header');
-        const sections = document.querySelectorAll('main > section, main > div');
-
-        gsap.from(headers, { y: -20, opacity: 0, duration: 0.8, ease: "m3-emphasized" });
-        gsap.from(sections, {
-            y: 30,
+    // Initial View Entrance stagger
+    if (document.querySelector('.stagger-item')) {
+        gsap.from('.stagger-item', {
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "m3-emphasized",
-            delay: 0.1
+            y: 20,
+            stagger: 0.08,
+            duration: 0.6,
+            ease: EASE_EMPHASIZED
         });
     }
 
-    // 4.2 Interactive Hover Effects
-    document.querySelectorAll('.product-card-v3, .bento-card, .category-tile').forEach(card => {
+    const headers = document.querySelectorAll('header');
+    if (headers.length > 0) {
+        gsap.from(headers, { y: -20, opacity: 0, duration: 0.8, ease: EASE_STANDARD });
+    }
+
+    // Section reveal animations
+    gsap.utils.toArray('section').forEach(section => {
+        gsap.from(section, {
+            scrollTrigger: {
+                trigger: section,
+                scroller: "#view-port",
+                start: "top bottom-=60px",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            ease: "expo.out"
+        });
+    });
+
+    // Advanced Product Card Reveal
+    const productCards = document.querySelectorAll('.product-card-v3');
+    if (productCards.length > 0) {
+        gsap.from(productCards, {
+            scrollTrigger: {
+                trigger: productCards[0],
+                scroller: "#view-port",
+                start: "top bottom"
+            },
+            opacity: 0,
+            y: 50,
+            scale: 0.9,
+            stagger: {
+                each: 0.1,
+                grid: "auto",
+                from: "start"
+            },
+            duration: 1.2,
+            ease: "elastic.out(1, 0.8)",
+            clearProps: "all"
+        });
+    }
+
+    // Icon Micro-interactions Logic
+    document.querySelectorAll('.nav-item-v3, .icon-btn-v3, .category-tile').forEach(el => {
+        const icon = el.querySelector('i');
+        if (!icon) return;
+
+        el.addEventListener('mouseenter', () => {
+            gsap.to(icon, {
+                scale: 1.3,
+                rotate: 15,
+                duration: 0.4,
+                ease: "back.out(2)"
+            });
+        });
+
+        el.addEventListener('mouseleave', () => {
+            gsap.to(icon, {
+                scale: 1,
+                rotate: 0,
+                duration: 0.4,
+                ease: "elastic.out(1, 0.3)"
+            });
+        });
+
+        el.addEventListener('mousedown', () => {
+            gsap.to(icon, { scale: 0.8, duration: 0.1 });
+        });
+
+        el.addEventListener('mouseup', () => {
+            gsap.to(icon, { scale: 1.3, duration: 0.2 });
+        });
+    });
+
+    // Card Hover Physics
+    document.querySelectorAll('.product-card-v3, .u-card, .promo-slide').forEach(card => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card, {
-                y: -6,
-                boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
-                borderColor: "var(--brand-primary)",
-                duration: 0.4,
-                ease: "m3-emphasized"
+                y: -10,
+                scale: 1.02,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+                duration: 0.5,
+                ease: "power2.out"
             });
         });
         card.addEventListener('mouseleave', () => {
             gsap.to(card, {
                 y: 0,
+                scale: 1,
                 boxShadow: "var(--shadow-sm)",
-                borderColor: "var(--border-color)",
-                duration: 0.4,
-                ease: "m3-emphasized"
+                duration: 0.5,
+                ease: "power2.out"
             });
         });
     });
-
-
-    // 4.5 Refresh Logic
-    const refreshST = () => {
-        setTimeout(() => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }, 500);
-    };
-
-    refreshST();
-    window.addEventListener('resize', refreshST);
-    window.addEventListener('load', refreshST);
 }
 
 // 5. Setup & Events
-document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    initGSAP();
+function initApp() {
+    try {
+        handleSplashScreen(); // High priority: clear the view
+        initTheme();
 
-    // URL Message Handler
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('msg')) {
-        showToast(params.get('msg'));
-        const url = new URL(window.location);
-        url.searchParams.delete('msg');
-        window.history.replaceState({}, '', url);
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        function initScrollTracker() {
+            const header = document.getElementById('main-header');
+            const topRow = document.getElementById('header-top-row');
+            const viewPort = document.getElementById('view-port');
+
+            if (!header || !topRow || !viewPort) return;
+
+            viewPort.addEventListener('scroll', () => {
+                const isScrolled = viewPort.scrollTop > 20;
+
+                if (isScrolled) {
+                    header.classList.add('scrolled');
+                    topRow.classList.add('scrolled');
+                    gsap.to(header, {
+                        backgroundColor: 'var(--bg-header)',
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                } else {
+                    header.classList.remove('scrolled');
+                    topRow.classList.remove('scrolled');
+                    gsap.to(header, {
+                        backgroundColor: 'var(--bg-header)',
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                }
+            });
+        }
+
+        initScrollTracker();
+
+        // 4.7 Pull to Refresh Simulation Logic
+        function initPullToRefresh() {
+            const viewPort = document.getElementById('view-port');
+            const pullEl = document.getElementById('pull-to-refresh');
+            const icon = pullEl ? pullEl.querySelector('.refresh-icon') : null;
+
+            if (!viewPort || !pullEl) return;
+
+            let startY = 0;
+            let pulling = false;
+
+            viewPort.addEventListener('touchstart', (e) => {
+                if (viewPort.scrollTop <= 0) {
+                    startY = e.touches[0].pageY;
+                    pulling = true;
+                }
+            });
+
+            viewPort.addEventListener('touchmove', (e) => {
+                if (!pulling) return;
+                const diff = e.touches[0].pageY - startY;
+                if (diff > 0 && viewPort.scrollTop <= 0) {
+                    const rotation = Math.min(diff * 2, 360);
+                    const y = Math.min(diff / 2, 60);
+                    gsap.set(pullEl, { y: y });
+                    gsap.set(icon, { rotate: rotation });
+                    if (diff > 100) hapticFeedback('light');
+                }
+            });
+
+            viewPort.addEventListener('touchend', (e) => {
+                if (!pulling) return;
+                const diff = e.changedTouches[0].pageY - startY;
+                if (diff > 100 && viewPort.scrollTop <= 0) {
+                    pullEl.classList.add('pull-active');
+                    hapticFeedback('medium');
+                    ProgressBar.start();
+
+                    // Simulate Refresh
+                    setTimeout(() => {
+                        pullEl.classList.remove('pull-active');
+                        gsap.to(pullEl, { y: 0, duration: 0.4, ease: "back.in(1.7)" });
+                        ProgressBar.finish();
+                        showToast("Protocol Refreshed: Hub Sync Active");
+                        detectLocation(); // Auto update location on pull
+                    }, 1500);
+                } else {
+                    gsap.to(pullEl, { y: 0, duration: 0.3 });
+                }
+                pulling = false;
+            });
+        }
+
+        initPullToRefresh();
+
+        document.querySelectorAll('button, a, .clickable, .nav-item-v3').forEach(el => {
+            el.addEventListener('click', () => {
+                hapticFeedback('light');
+            });
+
+            el.addEventListener('touchstart', () => el.classList.add('tap-active'));
+            el.addEventListener('touchend', () => el.classList.remove('tap-active'));
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('msg')) {
+            showToast(params.get('msg'));
+            const url = new URL(window.location);
+            url.searchParams.delete('msg');
+            window.history.replaceState({}, '', url);
+        }
+
+        // Carousels and other scroll logic...
+        const horizScrolls = document.querySelectorAll('.home-carousel, .reorder-list-v3, .no-scrollbar');
+        horizScrolls.forEach(el => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            el.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - el.offsetLeft;
+                scrollLeft = el.scrollLeft;
+                gsap.to(el, { cursor: "grabbing", duration: 0.1 });
+            });
+            el.addEventListener('mouseleave', () => {
+                isDown = false;
+                gsap.to(el, { cursor: "grab", duration: 0.1 });
+            });
+            el.addEventListener('mouseup', () => {
+                isDown = false;
+                gsap.to(el, { cursor: "grab", duration: 0.1 });
+            });
+            el.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - el.offsetLeft;
+                const walk = (x - startX) * 2;
+                gsap.to(el, { scrollLeft: scrollLeft - walk, duration: 0.3, ease: "power1.out" });
+            });
+        });
+    } catch (e) {
+        console.error("Critical System Protocol Failure:", e);
+        const skeleton = document.getElementById('skeleton-overlay');
+        if (skeleton) {
+            skeleton.style.display = 'none';
+            skeleton.style.visibility = 'hidden';
+        }
+        if (typeof initGSAP === 'function') initGSAP();
     }
+}
 
-    // Smooth Scroll Integration for Carousels
-    const horizScrolls = document.querySelectorAll('.home-carousel, .reorder-list-v3, .no-scrollbar');
-    horizScrolls.forEach(el => {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
-        el.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - el.offsetLeft;
-            scrollLeft = el.scrollLeft;
-            gsap.to(el, { cursor: "grabbing", duration: 0.1 });
-        });
-        el.addEventListener('mouseleave', () => {
-            isDown = false;
-            gsap.to(el, { cursor: "grab", duration: 0.1 });
-        });
-        el.addEventListener('mouseup', () => {
-            isDown = false;
-            gsap.to(el, { cursor: "grab", duration: 0.1 });
-        });
-        el.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - el.offsetLeft;
-            const walk = (x - startX) * 2;
-            gsap.to(el, { scrollLeft: scrollLeft - walk, duration: 0.3, ease: "power1.out" });
-        });
-    });
-
-    // Global Interactive Button Effect
-    document.querySelectorAll('button, .icon-btn-v3, .add-btn-v3, .nav-item-v3').forEach(btn => {
-        btn.addEventListener('touchstart', () => gsap.to(btn, { scale: 0.94, duration: 0.1 }));
-        btn.addEventListener('touchend', () => gsap.to(btn, { scale: 1, duration: 0.2, ease: "m3-emphasized" }));
-        btn.addEventListener('mousedown', () => gsap.to(btn, { scale: 0.94, duration: 0.1 }));
-        btn.addEventListener('mouseup', () => gsap.to(btn, { scale: 1, duration: 0.2, ease: "m3-emphasized" }));
-    });
-});
-
-// --- NEW SYSTEM FEATURES ---
-
-// 6. Notifications Panel Logic
+// 6. Notifications Panel Logic (Modified with Haptics)
 let isNotifOpen = false;
 function toggleNotifications() {
+    hapticFeedback('medium');
     const panel = document.getElementById('notifications-panel');
     const overlay = document.getElementById('notifications-overlay');
+    if (!panel || !overlay) return;
 
     if (!isNotifOpen) {
         overlay.style.display = 'block';
-        gsap.to(panel, { right: 0, duration: 0.6, ease: "m3-emphasized" });
+        gsap.to(panel, { right: 0, duration: 0.6, ease: "power3.out" });
         gsap.from(overlay, { opacity: 0, duration: 0.4 });
         isNotifOpen = true;
     } else {
-        gsap.to(panel, { right: -400, duration: 0.5, ease: "m3-emphasized" });
+        gsap.to(panel, { right: -400, duration: 0.5, ease: "power3.out" });
         gsap.to(overlay, {
             opacity: 0,
             duration: 0.4,
@@ -245,17 +473,20 @@ function toggleNotifications() {
     }
 }
 
-// 7. Real Location Detection
+// 7. Real Location Detection (Modified with Haptics)
 async function detectLocation() {
+    hapticFeedback('heavy');
     const locTitle = document.getElementById('location-title');
     const locSub = document.getElementById('location-subtitle');
 
     if (!locTitle) return;
 
+    ProgressBar.start();
     showToast("Initializing Deep Location Sync...");
     locTitle.textContent = "Locating...";
 
     if (!navigator.geolocation) {
+        ProgressBar.finish();
         showToast("Geolocation is not supported by your browser.");
         locTitle.textContent = "Location Denied";
         return;
@@ -263,19 +494,16 @@ async function detectLocation() {
 
     navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
-        console.log(`Protocol: Lat ${latitude}, Lon ${longitude}`);
 
         try {
-            // Updated fetch with User-Agent header as required by Nominatim Policy
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`, {
-                headers: {
-                    'User-Agent': 'FreshGo-Grocery-App-v4'
-                }
+                headers: { 'User-Agent': 'FreshGo-Grocery-App-v4' }
             });
 
             if (!response.ok) throw new Error('Network Protocol Error');
 
             const data = await response.json();
+            ProgressBar.finish();
 
             if (data && data.address) {
                 const area = data.address.suburb || data.address.neighbourhood || data.address.city_district || data.address.village || "Nearby Hub";
@@ -283,21 +511,22 @@ async function detectLocation() {
 
                 locTitle.textContent = area;
                 locSub.textContent = `${city}, India`;
+                hapticFeedback('success');
                 showToast(`Sync Successful: ${area} Hub`);
 
-                // Entrance animation for the new text
-                gsap.from([locTitle, locSub], { opacity: 0, y: 5, stagger: 0.1, duration: 0.4, ease: "m3-emphasized" });
-            } else {
-                throw new Error('Data Empty');
+                const locElements = [locTitle, locSub].filter(el => el !== null);
+                if (locElements.length > 0) {
+                    gsap.from(locElements, { opacity: 0, y: 5, stagger: 0.1, duration: 0.4, ease: EASE_EMPHASIZED });
+                }
             }
         } catch (error) {
-            console.error("Sync Error:", error);
-            locTitle.textContent = "HSR Layout"; // Robust legacy fallback
+            ProgressBar.finish();
+            locTitle.textContent = "HSR Layout";
             locSub.textContent = "Bengaluru, KA 560102";
             showToast("System Error: Using Last Known Hub");
         }
     }, (error) => {
-        console.error("Geo Error:", error);
+        ProgressBar.finish();
         locTitle.textContent = "Permission Required";
         showToast("Access Denied: Please enable Location");
     }, {
@@ -307,7 +536,7 @@ async function detectLocation() {
     });
 }
 
-// 8. Global Theme Observer (Ensures UI Sync)
+// 8. Observer
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'data-theme') {

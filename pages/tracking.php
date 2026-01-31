@@ -1,21 +1,21 @@
 <div class="view-enter tracking-v3" style="background: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column;">
     <!-- Map Area (Full Screen) -->
     <div style="position: fixed; inset: 0; background: var(--bg-secondary); z-index: 1;">
-         <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1200" alt="Map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(0.2) contrast(1.1);">
+         <img src="assets/neo_map.png" alt="Map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: contrast(1.1);">
          
          <header style="position: absolute; top: 0; left: 0; width: 100%; padding: 16px; display: flex; align-items: center; justify-content: space-between; z-index: 10;">
              <button onclick="location.href='?page=home'" style="width: 44px; height: 44px; border-radius: 14px; background: var(--bg-tile); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
-                 <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 24px;">close</span>
+                 <i data-lucide="x" style="color: var(--text-primary); width: 24px; height: 24px;"></i>
              </button>
              <button onclick="toggleTheme()" style="width: 44px; height: 44px; border-radius: 14px; background: var(--bg-tile); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
-                <span class="material-symbols-outlined light-icon" style="color: var(--text-primary);">dark_mode</span>
-                <span class="material-symbols-outlined dark-icon" style="color: var(--text-primary);">light_mode</span>
+                <i data-lucide="moon" class="light-icon" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
+                <i data-lucide="sun" class="dark-icon" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
              </button>
          </header>
 
          <!-- Rider Indicator -->
          <div style="position: absolute; top: 40%; left: 50%; width: 56px; height: 56px; background: var(--brand-primary); border-radius: 20px; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(21, 209, 112, 0.4); transform: translate(-50%, -50%);">
-            <span class="material-symbols-outlined" style="color: #000; font-size: 28px; font-weight: 950;">pedal_bike</span>
+            <i data-lucide="bike" style="color: #000; width: 28px; height: 28px;"></i>
             <div style="position: absolute; inset: -15px; border: 2px solid var(--brand-primary); border-radius: 50%; opacity: 0.5; animation: pulse-ring 2s infinite;"></div>
          </div>
     </div>
@@ -31,10 +31,10 @@
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="icon-btn-v3" style="width: 48px; height: 48px; border-radius: 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                    <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 22px;">call</span>
+                    <i data-lucide="phone" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
                 </button>
                  <button class="icon-btn-v3" style="width: 48px; height: 48px; border-radius: 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                    <span class="material-symbols-outlined" style="color: var(--text-primary); font-size: 22px;">chat_bubble_outline</span>
+                    <i data-lucide="message-square" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
                 </button>
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div style="background: var(--bg-secondary); border-radius: 28px; padding: 20px; border: 1px solid var(--border-subtle); margin-bottom: 28px;">
             <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; position: relative;">
                 <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--brand-primary); display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 12px rgba(21, 209, 112, 0.2);">
-                    <span class="material-symbols-outlined" style="color: #000; font-size: 16px; font-weight: 950;">check</span>
+                    <i data-lucide="check" style="color: #000; width: 16px; height: 16px;"></i>
                 </div>
                 <div style="flex: 1;">
                     <p style="font-size: 15px; font-weight: 900; color: var(--text-primary);">Logistics Triggered</p>
@@ -72,7 +72,7 @@
             <div style="flex: 1;">
                 <h4 style="font-size: 16px; font-weight: 900; color: var(--text-primary);">Ramesh Kumar</h4>
                 <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
-                    <span class="material-symbols-outlined filled" style="color: #FFCC00; font-size: 15px;">star</span>
+                    <i data-lucide="star" style="color: #FFCC00; width: 15px; height: 15px; fill: #FFCC00;"></i>
                     <span style="font-size: 12px; font-weight: 800; color: var(--text-secondary);">4.9 Hub Rating</span>
                 </div>
             </div>

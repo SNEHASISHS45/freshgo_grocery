@@ -1,0 +1,146 @@
+/* --- APP-LIKE TWEAKS & FEATURES --- */
+
+/* 1. Global Progress Bar */
+#app-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--brand-primary);
+    z-index: 10001;
+    box-shadow: 0 0 10px var(--brand-primary);
+    transition: width 0.3s ease;
+}
+
+/* 2. Premium Splash Screen */
+#app-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 1s ease, visibility 1s;
+}
+
+.splash-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.splash-logo {
+    font-size: 80px;
+}
+
+.splash-brand {
+    font-size: 32px;
+    font-weight: 950;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+}
+
+.splash-status {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.splash-loader {
+    width: 120px;
+    height: 4px;
+    background: var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.loader-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--brand-primary);
+}
+
+/* 3. Safe Area Insets Support */
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+}
+
+#main-header {
+    padding-top: calc(16px + var(--safe-top)) !important;
+}
+
+.bottom-nav-fixed {
+    padding-bottom: calc(15px + var(--safe-bottom)) !important;
+    height: calc(85px + var(--safe-bottom)) !important;
+}
+
+/* 4. Smooth Scrolling & Bouncing (Native Feel) */
+#view-port {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+/* 5. Active State for Tap Interactions */
+.tap-active {
+    opacity: 0.7;
+    transform: scale(0.96);
+    transition: all 0.1s ease;
+}
+
+/* Hide scrollbars but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* 7. Pull to Refresh Simulation */
+#pull-to-refresh {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.refresh-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--brand-primary);
+    transition: transform 0.1s linear;
+}
+
+.pull-active .refresh-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

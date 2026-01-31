@@ -15,12 +15,12 @@ if (!empty($search)) {
 ?>
 <div class="view-enter explore-page-v3" style="background: var(--bg-main); min-height: 100vh;">
     <!-- Neo-Premium Explore Header -->
-    <header style="background: var(--bg-main); padding: 16px 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-subtle);">
-         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+    <header id="main-header" style="background: var(--bg-main); padding: 16px 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-subtle); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
+         <div id="header-top-row" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
              <div style="display: flex; align-items: center; gap: 14px;">
                  <?php if (!$browseMode): ?>
                  <button class="icon-btn-v3" onclick="location.href='?page=explore'" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-                    <span class="material-symbols-outlined" style="font-size: 24px; color: var(--text-primary);">chevron_left</span>
+                    <i data-lucide="chevron-left" style="width: 24px; height: 24px; color: var(--text-primary);"></i>
                  </button>
                  <?php endif; ?>
                  <div>
@@ -30,17 +30,17 @@ if (!empty($search)) {
              </div>
              <div style="display: flex; gap: 10px;">
                 <button class="icon-btn-v3" onclick="toggleTheme()" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-                    <span class="material-symbols-outlined light-icon" style="color: var(--text-primary);">dark_mode</span>
-                    <span class="material-symbols-outlined dark-icon" style="color: var(--text-primary);">light_mode</span>
+                    <i data-lucide="moon" class="light-icon" style="width: 22px; height: 22px; color: var(--text-primary);"></i>
+                    <i data-lucide="sun" class="dark-icon" style="width: 22px; height: 22px; color: var(--text-primary);"></i>
                 </button>
                 <button class="icon-btn-v3" onclick="toggleNotifications()" style="background: var(--bg-secondary); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-                    <span class="material-symbols-outlined" style="color: var(--text-primary);">notifications</span>
+                    <i data-lucide="bell" style="width: 22px; height: 22px; color: var(--text-primary);"></i>
                 </button>
              </div>
          </div>
-         <form action="index.php" method="GET" class="search-bar-v3" style="background: var(--bg-secondary); border-radius: 16px; height: 52px; display: flex; align-items: center; padding: 0 16px; gap: 12px; border: 1px solid var(--border-subtle);">
+         <form action="index.php" method="GET" id="search-container" class="search-bar-v3" style="background: var(--bg-secondary); border-radius: 16px; height: 52px; display: flex; align-items: center; padding: 0 16px; gap: 12px; border: 1px solid var(--border-subtle); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
             <input type="hidden" name="page" value="explore">
-            <span class="material-symbols-outlined" style="color: var(--brand-primary); font-size: 22px;">search</span>
+            <i data-lucide="search" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
             <input type="text" name="search" placeholder="Search for bread, jam, fruits..." value="<?= htmlspecialchars($search) ?>" autocomplete="off" style="flex: 1; background: none; border: none; outline: none; font-size: 15px; font-weight: 700; color: var(--text-primary);">
          </form>
     </header>
@@ -51,14 +51,16 @@ if (!empty($search)) {
          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 12px; padding-bottom: 120px;">
             <?php
             $depts = [
-                ['n' => 'Dairy', 'i' => '🥛', 'bg' => 'var(--cat-dairy)', 'id' => 'Dairy'],
-                ['n' => 'Fruits', 'i' => '🍎', 'bg' => 'var(--cat-fruits)', 'id' => 'Fruits'],
-                ['n' => 'Veggies', 'i' => '🥦', 'bg' => 'var(--cat-veggies)', 'id' => 'Vegetables'],
-                ['n' => 'Snacks', 'i' => '🍪', 'bg' => 'var(--cat-snacks)', 'id' => 'Instant Food'],
-                ['n' => 'Atta', 'i' => '🌾', 'bg' => 'var(--cat-atta)', 'id' => 'Atta & Flours'],
-                ['n' => 'Spices', 'i' => '🌶️', 'bg' => 'var(--cat-spices)', 'id' => 'Masala & Spices'],
-                ['n' => 'Brew', 'i' => '☕', 'bg' => 'var(--cat-tea)', 'id' => 'Tea & Coffee'],
-                ['n' => 'Frozen', 'i' => '🧊', 'bg' => 'var(--cat-frozen)', 'id' => 'Dairy'],
+                ['n' => 'Dairy & Bread', 'i' => '🥛', 'bg' => 'var(--cat-dairy)', 'id' => 'Dairy & Bread'],
+                ['n' => 'Fruits & Veg', 'i' => '🍎', 'bg' => 'var(--cat-fruits)', 'id' => 'Fruits & Vegetables'],
+                ['n' => 'Atta & Rice', 'i' => '🌾', 'bg' => 'var(--cat-atta)', 'id' => 'Atta, Rice & Dal'],
+                ['n' => 'Snacks', 'i' => '🍪', 'bg' => 'var(--cat-snacks)', 'id' => 'Snacks & Munchies'],
+                ['n' => 'Drinks', 'i' => '🧃', 'bg' => 'var(--cat-frozen)', 'id' => 'Cold Drinks & Juices'],
+                ['n' => 'Instant', 'i' => '🍜', 'bg' => 'var(--cat-atta)', 'id' => 'Breakfast & Instant Food'],
+                ['n' => 'Tea / Coffee', 'i' => '☕', 'bg' => 'var(--cat-tea)', 'id' => 'Tea & Coffee'],
+                ['n' => 'Personal Care', 'i' => '🧴', 'bg' => 'var(--cat-more)', 'id' => 'Personal Care'],
+                ['n' => 'Household', 'i' => '🧹', 'bg' => 'var(--cat-more)', 'id' => 'Household'],
+                ['n' => 'Masala & Oil', 'i' => '🧂', 'bg' => 'var(--cat-spices)', 'id' => 'Masala & Oil'],
             ];
             foreach ($depts as $d): ?>
             <a href="?page=explore&category=<?= urlencode($d['id']) ?>" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px;">
@@ -74,7 +76,7 @@ if (!empty($search)) {
          <?php if (empty($filteredProducts)): ?>
          <div style="text-align: center; padding: 100px 20px;">
             <div style="width: 120px; height: 120px; background: var(--bg-secondary); border-radius: 44px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; border: 2px solid var(--border-subtle);">
-                <span class="material-symbols-outlined" style="font-size: 54px; color: var(--text-muted); opacity: 0.5;">search_off</span>
+                <i data-lucide="search-x" style="width: 54px; height: 54px; color: var(--text-muted); opacity: 0.5;"></i>
             </div>
             <h3 style="font-size: 22px; font-weight: 900; color: var(--text-primary); letter-spacing: -0.01em;">No results found</h3>
             <p style="color: var(--text-secondary); font-size: 14px; margin-top: 12px; font-weight: 600; line-height: 1.5; padding: 0 20px;">We couldn't find exactly what you're looking for. Try a different term or browse categories.</p>
@@ -89,11 +91,11 @@ if (!empty($search)) {
             ?>
             <div class="product-card-v3">
                 <div class="delivery-time-badge">
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+                    <i data-lucide="timer" style="width: 12px; height: 12px; margin-right: 4px;"></i>
                     <?= $deliveryTime ?>
                 </div>
                 <button class="fav-btn-v3 <?= $isFav ? 'active' : '' ?>" onclick="location.href='?action=toggle_favorite&id=<?= $item['id'] ?>'">
-                    <span class="material-symbols-outlined <?= $isFav ? 'filled' : '' ?>" style="font-size: 18px;">favorite</span>
+                    <i data-lucide="heart" style="width: 16px; height: 16px; <?= $isFav ? 'fill: currentColor;' : '' ?>"></i>
                 </button>
                 <div class="product-img-v3" onclick="location.href='?page=product&id=<?= $item['id'] ?>'">
                     <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>">

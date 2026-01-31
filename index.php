@@ -6,26 +6,95 @@ if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
 if (!isset($_SESSION['favorites'])) $_SESSION['favorites'] = [];
 
 // Products data
+// Products data - Comprehensive Catalog
 $products = [
-    ['id' => '1', 'name' => 'Amul Gold Full Cream Milk', 'price' => 33, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400', 'weight' => '500ml', 'brand' => 'Amul'],
-    ['id' => '2', 'name' => 'Aashirvaad Shudh Atta', 'price' => 215, 'oldPrice' => 240, 'category' => 'Atta & Flours', 'image' => 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?q=80&w=400', 'weight' => '5kg', 'brand' => 'ITC', 'isOnSale' => true],
-    ['id' => '3', 'name' => 'Alphonso Mangoes', 'price' => 699, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=400', 'weight' => '6pcs', 'brand' => 'Farm Fresh', 'isOrganic' => true],
-    ['id' => '4', 'name' => 'Maggi Masala Noodles', 'price' => 14, 'category' => 'Instant Food', 'image' => 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
-    ['id' => '5', 'name' => 'Tata Tea Gold Premium', 'price' => 165, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1594631252845-29fc4586d56c?q=80&w=400', 'weight' => '250g', 'brand' => 'Tata'],
-    ['id' => '6', 'name' => 'Fresh Organic Broccoli', 'price' => 89, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
-    ['id' => '7', 'name' => 'Mother Dairy Paneer', 'price' => 85, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=400', 'weight' => '200g', 'brand' => 'Mother Dairy'],
-    ['id' => '8', 'name' => 'Catch Turmeric Powder', 'price' => 45, 'category' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400', 'weight' => '100g', 'brand' => 'Catch'],
-    ['id' => '9', 'name' => 'Kashmiri Red Apples', 'price' => 149, 'oldPrice' => 179, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?q=80&w=400', 'weight' => '1kg', 'brand' => 'Farm Direct', 'isOnSale' => true],
-    ['id' => '10', 'name' => 'Amul Salted Butter', 'price' => 56, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?q=80&w=400', 'weight' => '100g', 'brand' => 'Amul'],
-    ['id' => '11', 'name' => 'Fresh Palak (Spinach)', 'price' => 25, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=400', 'weight' => '250g', 'brand' => 'Local', 'isOrganic' => true],
-    ['id' => '12', 'name' => 'Nescafe Classic Coffee', 'price' => 245, 'category' => 'Tea & Coffee', 'image' => 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=400', 'weight' => '200g', 'brand' => 'Nestle'],
-    ['id' => '13', 'name' => 'MDH Garam Masala', 'price' => 75, 'category' => 'Masala & Spices', 'image' => 'https://images.unsplash.com/photo-1593395841927-11120e17300c?q=80&w=400', 'weight' => '100g', 'brand' => 'MDH'],
-    ['id' => '14', 'name' => 'Robusta Bananas', 'price' => 45, 'category' => 'Fruits', 'image' => 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=400', 'weight' => '1 dozen', 'brand' => 'Farm Fresh'],
-    ['id' => '15', 'name' => 'Amul Cheese Slices', 'price' => 120, 'category' => 'Dairy', 'image' => 'https://images.unsplash.com/photo-1552763443-4299993330cb?q=80&w=400', 'weight' => '200g', 'brand' => 'Amul'],
-    ['id' => '16', 'name' => 'Hybrid Tomatoes', 'price' => 35, 'category' => 'Vegetables', 'image' => 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1233c?q=80&w=400', 'weight' => '500g', 'brand' => 'Local'],
+    // Fruits & Vegetables
+    ['id' => '1', 'name' => 'Organic Alphonso Mangoes', 'price' => 599, 'category' => 'Fruits & Vegetables', 'image' => 'assets/organic_mangoes.png', 'weight' => '1kg', 'brand' => 'Farm Fresh', 'isOrganic' => true],
+    ['id' => '2', 'name' => 'Kashmiri Red Apples', 'price' => 180, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '1kg', 'brand' => 'Kashmir Orchards'],
+    ['id' => '3', 'name' => 'Robusta Bananas', 'price' => 45, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '1 dozen', 'brand' => 'Local'],
+    ['id' => '4', 'name' => 'Fresh Organic Broccoli', 'price' => 85, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '250g', 'brand' => 'Nature\'s Best', 'isOrganic' => true],
+    ['id' => '5', 'name' => 'Hybrid Tomatoes', 'price' => 32, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fresh_tomatoes.png', 'weight' => '500g', 'brand' => 'Farm Direct'],
+    ['id' => '6', 'name' => 'Sweet American Corn', 'price' => 40, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '2pcs', 'brand' => 'Farm Fresh'],
+    ['id' => '7', 'name' => 'Fresh Palak (Spinach)', 'price' => 22, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '250g', 'brand' => 'Local'],
+    
+    // Dairy & Bread
+    ['id' => '8', 'name' => 'Amul Gold Full Cream Milk', 'price' => 33, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '500ml', 'brand' => 'Amul'],
+    ['id' => '9', 'name' => 'Mother Dairy Paneer', 'price' => 88, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '200g', 'brand' => 'Mother Dairy'],
+    ['id' => '10', 'name' => 'Amul Salted Butter', 'price' => 56, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '100g', 'brand' => 'Amul'],
+    ['id' => '11', 'name' => 'Amul Cheese Slices', 'price' => 135, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '200g', 'brand' => 'Amul'],
+    ['id' => '12', 'name' => 'Epigamia Greek Yogurt', 'price' => 60, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '90g', 'brand' => 'Epigamia'],
+    ['id' => '13', 'name' => 'Harvest Gold Brown Bread', 'price' => 45, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '400g', 'brand' => 'Harvest Gold'],
+    
+    // Atta, Rice & Dal
+    ['id' => '14', 'name' => 'Aashirvaad Shudh Atta', 'price' => 225, 'category' => 'Atta, Rice & Dal', 'image' => 'assets/staples.png', 'weight' => '5kg', 'brand' => 'ITC'],
+    ['id' => '15', 'name' => 'Daawat Rozana Basmati Rice', 'price' => 395, 'category' => 'Atta, Rice & Dal', 'image' => 'assets/staples.png', 'weight' => '5kg', 'brand' => 'Daawat'],
+    ['id' => '16', 'name' => 'Tata Sampann Toor Dal', 'price' => 145, 'category' => 'Atta, Rice & Dal', 'image' => 'assets/staples.png', 'weight' => '1kg', 'brand' => 'Tata'],
+    ['id' => '17', 'name' => 'Organic Kabuli Chana', 'price' => 120, 'category' => 'Atta, Rice & Dal', 'image' => 'assets/staples.png', 'weight' => '500g', 'brand' => 'Organic Tattva', 'isOrganic' => true],
+    
+    // Masala & Oil
+    ['id' => '18', 'name' => 'Fortune Soya Health Oil', 'price' => 145, 'category' => 'Masala & Oil', 'image' => 'https://plus.unsplash.com/premium_photo-1671560020309-1736b0099451?q=80&w=400', 'weight' => '1L', 'brand' => 'Fortune'],
+    ['id' => '19', 'name' => 'Catch Turmeric Powder', 'price' => 48, 'category' => 'Masala & Oil', 'image' => 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400', 'weight' => '100g', 'brand' => 'Catch'],
+    ['id' => '20', 'name' => 'MDH Garam Masala', 'price' => 78, 'category' => 'Masala & Oil', 'image' => 'https://images.unsplash.com/photo-1593395841927-11120e17300c?q=80&w=400', 'weight' => '100g', 'brand' => 'MDH'],
+    ['id' => '21', 'name' => 'Tata Salt Vacuum Evaporated', 'price' => 28, 'category' => 'Masala & Oil', 'image' => 'https://images.unsplash.com/photo-1626197031507-c17099753214?q=80&w=400', 'weight' => '1kg', 'brand' => 'Tata'],
+    
+    // Snacks & Munchies
+    ['id' => '22', 'name' => 'Lay\'s Classic Salted Chips', 'price' => 20, 'category' => 'Snacks & Munchies', 'image' => 'assets/snacks_namkeen.png', 'weight' => '50g', 'brand' => 'PepsiCo'],
+    ['id' => '23', 'name' => 'Haldiram\'s Alu Bhujia', 'price' => 45, 'category' => 'Snacks & Munchies', 'image' => 'assets/snacks_namkeen.png', 'weight' => '150g', 'brand' => 'Haldiram'],
+    ['id' => '24', 'name' => 'Cadbury Dairy Milk Silk', 'price' => 80, 'category' => 'Snacks & Munchies', 'image' => 'assets/snacks_namkeen.png', 'weight' => '60g', 'brand' => 'Mondelez'],
+    ['id' => '25', 'name' => 'Oreo Vanilla Creme Biscuits', 'price' => 30, 'category' => 'Snacks & Munchies', 'image' => 'assets/snacks_namkeen.png', 'weight' => '120g', 'brand' => 'Mondelez'],
+    
+    // Cold Drinks & Juices
+    ['id' => '26', 'name' => 'Coca-Cola Zero Sugar', 'price' => 40, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '250ml', 'brand' => 'Coca-Cola'],
+    ['id' => '27', 'name' => 'Paper Boat Aam Panna', 'price' => 35, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '200ml', 'brand' => 'Paper Boat'],
+    ['id' => '28', 'name' => 'Red Bull Energy Drink', 'price' => 125, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '250ml', 'brand' => 'Red Bull'],
+    ['id' => '29', 'name' => 'Tropicana 100% Orange Juice', 'price' => 110, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '1L', 'brand' => 'PepsiCo'],
+    
+    // Breakfast & Instant Food
+    ['id' => '30', 'name' => 'Maggi Masala Noodles', 'price' => 14, 'category' => 'Breakfast & Instant Food', 'image' => 'https://plus.unsplash.com/premium_photo-1667054230230-01977e20b3df?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
+    ['id' => '31', 'name' => 'Kellogg\'s Corn Flakes', 'price' => 175, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1594488737010-389f928e08d6?q=80&w=400', 'weight' => '475g', 'brand' => 'Kellogg\'s'],
+    ['id' => '32', 'name' => 'Quaker Oats White Oats', 'price' => 199, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?q=80&w=400', 'weight' => '1kg', 'brand' => 'PepsiCo'],
+    ['id' => '33', 'name' => 'Kissan Mixed Fruit Jam', 'price' => 165, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=400', 'weight' => '500g', 'brand' => 'HUL'],
+    
+    // Tea & Coffee
+    ['id' => '34', 'name' => 'Tata Tea Gold Premium', 'price' => 165, 'category' => 'Tea & Coffee', 'image' => 'assets/roasted_coffee.png', 'weight' => '250g', 'brand' => 'Tata'],
+    ['id' => '35', 'name' => 'Nescafe Classic Coffee', 'price' => 245, 'category' => 'Tea & Coffee', 'image' => 'assets/roasted_coffee.png', 'weight' => '200g', 'brand' => 'Nestle'],
+    ['id' => '36', 'name' => 'Brooke Bond Red Label', 'price' => 140, 'category' => 'Tea & Coffee', 'image' => 'assets/roasted_coffee.png', 'weight' => '500g', 'brand' => 'HUL'],
+    
+    // Personal Care
+    ['id' => '37', 'name' => 'Dove Cream Beauty Bar', 'price' => 65, 'category' => 'Personal Care', 'image' => 'assets/personal_care.png', 'weight' => '125g', 'brand' => 'Unilever'],
+    ['id' => '38', 'name' => 'Head & Shoulders Shampoo', 'price' => 185, 'category' => 'Personal Care', 'image' => 'assets/personal_care.png', 'weight' => '180ml', 'brand' => 'P&G'],
+    ['id' => '39', 'name' => 'Colgate MaxFresh Gel', 'price' => 95, 'category' => 'Personal Care', 'image' => 'assets/personal_care.png', 'weight' => '150g', 'brand' => 'Colgate-Palmolive'],
+    
+    // Household
+    ['id' => '40', 'name' => 'Surf Excel Easy Wash', 'price' => 125, 'category' => 'Household', 'image' => 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=400', 'weight' => '1kg', 'brand' => 'HUL'],
+    ['id' => '41', 'name' => 'Vim Dishwash Gel Lemon', 'price' => 105, 'category' => 'Household', 'image' => 'https://images.unsplash.com/photo-1603501097261-c8ca0599dd9e?q=80&w=400', 'weight' => '500ml', 'brand' => 'HUL'],
+    ['id' => '42', 'name' => 'Lizol Disinfectant Floor Cleaner', 'price' => 195, 'category' => 'Household', 'image' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=400', 'weight' => '1L', 'brand' => 'Reckitt'],
+    ['id' => '43', 'name' => 'Harpic Power Plus', 'price' => 170, 'category' => 'Household', 'image' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=400', 'weight' => '750ml', 'brand' => 'Reckitt'],
+    ['id' => '44', 'name' => 'Odonil Air Freshener', 'price' => 55, 'category' => 'Household', 'image' => 'https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=400', 'weight' => '50g', 'brand' => 'Dabur'],
+    
+    // Beverage Additions
+    ['id' => '45', 'name' => 'Monster Energy Ultra', 'price' => 110, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '350ml', 'brand' => 'Monster'],
+    ['id' => '46', 'name' => 'Sprite Lemon Lime Drink', 'price' => 45, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '750ml', 'brand' => 'Coca-Cola'],
+    
+    // Snack Additions
+    ['id' => '47', 'name' => 'Kurkure Masala Munch', 'price' => 20, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1621447509323-570a162dff96?q=80&w=400', 'weight' => '90g', 'brand' => 'PepsiCo'],
+    ['id' => '48', 'name' => 'Bikano Navratan Mixture', 'price' => 50, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1626132646501-f1f3a2157014?q=80&w=400', 'weight' => '200g', 'brand' => 'Bikano'],
+    ['id' => '49', 'name' => 'Kinder Joy with Surprise', 'price' => 45, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1587132131238-00566378415a?q=80&w=400', 'weight' => '20g', 'brand' => 'Ferrero'],
+    
+    // Exotic & Premium
+    ['id' => '50', 'name' => 'Imported Dragon Fruit', 'price' => 120, 'category' => 'Fruits & Vegetables', 'image' => 'assets/exotic_fruits.png', 'weight' => '1pc', 'brand' => 'Exotic Farm', 'isPremium' => true],
+    ['id' => '51', 'name' => 'Hass Avocados (Pack of 2)', 'price' => 299, 'category' => 'Fruits & Vegetables', 'image' => 'assets/exotic_fruits.png', 'weight' => '2pcs', 'brand' => 'Global Select', 'isPremium' => true],
+    ['id' => '52', 'name' => 'Blueberries (Imported)', 'price' => 350, 'category' => 'Fruits & Vegetables', 'image' => 'assets/fruits_veg_hero.png', 'weight' => '125g', 'brand' => 'Berry Fresh', 'isPremium' => true],
+    
+    // Organic Additions
+    ['id' => '53', 'name' => 'Organic Cold Pressed Mustard Oil', 'price' => 240, 'category' => 'Masala & Oil', 'image' => 'assets/staples.png', 'weight' => '500ml', 'brand' => 'Organic India', 'isOrganic' => true],
+    ['id' => '54', 'name' => 'Organic Brown Eggs (6 pcs)', 'price' => 95, 'category' => 'Dairy & Bread', 'image' => 'assets/dairy_bread_hero.png', 'weight' => '6pcs', 'brand' => 'Free Range', 'isOrganic' => true],
+    
+    // Specialty Coffee
+    ['id' => '55', 'name' => 'Blue Tokai Roasted Coffee', 'price' => 450, 'category' => 'Tea & Coffee', 'image' => 'assets/roasted_coffee.png', 'weight' => '250g', 'brand' => 'Blue Tokai', 'isPremium' => true],
 ];
 
-$categories = ['All', 'Dairy', 'Atta & Flours', 'Fruits', 'Vegetables', 'Tea & Coffee', 'Instant Food', 'Masala & Spices'];
+$categories = ['All', 'Dairy & Bread', 'Fruits & Vegetables', 'Atta, Rice & Dal', 'Masala & Oil', 'Snacks & Munchies', 'Cold Drinks & Juices', 'Breakfast & Instant Food', 'Tea & Coffee', 'Personal Care', 'Household'];
 
 // Helper function to get product by ID
 function getProductById($products, $id) {
@@ -169,6 +238,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FreshGo">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -192,9 +262,11 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="app_tweaks.css?v=<?= time() ?>">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>">
@@ -216,32 +288,92 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     })();
 </script>
 <body>
+    <!-- App-like Loading Progress -->
+    <div id="app-progress"></div>
+
+    <!-- Neo-Premium Skeleton Loader (Replaces Splash) -->
+    <div id="skeleton-overlay">
+        <!-- Header Skeleton -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <div class="skeleton skeleton-title" style="width: 100px; height: 16px; margin: 0;"></div>
+                    <div class="skeleton skeleton-text" style="width: 140px; height: 10px; margin: 0;"></div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
+                <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
+            </div>
+        </div>
+
+        <!-- Banner Skeleton -->
+        <div class="skeleton" style="width: 100%; height: 180px; border-radius: 28px;"></div>
+
+        <!-- Categories Skeleton -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+            <?php for($i=0; $i<8; $i++): ?>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div class="skeleton" style="width: 100%; aspect-ratio: 1; border-radius: 20px;"></div>
+                <div class="skeleton skeleton-text" style="width: 80%; height: 8px;"></div>
+            </div>
+            <?php endfor; ?>
+        </div>
+
+        <!-- Grid Skeleton -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <?php for($i=0; $i<4; $i++): ?>
+            <div style="background: var(--bg-tile); border-radius: 24px; padding: 12px; border: 1px solid var(--border-subtle);">
+                <div class="skeleton skeleton-img" style="border-radius: 20px;"></div>
+                <div class="skeleton skeleton-title" style="width: 90%;"></div>
+                <div class="skeleton skeleton-text" style="width: 40%;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                    <div class="skeleton skeleton-title" style="width: 30%; height: 24px; margin: 0;"></div>
+                    <div class="skeleton" style="width: 60px; height: 32px; border-radius: 8px;"></div>
+                </div>
+            </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+
     <div id="app-container">
         <div id="view-port">
+            <!-- Pull to Refresh Simulation -->
+            <div id="pull-to-refresh">
+                <i data-lucide="refresh-cw" class="refresh-icon"></i>
+            </div>
             <?php include "pages/{$page}.php"; ?>
         </div>
         <?php if (in_array($page, ['home', 'explore', 'profile', 'orders', 'rewards'])): ?>
-        <nav class="bottom-nav-floating">
+        <nav class="bottom-nav-fixed">
             <a href="?page=home" class="nav-item-v3 <?= $page === 'home' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined">home</span>
+                <i data-lucide="home"></i>
                 <span class="nav-label">Home</span>
+                <span class="u-tooltip">Home View</span>
             </a>
             <a href="?page=explore" class="nav-item-v3 <?= $page === 'explore' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined">grid_view</span>
+                <i data-lucide="layout-grid"></i>
                 <span class="nav-label">Explore</span>
+                <span class="u-tooltip">Browse Items</span>
             </a>
             <a href="?page=cart" class="nav-item-v3 <?= $page === 'cart' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined">shopping_basket</span>
+                <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                    <i data-lucide="shopping-basket"></i>
+                    <?php if ($cartCount > 0): ?><span class="nav-badge-v3"><?= $cartCount ?></span><?php endif; ?>
+                </div>
                 <span class="nav-label">Cart</span>
-                <?php if ($cartCount > 0): ?><span class="nav-badge-v3"><?= $cartCount ?></span><?php endif; ?>
+                <span class="u-tooltip">My Basket</span>
             </a>
             <a href="?page=orders" class="nav-item-v3 <?= $page === 'orders' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined">receipt_long</span>
+                <i data-lucide="receipt"></i>
                 <span class="nav-label">Orders</span>
+                <span class="u-tooltip">Order History</span>
             </a>
             <a href="?page=profile" class="nav-item-v3 <?= $page === 'profile' ? 'active' : '' ?>">
-                <span class="material-symbols-outlined">person</span>
+                <i data-lucide="user"></i>
                 <span class="nav-label">Profile</span>
+                <span class="u-tooltip">Account Hub</span>
             </a>
         </nav>
         <?php endif; ?>
@@ -253,7 +385,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
                    <p style="font-size: 11px; color: var(--brand-primary); font-weight: 850; text-transform: uppercase; margin-top: 2px;">Protocol: Live Notifications</p>
                 </div>
                 <button onclick="toggleNotifications()" style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-secondary); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                    <span class="material-symbols-outlined" style="color: var(--text-primary);">close</span>
+                    <i data-lucide="x" style="width: 22px; height: 22px; color: var(--text-primary);"></i>
                 </button>
             </header>
             <main class="no-scrollbar" style="flex: 1; overflow-y: auto; padding: 16px;">
@@ -263,7 +395,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
                          <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--brand-primary);"></div>
                          <div style="display: flex; gap: 14px;">
                              <div style="width: 44px; height: 44px; background: var(--brand-primary-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand-primary);">
-                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                                 <i data-lucide="truck" style="width: 20px; height: 20px; fill: currentColor;"></i>
                              </div>
                              <div style="flex: 1;">
                                  <h4 style="font-size: 14px; font-weight: 850; color: var(--text-primary);">Order Transmitted</h4>
@@ -276,7 +408,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
                     <div style="background: var(--bg-secondary); border-radius: 20px; padding: 16px; border: 1.1px solid var(--border-subtle); opacity: 0.7;">
                          <div style="display: flex; gap: 14px;">
                              <div style="width: 44px; height: 44px; background: var(--cat-fruits); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand-accent);">
-                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+                                 <i data-lucide="gift" style="width: 20px; height: 20px; fill: currentColor;"></i>
                              </div>
                              <div style="flex: 1;">
                                  <h4 style="font-size: 14px; font-weight: 850; color: var(--text-primary);">Flash Credits</h4>
@@ -294,7 +426,21 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
         <div id="notifications-overlay" onclick="toggleNotifications()" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 9999; display: none; backdrop-filter: blur(4px);"></div>
 
     </div>
-    <script src="app.js"></script>
+    <script>
+        // Failsafe: Hide skeleton no matter what after 3.5s
+        setTimeout(() => {
+            const skeleton = document.getElementById('skeleton-overlay');
+            if (skeleton && skeleton.style.display !== 'none') {
+                console.warn("Failsafe: Force-hiding skeleton loader.");
+                skeleton.style.opacity = '0';
+                setTimeout(() => { 
+                    skeleton.style.display = 'none';
+                    if (typeof initGSAP === 'function') initGSAP();
+                }, 500);
+            }
+        }, 3500);
+    </script>
+    <script src="app.js?v=<?= time() ?>"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
