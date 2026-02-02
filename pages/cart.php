@@ -72,16 +72,16 @@ $total = $subtotal + $delivery_fee + $handling_fee;
                             <h3 style="font-size: 14px; font-weight: 850; color: var(--text-primary); line-height: 1.3;"><?= $item['name'] ?></h3>
                             <p style="font-size: 11px; color: var(--text-muted); font-weight: 700; margin-top: 2px;"><?= $item['weight'] ?></p>
                         </div>
-                        <button onclick="location.href='?action=update_cart&id=<?= $item['id'] ?>&delta=-<?= $item['quantity'] ?>'" style="background: none; border: none; padding: 4px; color: var(--text-muted);">
+                        <button onclick="updateCart('<?= $item['id'] ?>', -<?= $item['quantity'] ?>, event)" style="background: none; border: none; padding: 4px; color: var(--text-muted);">
                             <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
                         </button>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
                         <span style="font-size: 16px; font-weight: 950; color: var(--text-primary);">₹<?= $item['price'] * $item['quantity'] ?></span>
                         <div style="display: flex; align-items: center; background: var(--bg-secondary); border-radius: 12px; padding: 4px; gap: 12px; border: 1.5px solid var(--border-subtle);">
-                            <button onclick="location.href='?action=update_cart&id=<?= $item['id'] ?>&delta=-1'" style="width: 32px; height: 32px; border: none; background: var(--bg-tile); border-radius: 8px; color: var(--text-primary); font-weight: 900; box-shadow: var(--shadow-sm);">-</button>
+                            <button onclick="updateCart('<?= $item['id'] ?>', -1, event)" style="width: 32px; height: 32px; border: none; background: var(--bg-tile); border-radius: 8px; color: var(--text-primary); font-weight: 900; box-shadow: var(--shadow-sm);">-</button>
                             <span style="font-size: 14px; font-weight: 900; color: var(--text-primary); min-width: 15px; text-align: center;"><?= $item['quantity'] ?></span>
-                            <button onclick="location.href='?action=update_cart&id=<?= $item['id'] ?>&delta=1'" style="width: 32px; height: 32px; border: none; background: var(--bg-tile); border-radius: 8px; color: var(--text-primary); font-weight: 900; box-shadow: var(--shadow-sm);">+</button>
+                            <button onclick="addToCart('<?= $item['id'] ?>', event)" style="width: 32px; height: 32px; border: none; background: var(--bg-tile); border-radius: 8px; color: var(--text-primary); font-weight: 900; box-shadow: var(--shadow-sm);">+</button>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ $total = $subtotal + $delivery_fee + $handling_fee;
                         <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" style="width: 80%; height: 80%;">
                     </div>
                     <div class="product-title-v3" style="font-size: 11px; height: 28px; line-height: 1.2;"><?= $product['name'] ?></div>
-                    <button class="add-btn-v3" style="width: 100%; height: 30px; border-radius: 8px; margin-top: 8px; font-size: 11px;" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">ADD ₹<?= $product['price'] ?></button>
+                    <button class="add-btn-v3" style="width: 100%; height: 30px; border-radius: 8px; margin-top: 8px; font-size: 11px;" onclick="addToCart('<?= $product['id'] ?>', event)">ADD ₹<?= $product['price'] ?></button>
                 </div>
                 <?php endforeach; ?>
             </div>

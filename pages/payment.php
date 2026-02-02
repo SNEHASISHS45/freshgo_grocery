@@ -24,7 +24,7 @@
             <div style="position: absolute; top: -20px; right: -20px; width: 120px; height: 120px; background: var(--brand-primary); border-radius: 50%; opacity: 0.1; filter: blur(40px);"></div>
             <div style="position: relative; z-index: 2;">
                 <p style="font-size: 11px; font-weight: 800; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Payable Amount</p>
-                <h2 style="font-size: 32px; font-weight: 950; letter-spacing: -0.02em;">₹<?= $total ?></h2>
+                <h2 style="font-size: 32px; font-weight: 950; letter-spacing: -0.02em;">₹<?= $finalTotal ?></h2>
                 <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                      <i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--brand-primary);"></i>

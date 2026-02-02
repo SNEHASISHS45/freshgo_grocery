@@ -78,7 +78,7 @@
                         <i data-lucide="network" style="color: var(--brand-primary); width: 20px; height: 20px;"></i>
                     </div>
                     <span style="font-weight: 800; font-size: 15px;">Regional Hub</span>
-                    <span style="font-size: 11px; font-weight: 950; color: var(--text-muted); text-transform: uppercase;">Bangalore #2</span>
+                    <span style="font-size: 11px; font-weight: 950; color: var(--text-muted); text-transform: uppercase;">Kolkata Hub</span>
                 </div>
             </div>
         </div>

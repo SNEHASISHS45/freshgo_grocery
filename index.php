@@ -50,8 +50,8 @@ $products = [
     ['id' => '29', 'name' => 'Tropicana 100% Orange Juice', 'price' => 110, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '1L', 'brand' => 'PepsiCo'],
     
     // Breakfast & Instant Food
-    ['id' => '30', 'name' => 'Maggi Masala Noodles', 'price' => 14, 'category' => 'Breakfast & Instant Food', 'image' => 'https://plus.unsplash.com/premium_photo-1667054230230-01977e20b3df?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
-    ['id' => '31', 'name' => 'Kellogg\'s Corn Flakes', 'price' => 175, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1594488737010-389f928e08d6?q=80&w=400', 'weight' => '475g', 'brand' => 'Kellogg\'s'],
+    ['id' => '30', 'name' => 'Maggi Masala Noodles', 'price' => 14, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400', 'weight' => '70g', 'brand' => 'Nestle'],
+    ['id' => '31', 'name' => 'Kellogg\'s Corn Flakes', 'price' => 175, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1585238341267-1cfec2046a55?q=80&w=400', 'weight' => '475g', 'brand' => 'Kellogg\'s'],
     ['id' => '32', 'name' => 'Quaker Oats White Oats', 'price' => 199, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?q=80&w=400', 'weight' => '1kg', 'brand' => 'PepsiCo'],
     ['id' => '33', 'name' => 'Kissan Mixed Fruit Jam', 'price' => 165, 'category' => 'Breakfast & Instant Food', 'image' => 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=400', 'weight' => '500g', 'brand' => 'HUL'],
     
@@ -77,7 +77,7 @@ $products = [
     ['id' => '46', 'name' => 'Sprite Lemon Lime Drink', 'price' => 45, 'category' => 'Cold Drinks & Juices', 'image' => 'assets/energy_drinks_premium.png', 'weight' => '750ml', 'brand' => 'Coca-Cola'],
     
     // Snack Additions
-    ['id' => '47', 'name' => 'Kurkure Masala Munch', 'price' => 20, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1621447509323-570a162dff96?q=80&w=400', 'weight' => '90g', 'brand' => 'PepsiCo'],
+    ['id' => '47', 'name' => 'Kurkure Masala Munch', 'price' => 20, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1599490659223-91524e871b07?q=80&w=400', 'weight' => '90g', 'brand' => 'PepsiCo'],
     ['id' => '48', 'name' => 'Bikano Navratan Mixture', 'price' => 50, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1626132646501-f1f3a2157014?q=80&w=400', 'weight' => '200g', 'brand' => 'Bikano'],
     ['id' => '49', 'name' => 'Kinder Joy with Surprise', 'price' => 45, 'category' => 'Snacks & Munchies', 'image' => 'https://images.unsplash.com/photo-1587132131238-00566378415a?q=80&w=400', 'weight' => '20g', 'brand' => 'Ferrero'],
     
@@ -131,8 +131,16 @@ if ($action === 'add_cart' && $actionId) {
         }
         $msg = 'Added to basket!';
     }
+    
+    if (isset($_GET['ajax'])) {
+        header('Content-Type: application/json');
+        $newCount = 0;
+        foreach ($_SESSION['cart'] as $item) $newCount += $item['quantity'];
+        echo json_encode(['status' => 'success', 'msg' => $msg, 'cartCount' => $newCount]);
+        exit;
+    }
+
     $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?page=home';
-    // Remove existing msg from referer if any
     $referer = preg_replace('/([?&])msg=[^&]*(&|$)/', '$1', $referer);
     $referer = rtrim($referer, '?&');
     $sep = strpos($referer, '?') !== false ? '&' : '?';
@@ -152,6 +160,15 @@ if ($action === 'update_cart' && $actionId) {
             break;
         }
     }
+
+    if (isset($_GET['ajax'])) {
+        header('Content-Type: application/json');
+        $newCount = 0;
+        foreach ($_SESSION['cart'] as $item) $newCount += $item['quantity'];
+        echo json_encode(['status' => 'success', 'cartCount' => $newCount]);
+        exit;
+    }
+
     header('Location: ?page=cart');
     exit;
 }
@@ -199,7 +216,7 @@ $finalTotal = $cartTotal + ($cartTotal > 0 ? $deliveryFee + 5 : 0);
 
 // Page titles for SEO
 $pageTitles = [
-    'home' => 'FreshGo Premium | 12-Min Grocery Delivery in Bangalore',
+    'home' => 'FreshGo Premium | 12-Min Grocery Delivery in Kolkata',
     'explore' => 'Explore Categories | FreshGo Premium',
     'cart' => 'My Basket | FreshGo Premium',
     'checkout' => 'Checkout | FreshGo Premium',
@@ -218,7 +235,8 @@ $pageTitles = [
     'login' => 'Login | FreshGo Premium',
     'signup' => 'Create Account | FreshGo Premium',
     'forgot' => 'Reset Password | FreshGo Premium',
-    'welcome' => 'Welcome to FreshGo Premium'
+    'welcome' => 'Welcome to FreshGo Premium',
+    'about' => 'About Protocol | FreshGo Premium'
 ];
 $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered';
 ?>
@@ -226,9 +244,10 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <!-- Responsive & Device Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="description" content="FreshGo Premium - Get farm-fresh groceries delivered to your doorstep in 12 minutes. Shop dairy, fruits, vegetables, spices & more from top Indian brands.">
-    <meta name="keywords" content="grocery delivery, fresh vegetables, fruits, dairy, online grocery, Bangalore, quick delivery, Amul, Tata, organic">
+    <meta name="keywords" content="grocery delivery, fresh vegetables, fruits, dairy, online grocery, Kolkata, West Bengal, quick delivery, Amul, Tata, organic">
     <meta name="author" content="FreshGo">
     <meta name="robots" content="index, follow">
     
@@ -238,7 +257,6 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FreshGo">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -295,14 +313,15 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
     <div id="skeleton-overlay">
         <!-- Header Skeleton -->
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; gap: 12px; align-items: center;">
+            <div style="display: flex; gap: 14px; align-items: center;">
                 <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
                 <div style="display: flex; flex-direction: column; gap: 6px;">
-                    <div class="skeleton skeleton-title" style="width: 100px; height: 16px; margin: 0;"></div>
-                    <div class="skeleton skeleton-text" style="width: 140px; height: 10px; margin: 0;"></div>
+                    <div class="skeleton skeleton-title" style="width: 80px; height: 18px; margin: 0;"></div>
+                    <div class="skeleton skeleton-text" style="width: 120px; height: 10px; margin: 0;"></div>
                 </div>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 10px;">
+                <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
                 <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
                 <div class="skeleton" style="width: 44px; height: 44px; border-radius: 14px;"></div>
             </div>
@@ -343,7 +362,13 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
             <div id="pull-to-refresh">
                 <i data-lucide="refresh-cw" class="refresh-icon"></i>
             </div>
-            <?php include "pages/{$page}.php"; ?>
+            <?php 
+                if (file_exists("pages/{$page}.php")) {
+                    include "pages/{$page}.php";
+                } else {
+                    include "pages/home.php";
+                }
+            ?>
         </div>
         <?php if (in_array($page, ['home', 'explore', 'profile', 'orders', 'rewards'])): ?>
         <nav class="bottom-nav-fixed">
@@ -427,7 +452,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
 
     </div>
     <script>
-        // Failsafe: Hide skeleton no matter what after 3.5s
+        // Failsafe: Hide skeleton no matter what after 1.5s (reduced from 3.5s)
         setTimeout(() => {
             const skeleton = document.getElementById('skeleton-overlay');
             if (skeleton && skeleton.style.display !== 'none') {
@@ -438,7 +463,7 @@ $pageTitle = $pageTitles[$page] ?? 'FreshGo Premium | Fresh Groceries Delivered'
                     if (typeof initGSAP === 'function') initGSAP();
                 }, 500);
             }
-        }, 3500);
+        }, 1500);
     </script>
     <script src="app.js?v=<?= time() ?>"></script>
     <script>

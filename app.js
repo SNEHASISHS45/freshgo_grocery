@@ -59,8 +59,8 @@ function handleSplashScreen() {
             ease: "power2.out",
             onComplete: hide
         });
-        // Safety timeout: hide after 1.5s regardless of GSAP
-        setTimeout(hide, 1500);
+        // Safety timeout for instant feel
+        setTimeout(hide, 800);
     } else {
         hide();
     }
@@ -68,7 +68,7 @@ function handleSplashScreen() {
 
 // --- CORE SYSTEM ---
 
-// 1. Theme Management (Modified for Haptics)
+// 1. Theme Management
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -88,7 +88,7 @@ function toggleTheme() {
     showToast(`${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} Mode Activated`);
 }
 
-// 2. Premium Toast System (Modified for Haptics)
+// 2. Premium Toast System
 function showToast(message) {
     hapticFeedback('light');
     const existingToast = document.querySelector('.toast');
@@ -137,7 +137,7 @@ function showToast(message) {
     }, 2800);
 }
 
-// 3. AI Search Concierge (Modified with Progress)
+// 3. AI Search Concierge
 function askAI() {
     hapticFeedback('medium');
     const input = document.getElementById('searchInput');
@@ -173,187 +173,144 @@ function askAI() {
 }
 
 // 4. Page & Component Animations
+let isGSAPInitialized = false;
 function initGSAP() {
-    gsap.registerPlugin(ScrollTrigger);
+    if (isGSAPInitialized) return;
+    isGSAPInitialized = true;
 
-    // Initial View Entrance stagger
-    if (document.querySelector('.stagger-item')) {
-        gsap.from('.stagger-item', {
+    gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+    // 4.1 Force visibility safety
+    const sections = document.querySelectorAll('section');
+    if (sections.length > 0) {
+        gsap.set(sections, { opacity: 1, y: 0, visibility: 'visible' });
+    }
+
+    // 4.2 Initial stagger items
+    const staggerItems = document.querySelectorAll('.stagger-item, .product-card-v3');
+    if (staggerItems.length > 0) {
+        // Use gsap.from to allow CSS defaults as fallback
+        gsap.from(staggerItems, {
             opacity: 0,
-            y: 20,
-            stagger: 0.08,
+            y: 15,
+            stagger: 0.03,
             duration: 0.6,
-            ease: EASE_EMPHASIZED
+            ease: EASE_STANDARD,
+            clearProps: "opacity,y,transform",
+            overwrite: "auto",
+            scrollTrigger: {
+                trigger: staggerItems[0],
+                scroller: "#view-port",
+                start: "top bottom",
+                toggleActions: "play none none none"
+            }
         });
     }
 
+    // 4.3 Header reveal
     const headers = document.querySelectorAll('header');
     if (headers.length > 0) {
-        gsap.from(headers, { y: -20, opacity: 0, duration: 0.8, ease: EASE_STANDARD });
+        gsap.from(headers, { y: -10, opacity: 0, duration: 0.4, ease: "power2.out", clearProps: "y,opacity" });
     }
 
-    // Section reveal animations
-    gsap.utils.toArray('section').forEach(section => {
-        gsap.from(section, {
-            scrollTrigger: {
-                trigger: section,
-                scroller: "#view-port",
-                start: "top bottom-=60px",
-                toggleActions: "play none none none"
-            },
-            opacity: 0,
-            y: 40,
-            duration: 1,
-            ease: "expo.out"
-        });
+    // 4.4 Section reveal logic
+    gsap.utils.toArray('section').forEach((section, index) => {
+        if (index <= 1) return; // Top sections already handled by stagger
+
+        gsap.fromTo(section,
+            { opacity: 0, y: 20 },
+            {
+                scrollTrigger: {
+                    trigger: section,
+                    scroller: "#view-port",
+                    start: "top bottom-=50px",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                clearProps: "y,opacity"
+            }
+        );
     });
 
-    // Advanced Product Card Reveal
-    const productCards = document.querySelectorAll('.product-card-v3');
-    if (productCards.length > 0) {
-        gsap.from(productCards, {
-            scrollTrigger: {
-                trigger: productCards[0],
-                scroller: "#view-port",
-                start: "top bottom"
-            },
-            opacity: 0,
-            y: 50,
-            scale: 0.9,
-            stagger: {
-                each: 0.1,
-                grid: "auto",
-                from: "start"
-            },
-            duration: 1.2,
-            ease: "elastic.out(1, 0.8)",
-            clearProps: "all"
-        });
-    }
-
-    // Icon Micro-interactions Logic
-    document.querySelectorAll('.nav-item-v3, .icon-btn-v3, .category-tile').forEach(el => {
-        const icon = el.querySelector('i');
-        if (!icon) return;
-
-        el.addEventListener('mouseenter', () => {
-            gsap.to(icon, {
-                scale: 1.3,
-                rotate: 15,
-                duration: 0.4,
-                ease: "back.out(2)"
-            });
-        });
-
-        el.addEventListener('mouseleave', () => {
-            gsap.to(icon, {
-                scale: 1,
-                rotate: 0,
-                duration: 0.4,
-                ease: "elastic.out(1, 0.3)"
-            });
-        });
-
-        el.addEventListener('mousedown', () => {
-            gsap.to(icon, { scale: 0.8, duration: 0.1 });
-        });
-
-        el.addEventListener('mouseup', () => {
-            gsap.to(icon, { scale: 1.3, duration: 0.2 });
-        });
-    });
-
-    // Card Hover Physics
+    // 4.5 Card Hover Physics
     document.querySelectorAll('.product-card-v3, .u-card, .promo-slide').forEach(card => {
         card.addEventListener('mouseenter', () => {
-            gsap.to(card, {
-                y: -10,
-                scale: 1.02,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
-                duration: 0.5,
-                ease: "power2.out"
-            });
+            gsap.to(card, { y: -8, scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.12)", duration: 0.4, ease: "power2.out" });
         });
         card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                y: 0,
-                scale: 1,
-                boxShadow: "var(--shadow-sm)",
-                duration: 0.5,
-                ease: "power2.out"
-            });
+            gsap.to(card, { y: 0, scale: 1, boxShadow: "var(--shadow-sm)", duration: 0.4, ease: "power2.out" });
         });
+    });
+
+    // 4.6 Icon Interactions
+    document.querySelectorAll('.nav-item-v3, .icon-btn-v3, .category-tile, button i, a i').forEach(el => {
+        const icon = el.querySelector('i, svg, .material-symbols-outlined');
+        if (!icon) return;
+
+        el.addEventListener('mouseenter', () => gsap.to(icon, { scale: 1.2, rotate: 10, duration: 0.3, ease: "back.out(2)" }));
+        el.addEventListener('mouseleave', () => gsap.to(icon, { scale: 1, rotate: 0, duration: 0.3, ease: "power2.out" }));
+        el.addEventListener('mousedown', () => gsap.to(icon, { scale: 0.9, duration: 0.1 }));
+        el.addEventListener('mouseup', () => gsap.to(icon, { scale: 1.2, duration: 0.2 }));
     });
 }
 
 // 5. Setup & Events
 function initApp() {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
     try {
-        handleSplashScreen(); // High priority: clear the view
+        handleSplashScreen();
         initTheme();
 
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        // 5.1 Check for URL messages
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('msg')) {
+            showToast(urlParams.get('msg'));
+            // Clean URL without refresh
+            const newUrl = window.location.pathname + window.location.search.replace(/([?&])msg=[^&]*(&|$)/, '$1').replace(/[?&]$/, '');
+            window.history.replaceState({}, '', newUrl);
         }
 
-        function initScrollTracker() {
-            const header = document.getElementById('main-header');
-            const topRow = document.getElementById('header-top-row');
-            const viewPort = document.getElementById('view-port');
+        // 5.2 Scroll Tracking
+        const header = document.getElementById('main-header');
+        const topRow = document.getElementById('header-top-row');
+        const viewPort = document.getElementById('view-port');
 
-            if (!header || !topRow || !viewPort) return;
-
+        if (header && topRow && viewPort) {
+            viewPort.scrollTop = 0;
             viewPort.addEventListener('scroll', () => {
                 const isScrolled = viewPort.scrollTop > 20;
-
                 if (isScrolled) {
                     header.classList.add('scrolled');
                     topRow.classList.add('scrolled');
-                    gsap.to(header, {
-                        backgroundColor: 'var(--bg-header)',
-                        duration: 0.3,
-                        ease: "power2.out"
-                    });
                 } else {
                     header.classList.remove('scrolled');
                     topRow.classList.remove('scrolled');
-                    gsap.to(header, {
-                        backgroundColor: 'var(--bg-header)',
-                        duration: 0.3,
-                        ease: "power2.out"
-                    });
                 }
             });
         }
 
-        initScrollTracker();
+        // 5.2 Pull to Refresh
+        const pullEl = document.getElementById('pull-to-refresh');
+        const refreshIcon = pullEl ? pullEl.querySelector('.refresh-icon') : null;
 
-        // 4.7 Pull to Refresh Simulation Logic
-        function initPullToRefresh() {
-            const viewPort = document.getElementById('view-port');
-            const pullEl = document.getElementById('pull-to-refresh');
-            const icon = pullEl ? pullEl.querySelector('.refresh-icon') : null;
-
-            if (!viewPort || !pullEl) return;
-
+        if (viewPort && pullEl) {
             let startY = 0;
             let pulling = false;
 
             viewPort.addEventListener('touchstart', (e) => {
-                if (viewPort.scrollTop <= 0) {
-                    startY = e.touches[0].pageY;
-                    pulling = true;
-                }
+                if (viewPort.scrollTop <= 0) { startY = e.touches[0].pageY; pulling = true; }
             });
 
             viewPort.addEventListener('touchmove', (e) => {
                 if (!pulling) return;
                 const diff = e.touches[0].pageY - startY;
                 if (diff > 0 && viewPort.scrollTop <= 0) {
-                    const rotation = Math.min(diff * 2, 360);
-                    const y = Math.min(diff / 2, 60);
-                    gsap.set(pullEl, { y: y });
-                    gsap.set(icon, { rotate: rotation });
+                    gsap.set(pullEl, { y: Math.min(diff / 2, 60) });
+                    if (refreshIcon) gsap.set(refreshIcon, { rotate: Math.min(diff * 2, 360) });
                     if (diff > 100) hapticFeedback('light');
                 }
             });
@@ -365,14 +322,11 @@ function initApp() {
                     pullEl.classList.add('pull-active');
                     hapticFeedback('medium');
                     ProgressBar.start();
-
-                    // Simulate Refresh
                     setTimeout(() => {
                         pullEl.classList.remove('pull-active');
                         gsap.to(pullEl, { y: 0, duration: 0.4, ease: "back.in(1.7)" });
                         ProgressBar.finish();
                         showToast("Protocol Refreshed: Hub Sync Active");
-                        detectLocation(); // Auto update location on pull
                     }, 1500);
                 } else {
                     gsap.to(pullEl, { y: 0, duration: 0.3 });
@@ -381,72 +335,118 @@ function initApp() {
             });
         }
 
-        initPullToRefresh();
-
-        document.querySelectorAll('button, a, .clickable, .nav-item-v3').forEach(el => {
-            el.addEventListener('click', () => {
-                hapticFeedback('light');
-            });
-
+        // 5.3 Global Haptics & Taps
+        document.querySelectorAll('button, a, .clickable').forEach(el => {
+            el.addEventListener('click', () => hapticFeedback('light'));
             el.addEventListener('touchstart', () => el.classList.add('tap-active'));
             el.addEventListener('touchend', () => el.classList.remove('tap-active'));
         });
 
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('msg')) {
-            showToast(params.get('msg'));
-            const url = new URL(window.location);
-            url.searchParams.delete('msg');
-            window.history.replaceState({}, '', url);
-        }
-
-        // Carousels and other scroll logic...
-        const horizScrolls = document.querySelectorAll('.home-carousel, .reorder-list-v3, .no-scrollbar');
-        horizScrolls.forEach(el => {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            el.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - el.offsetLeft;
-                scrollLeft = el.scrollLeft;
-                gsap.to(el, { cursor: "grabbing", duration: 0.1 });
-            });
-            el.addEventListener('mouseleave', () => {
-                isDown = false;
-                gsap.to(el, { cursor: "grab", duration: 0.1 });
-            });
-            el.addEventListener('mouseup', () => {
-                isDown = false;
-                gsap.to(el, { cursor: "grab", duration: 0.1 });
-            });
+        // 5.4 Scroll Carousels
+        document.querySelectorAll('.no-scrollbar').forEach(el => {
+            let isDown = false; let startX; let scrollLeft;
+            el.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; el.style.cursor = "grabbing"; });
+            el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor = "grab"; });
+            el.addEventListener('mouseup', () => { isDown = false; el.style.cursor = "grab"; });
             el.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
                 e.preventDefault();
-                const x = e.pageX - el.offsetLeft;
-                const walk = (x - startX) * 2;
-                gsap.to(el, { scrollLeft: scrollLeft - walk, duration: 0.3, ease: "power1.out" });
+                const walk = (e.pageX - el.offsetLeft - startX) * 2;
+                el.scrollLeft = scrollLeft - walk;
             });
         });
+
     } catch (e) {
         console.error("Critical System Protocol Failure:", e);
         const skeleton = document.getElementById('skeleton-overlay');
-        if (skeleton) {
-            skeleton.style.display = 'none';
-            skeleton.style.visibility = 'hidden';
-        }
-        if (typeof initGSAP === 'function') initGSAP();
+        if (skeleton) { skeleton.style.display = 'none'; skeleton.style.visibility = 'hidden'; }
+        initGSAP();
     }
 }
 
+// 8. AJAX Cart System
+async function addToCart(id, event) {
+    if (event) {
+        if (typeof event.preventDefault === 'function') event.preventDefault();
+        if (typeof event.stopPropagation === 'function') event.stopPropagation();
+    }
+    hapticFeedback('medium');
+
+    // Optimistic UI/Loading feel
+    const btn = event ? event.currentTarget : null;
+    if (btn) gsap.to(btn, { scale: 0.9, duration: 0.1, yoyo: true, repeat: 1 });
+
+    try {
+        const response = await fetch(`index.php?action=add_cart&id=${id}&ajax=1`);
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            updateCartBadge(data.cartCount);
+            showToast(data.msg || "Added to basket!");
+        }
+    } catch (e) {
+        console.error("Cart System Protocol Error:", e);
+        // Fallback to normal navigation if AJAX fails
+        window.location.href = `?action=add_cart&id=${id}`;
+    }
+}
+
+async function updateCart(id, delta, event) {
+    if (event) {
+        if (typeof event.preventDefault === 'function') event.preventDefault();
+        if (typeof event.stopPropagation === 'function') event.stopPropagation();
+    }
+    hapticFeedback('light');
+
+    try {
+        const response = await fetch(`index.php?action=update_cart&id=${id}&delta=${delta}&ajax=1`);
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            updateCartBadge(data.cartCount);
+            // Optionally reload page if on cart page, or update local UI
+            if (window.location.search.includes('page=cart') || window.location.search.includes('page=product')) {
+                window.location.reload(); // Product page might need reload to update its own qty counter if we don't handle it in JS
+            }
+        }
+    } catch (e) {
+        window.location.href = `?action=update_cart&id=${id}&delta=${delta}`;
+    }
+}
+
+function updateCartBadge(count) {
+    const badges = document.querySelectorAll('.nav-badge-v3');
+    const cartNavItem = document.querySelector('a[href="?page=cart"] div');
+
+    if (count > 0) {
+        if (badges.length > 0) {
+            badges.forEach(b => {
+                b.textContent = count;
+                gsap.fromTo(b,
+                    { scale: 1.5, rotate: 15 },
+                    { scale: 1, rotate: 0, duration: 0.5, ease: "back.out(2.5)" }
+                );
+            });
+        } else if (cartNavItem) {
+            const badge = document.createElement('span');
+            badge.className = 'nav-badge-v3';
+            badge.textContent = count;
+            cartNavItem.appendChild(badge);
+            gsap.from(badge, { scale: 0, duration: 0.5, ease: "back.out(2.5)" });
+        }
+    } else {
+        badges.forEach(b => b.remove());
+    }
+}
+
+// Initialize App
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
 }
 
-// 6. Notifications Panel Logic (Modified with Haptics)
+// 6. Notifications Panel Logic
 let isNotifOpen = false;
 function toggleNotifications() {
     hapticFeedback('medium');
@@ -457,28 +457,20 @@ function toggleNotifications() {
     if (!isNotifOpen) {
         overlay.style.display = 'block';
         gsap.to(panel, { right: 0, duration: 0.6, ease: "power3.out" });
-        gsap.from(overlay, { opacity: 0, duration: 0.4 });
+        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4 });
         isNotifOpen = true;
     } else {
         gsap.to(panel, { right: -400, duration: 0.5, ease: "power3.out" });
-        gsap.to(overlay, {
-            opacity: 0,
-            duration: 0.4,
-            onComplete: () => {
-                overlay.style.display = 'none';
-                overlay.style.opacity = 1;
-            }
-        });
+        gsap.to(overlay, { opacity: 0, duration: 0.4, onComplete: () => { overlay.style.display = 'none'; } });
         isNotifOpen = false;
     }
 }
 
-// 7. Real Location Detection (Modified with Haptics)
+// 7. Location Detection
 async function detectLocation() {
     hapticFeedback('heavy');
     const locTitle = document.getElementById('location-title');
     const locSub = document.getElementById('location-subtitle');
-
     if (!locTitle) return;
 
     ProgressBar.start();
@@ -487,61 +479,44 @@ async function detectLocation() {
 
     if (!navigator.geolocation) {
         ProgressBar.finish();
-        showToast("Geolocation is not supported by your browser.");
+        showToast("Geolocation not supported");
         locTitle.textContent = "Location Denied";
         return;
     }
 
     navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
-
         try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`, {
-                headers: { 'User-Agent': 'FreshGo-Grocery-App-v4' }
+                headers: { 'User-Agent': 'FreshGo-App-v4' }
             });
-
-            if (!response.ok) throw new Error('Network Protocol Error');
-
             const data = await response.json();
             ProgressBar.finish();
-
             if (data && data.address) {
-                const area = data.address.suburb || data.address.neighbourhood || data.address.city_district || data.address.village || "Nearby Hub";
-                const city = data.address.city || data.address.town || data.address.state || "Location Sync";
-
+                const area = data.address.suburb || data.address.neighbourhood || "Nearby Hub";
+                const city = data.address.city || data.address.state || "India";
                 locTitle.textContent = area;
                 locSub.textContent = `${city}, India`;
                 hapticFeedback('success');
                 showToast(`Sync Successful: ${area} Hub`);
-
-                const locElements = [locTitle, locSub].filter(el => el !== null);
-                if (locElements.length > 0) {
-                    gsap.from(locElements, { opacity: 0, y: 5, stagger: 0.1, duration: 0.4, ease: EASE_EMPHASIZED });
-                }
             }
         } catch (error) {
             ProgressBar.finish();
-            locTitle.textContent = "HSR Layout";
-            locSub.textContent = "Bengaluru, KA 560102";
+            locTitle.textContent = "Esplanade";
             showToast("System Error: Using Last Known Hub");
         }
-    }, (error) => {
+    }, () => {
         ProgressBar.finish();
         locTitle.textContent = "Permission Required";
-        showToast("Access Denied: Please enable Location");
-    }, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    });
+        showToast("Access Denied");
+    }, { enableHighAccuracy: true, timeout: 5000 });
 }
 
-// 8. Observer
+// Theme Observer
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'data-theme') {
-            const theme = document.documentElement.getAttribute('data-theme');
-            console.log(`System Protocol: Theme Shifted to ${theme}`);
+            console.log(`System Protocol: Theme Shifted to ${document.documentElement.getAttribute('data-theme')}`);
         }
     });
 });

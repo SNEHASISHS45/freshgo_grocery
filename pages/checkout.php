@@ -34,10 +34,10 @@ $total = $subtotal + $delivery_fee + $handling_fee;
             <div style="padding: 24px; display: flex; justify-content: space-between; align-items: center;">
                  <div>
                      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <p style="font-size: 16px; font-weight: 900;">Sector 2 Outpost</p>
+                        <p style="font-size: 16px; font-weight: 900;">Esplanade Hub</p>
                         <span style="font-size: 10px; font-weight: 950; background: var(--primary); color: #000; padding: 2px 10px; border-radius: 50px;">PRIMARY</span>
                      </div>
-                     <p style="font-size: 13px; color: var(--text-muted); font-weight: 700; line-height: 1.4;">HSR Layout, 27th Main, Bangalore - 560102</p>
+                     <p style="font-size: 13px; color: var(--text-muted); font-weight: 700; line-height: 1.4;">12, Government Place Rd, Esplanade, Kolkata - 700069</p>
                  </div>
                  <button onclick="location.href='?page=addresses'" style="width: 48px; height: 48px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--primary); cursor: pointer;">
                      <span class="material-symbols-outlined" style="font-size: 20px;">edit_location_alt</span>

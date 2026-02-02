@@ -18,19 +18,23 @@ foreach($_SESSION['cart'] as $item) {
     }
 }
 ?>
-<div class="view-enter product-detail-v3" style="background: var(--bg-secondary); min-height: 100vh;">
-    <!-- Neo-Premium Product Header -->
-    <header style="padding: 16px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; display: flex; justify-content: space-between; z-index: 1000; gap: 8px;">
-        <button onclick="history.back()" style="width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
-            <i data-lucide="chevron-left" style="color: #000; width: 24px; height: 24px;"></i>
+<div class="view-enter product-detail-v3" style="background: var(--bg-secondary); min-height: 100vh; position: relative;">
+    <!-- Neo-Premium Product Header (Absolute Fix for Centering) -->
+    <header style="padding: 12px 20px; position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; z-index: 1000; box-sizing: border-box;">
+        <button class="icon-btn-v3 glass" onclick="history.back()" style="background: var(--bg-tile); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; backdrop-filter: blur(12px);">
+            <i data-lucide="chevron-left" style="color: var(--text-primary); width: 24px; height: 24px;"></i>
         </button>
-        <div style="display: flex; gap: 10px;">
-            <button class="icon-btn-v3" onclick="toggleTheme()" style="width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
-                <i data-lucide="moon" class="light-icon" style="color: #000; width: 22px; height: 22px;"></i>
-                <i data-lucide="sun" class="dark-icon" style="color: #000; width: 22px; height: 22px;"></i>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="icon-btn-v3 glass" onclick="toggleTheme()" style="background: var(--bg-tile); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; backdrop-filter: blur(12px);">
+                <i data-lucide="moon" class="light-icon" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
+                <i data-lucide="sun" class="dark-icon" style="color: var(--text-primary); width: 22px; height: 22px;"></i>
             </button>
-            <button onclick="location.href='?action=toggle_favorite&id=<?= $product['id'] ?>'" style="width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
-                <i data-lucide="heart" style="color: <?= $isFavorite ? '#FF4D4F' : '#000' ?>; width: 22px; height: 22px; <?= $isFavorite ? 'fill: #FF4D4F;' : '' ?>"></i>
+            <button class="icon-btn-v3 glass" onclick="location.href='?action=toggle_favorite&id=<?= $product['id'] ?>'" style="background: var(--bg-tile); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; backdrop-filter: blur(12px);">
+                <i data-lucide="heart" style="color: <?= $isFavorite ? '#FF3B89' : 'var(--text-primary)' ?>; width: 22px; height: 22px; <?= $isFavorite ? 'fill: #FF3B89;' : '' ?>"></i>
+            </button>
+            <button class="icon-btn-v3 glass" onclick="navigator.share({title: '<?= addslashes($product['name']) ?>', url: window.location.href}).catch(() => showToast('Protocol: Sharing failed'))" style="background: var(--bg-tile); border: 1.5px solid var(--border-color); border-radius: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; backdrop-filter: blur(12px);">
+                <i data-lucide="share-2" style="color: var(--text-primary); width: 20px; height: 20px;"></i>
             </button>
         </div>
     </header>
@@ -135,7 +139,7 @@ foreach($_SESSION['cart'] as $item) {
                     <div class="product-title-v3" style="font-size: 12px; height: 32px; overflow: hidden;"><?= $sim['name'] ?></div>
                     <div class="product-footer-v3">
                         <span class="price-current" style="font-size: 13px;">₹<?= $sim['price'] ?></span>
-                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="location.href='?action=add_cart&id=<?= $sim['id'] ?>'">+</button>
+                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="addToCart('<?= $sim['id'] ?>', event)">+</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -152,12 +156,12 @@ foreach($_SESSION['cart'] as $item) {
         
         <?php if($currentQty > 0): ?>
         <div style="display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px; width: 140px;">
-            <button onclick="location.href='?action=update_cart&id=<?= $product['id'] ?>&delta=-1'" style="flex: 1; height: 48px; background: none; border: none; color: #fff; font-weight: 950; font-size: 24px;">-</button>
+            <button onclick="updateCart('<?= $product['id'] ?>', -1, event)" style="flex: 1; height: 48px; background: none; border: none; color: #fff; font-weight: 950; font-size: 24px;">-</button>
             <span style="color: #fff; font-weight: 900; width: 34px; text-align: center; font-size: 18px;"><?= $currentQty ?></span>
-            <button onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'" style="flex: 1; height: 48px; background: none; border: none; color: #fff; font-weight: 950; font-size: 24px;">+</button>
+            <button onclick="addToCart('<?= $product['id'] ?>', event)" style="flex: 1; height: 48px; background: none; border: none; color: #fff; font-weight: 950; font-size: 24px;">+</button>
         </div>
         <?php else: ?>
-        <button onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'" style="background: var(--brand-primary); color: #000; border: none; border-radius: 20px; padding: 14px 28px; font-size: 14px; font-weight: 950; text-transform: uppercase; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(21, 209, 112, 0.3);">
+        <button onclick="addToCart('<?= $product['id'] ?>', event)" style="background: var(--brand-primary); color: #000; border: none; border-radius: 20px; padding: 14px 28px; font-size: 14px; font-weight: 950; text-transform: uppercase; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(21, 209, 112, 0.3);">
             <i data-lucide="shopping-cart" style="width: 20px; height: 20px; fill: #000;"></i>
             Add to Basket
         </button>

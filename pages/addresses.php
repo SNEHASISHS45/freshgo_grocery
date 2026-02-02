@@ -26,7 +26,7 @@
                             <h3 style="font-size: 16px; font-weight: 900;">Home</h3>
                             <span class="glass-pill-badge" style="background: var(--primary); color: #000; padding: 2px 10px; font-weight: 900;">ACTIVE</span>
                         </div>
-                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Sector 2, HSR Layout, Bangalore - 560102, Karnataka</p>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">12, Government Place Rd, Esplanade, Chowringhee North, Bow Barracks, Kolkata, West Bengal 700069</p>
                     </div>
                 </div>
             </div>
@@ -43,8 +43,8 @@
                             <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 22px;">work</span>
                         </div>
                         <div style="flex: 1;">
-                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Office (Wework)</h4>
-                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">RMZ Ecoworld, Outer Ring Rd, Bellandur, Bangalore</p>
+                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Office Terminal</h4>
+                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Infinity Benchmark, Plot G1, Block EP & GP, Sector V, Salt Lake City, Kolkata</p>
                         </div>
                         <button class="icon-btn-v3 glass" style="width: 36px; height: 36px; border-radius: 12px;">
                             <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
@@ -58,8 +58,8 @@
                             <span class="material-symbols-outlined" style="color: var(--text-muted); font-size: 22px;">apartment</span>
                         </div>
                         <div style="flex: 1;">
-                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Gym Outpost</h4>
-                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Cult.fit, 27th Main Rd, Sector 2, HSR Layout</p>
+                            <h4 style="font-size: 15px; font-weight: 900; margin-bottom: 4px;">Fitness Node</h4>
+                            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 700;">Park Street Crossfit, 15 Park Street, Kolkata - 700016</p>
                         </div>
                         <button class="icon-btn-v3 glass" style="width: 36px; height: 36px; border-radius: 12px;">
                             <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>

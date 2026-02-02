@@ -7,32 +7,34 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
 ?>
 <div class="view-enter home-page-v3" style="background: var(--bg-main);">
     <!-- Sticky Neo-Premium Header -->
-    <header id="main-header" style="background: var(--bg-header); padding: 16px 16px 24px; position: sticky; top: 0; z-index: 1000; border-radius: 0 0 32px 32px; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div id="header-top-row" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
-            <div class="location-chip-v3" onclick="detectLocation()" style="display: flex; align-items: center; gap: 14px; cursor: pointer;">
-                <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
-                    <i data-lucide="map-pin" style="color: #fff; width: 24px; height: 24px;"></i>
+    <!-- Sticky Neo-Premium Header -->
+    <header id="main-header" style="background: var(--brand-accent); padding: 16px 16px 24px; position: sticky; top: 0; z-index: 1000; border-radius: 0 0 32px 32px; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden;">
+        <div id="header-top-row" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 2;">
+            <div class="app-logo-v3" style="display: flex; align-items: center; gap: 14px; cursor: pointer;" onclick="location.href='?page=home'">
+                <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.25); border-radius: 14px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+                    <i data-lucide="shopping-basket" style="color: #fff; width: 24px; height: 24px;"></i>
                 </div>
                 <div>
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <h3 id="location-title" style="font-size: 17px; font-weight: 850; color: #fff; line-height: 1.1; letter-spacing: -0.01em;">HSR Layout</h3>
-                        <i data-lucide="chevron-down" style="color: #fff; width: 18px; height: 18px; opacity: 0.8;"></i>
+                    <h1 style="font-size: 22px; font-weight: 950; color: #fff; line-height: 1; letter-spacing: -0.02em; margin: 0;">FreshGo</h1>
+                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                        <span style="font-size: 9px; font-weight: 900; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; backdrop-filter: blur(4px);">Premium</span>
+                        <div style="width: 4px; height: 4px; background: #45E68F; border-radius: 50%; box-shadow: 0 0 8px #45E68F;"></div>
+                        <span style="font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.7);">Express Delivery</span>
                     </div>
-                    <p id="location-subtitle" style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); margin-top: 3px; letter-spacing: 0.01em;">Bengaluru, KA 560102</p>
                 </div>
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="icon-btn-v3" onclick="toggleTheme()" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                <button class="icon-btn-v3" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15);">
                     <i data-lucide="moon" class="light-icon" style="width: 22px; height: 22px;"></i>
                     <i data-lucide="sun" class="dark-icon" style="width: 22px; height: 22px;"></i>
                 </button>
                 <div style="position: relative;">
-                    <button class="icon-btn-v3" onclick="toggleNotifications()" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                    <button class="icon-btn-v3" onclick="toggleNotifications()" style="background: rgba(255,255,255,0.2); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15);">
                         <i data-lucide="bell" style="width: 22px; height: 22px;"></i>
                     </button>
-                    <div style="position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--brand-primary); border-radius: 50%; border: 2px solid #8E0E44;"></div>
+                    <div style="position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--brand-primary); border-radius: 50%; border: 2px solid var(--brand-accent);"></div>
                 </div>
-                <button class="icon-btn-v3" onclick="location.href='?page=profile'" style="background: rgba(255,255,255,0.15); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);">
+                <button class="icon-btn-v3" onclick="location.href='?page=profile'" style="background: rgba(255,255,255,0.2); border: none; border-radius: 14px; width: 44px; height: 44px; color: #fff; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15);">
                     <i data-lucide="user" style="width: 22px; height: 22px;"></i>
                 </button>
             </div>
@@ -135,7 +137,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                                 <span class="price-old">₹<?= $product['oldPrice'] ?></span>
                             <?php endif; ?>
                         </div>
-                        <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">ADD</button>
+                        <button class="add-btn-v3" onclick="addToCart('<?= $product['id'] ?>', event)">ADD</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -165,7 +167,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                     <div class="product-title-v3" style="font-size: 12px; height: 32px; overflow: hidden; margin-bottom: 4px;"><?= $product['name'] ?></div>
                     <div class="product-footer-v3">
                         <span class="price-current" style="font-size: 13px;">₹<?= $product['price'] ?></span>
-                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">+</button>
+                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="addToCart('<?= $product['id'] ?>', event)">+</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -197,7 +199,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                     <div class="product-title-v3" style="font-size: 12px; height: 32px; overflow: hidden; margin-bottom: 4px;"><?= $product['name'] ?></div>
                     <div class="product-footer-v3">
                         <span class="price-current" style="font-size: 13px;">₹<?= $product['price'] ?></span>
-                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">+</button>
+                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px;" onclick="addToCart('<?= $product['id'] ?>', event)">+</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -229,7 +231,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                         <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="width: 80%; height: 80%;">
                     </div>
                     <div class="product-title-v3" style="font-size: 11px; height: 28px; line-height: 1.2;"><?= $item['name'] ?></div>
-                    <button class="add-btn-v3" style="width: 100%; height: 28px; border-radius: 8px; margin-top: 6px;" onclick="location.href='?action=add_cart&id=<?= $item['id'] ?>'"><?= $item['price'] ?> +</button>
+                    <button class="add-btn-v3" style="width: 100%; height: 28px; border-radius: 8px; margin-top: 6px;" onclick="addToCart('<?= $item['id'] ?>', event)"><?= $item['price'] ?> +</button>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -258,7 +260,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                     <div class="product-title-v3" style="font-size: 12px; height: 32px; overflow: hidden; margin-bottom: 4px;"><?= $product['name'] ?></div>
                     <div class="product-footer-v3">
                         <span class="price-current" style="font-size: 13px;">₹<?= $product['price'] ?></span>
-                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px; border-color: #4CAF50; color: #4CAF50;" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">+</button>
+                        <button class="add-btn-v3" style="width: 28px; height: 28px; border-radius: 8px; border-color: #4CAF50; color: #4CAF50;" onclick="addToCart('<?= $product['id'] ?>', event)">+</button>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -287,7 +289,7 @@ $beverageItems = array_values(array_filter($products, function($p) { return $p['
                     <div class="product-title-v3" style="font-size: 13px; height: 34px; line-height: 1.3; margin-bottom: 4px;"><?= $product['name'] ?></div>
                     <div class="product-footer-v3">
                         <span class="price-current" style="font-size: 14px;">₹<?= $product['price'] ?></span>
-                        <button class="add-btn-v3" style="width: 32px; height: 32px; border-radius: 10px;" onclick="location.href='?action=add_cart&id=<?= $product['id'] ?>'">ADD</button>
+                        <button class="add-btn-v3" style="width: 32px; height: 32px; border-radius: 10px;" onclick="addToCart('<?= $product['id'] ?>', event)">ADD</button>
                     </div>
                 </div>
                 <?php endforeach; ?>

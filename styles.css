@@ -25,7 +25,8 @@
     --bg-secondary: #F7FAF9;
     --bg-tile: #FFFFFF;
     --bg-tile-rgb: 255, 255, 255;
-    --bg-header: var(--header-gradient);
+    --bg-header: var(--brand-accent);
+    --header-text: #FFFFFF;
 
     /* Neo-Category Palettes (More Sophisticated) */
     --cat-dairy: #F0F4FF;
@@ -215,12 +216,19 @@ html[data-theme="dark"] body .bottom-nav-fixed,
 html,
 body {
     height: 100%;
+    min-height: -webkit-fill-available;
+    /* Fix for iOS Safari */
     overflow: hidden;
     font-family: var(--font-main);
     background: var(--bg-main);
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.view-enter {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 [data-theme="dark"] body {
@@ -232,6 +240,8 @@ body {
     max-width: 430px;
     margin: 0 auto;
     height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height for mobile support */
     position: relative;
     background: var(--bg-main);
     display: flex;
@@ -366,20 +376,38 @@ body {
     margin-bottom: 24px;
 }
 
+#main-header {
+    background: var(--brand-accent) !important;
+    color: #FFFFFF !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header .app-logo-v3 h1,
+#main-header .app-logo-v3 span,
+#main-header .icon-btn-v3 {
+    color: #FFFFFF !important;
+}
+
 /* Dynamic Header Scroll States */
 #main-header.scrolled {
-    padding: 8px 16px 12px !important;
-    border-radius: 0 0 20px 20px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    padding: 12px 16px !important;
+    border-radius: 0 0 24px 24px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    background: var(--brand-accent) !important;
+}
+
+#header-top-row {
+    max-height: 100px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #header-top-row.scrolled {
+    max-height: 0 !important;
     margin-bottom: 0 !important;
-    height: 0 !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
 }
 
 #search-container.scrolled {
@@ -780,10 +808,13 @@ body {
 }
 
 .bottom-nav-fixed {
-    position: absolute;
+    position: fixed;
+    /* Changed to fixed for better mobile stickiness */
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 430px;
     height: 85px;
     background: rgba(var(--bg-tile-rgb), 0.85);
     backdrop-filter: blur(25px) saturate(180%);
@@ -1350,7 +1381,7 @@ button:active {
 
 /* 5. Staggered Entrance Helper */
 .stagger-item {
-    opacity: 0;
+    opacity: 1;
 }
 
 /* --- Uiverse-Inspired Premium Components --- */

@@ -109,7 +109,7 @@ if (!empty($search)) {
                             <span class="price-old">₹<?= $item['oldPrice'] ?></span>
                         <?php endif; ?>
                     </div>
-                    <button class="add-btn-v3" onclick="location.href='?action=add_cart&id=<?= $item['id'] ?>'">ADD</button>
+                    <button class="add-btn-v3" onclick="addToCart('<?= $item['id'] ?>', event)">ADD</button>
                 </div>
             </div>
             <?php endforeach; ?>
